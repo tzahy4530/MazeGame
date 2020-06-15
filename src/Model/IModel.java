@@ -3,6 +3,7 @@ package Model;
 import algorithms.search.AState;
 
 import java.util.List;
+import java.util.Observer;
 
 public interface IModel {
     public void generateMaze(int row, int col);
@@ -12,6 +13,6 @@ public interface IModel {
     public int getCharacterRow();
     public int getCharacterCol();
     public List<AState> getSolution();
-
+    public void assignObserver(Observer o);
 
 }

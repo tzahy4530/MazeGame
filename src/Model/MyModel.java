@@ -9,6 +9,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.List;
 import java.util.Observable;
+import java.util.Observer;
 
 public class MyModel extends Observable implements IModel {
     private Maze maze;
@@ -103,5 +104,10 @@ public class MyModel extends Observable implements IModel {
     @Override
     public List<AState> getSolution() {
         return solution.getSolutionPath();
+    }
+
+    @Override
+    public void assignObserver(Observer o) {
+        addObserver(o);
     }
 }
