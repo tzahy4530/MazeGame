@@ -109,6 +109,12 @@ public class MazeDisplayer extends Canvas {
         }
         graphicsContext.drawImage(playerImage,w_player,h_player,cellWidth,cellHeight);
         if(solution != null){
+            graphicsContext.setFill(Color.RED);
+            for(Pair<Integer,Integer> pair: solution){
+                double r = pair.getKey() * cellHeight;
+                double c = pair.getValue() * cellWidth;
+                graphicsContext.fillRect(r,c,cellWidth,cellHeight);
+            }
 
         }
 

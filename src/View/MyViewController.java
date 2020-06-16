@@ -24,7 +24,6 @@ public class MyViewController implements IView, Observer, Initializable {
     @FXML
     public MazeDisplayer mazeDisplayer;
 
-
     public void setViewModel(MyViewModel viewModel) {
         this.viewModel = viewModel;
     }
@@ -50,8 +49,8 @@ public class MyViewController implements IView, Observer, Initializable {
             }
             else if(arg instanceof List){
                 //Solution
-
-
+                mazeDisplayer.setSolution((List) arg);
+                mazeDisplayer.draw();
             }
             else{
                 //move
