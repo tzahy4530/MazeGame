@@ -19,6 +19,9 @@ public class MyViewController implements IView, Observer, Initializable {
         this.viewModel = viewModel;
     }
 
+    int[][] maze;
+    int charCol, charRow;
+
     @Override
     public void update(Observable o, Object arg) {
 

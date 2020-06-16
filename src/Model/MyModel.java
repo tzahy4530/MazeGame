@@ -32,7 +32,7 @@ public class MyModel extends Observable implements IModel {
         }
         maze = clientStrategyGenerateMaze.getMaze();
         setChanged();
-        notifyObservers();
+        notifyObservers(maze);
 
     }
 
@@ -48,7 +48,7 @@ public class MyModel extends Observable implements IModel {
         }
         solution = clientStrategySolveMaze.getSolution();
         setChanged();
-        notifyObservers();
+        notifyObservers(solution);
     }
 
     @Override
