@@ -1,6 +1,7 @@
 package Model;
 
 import Client.*;
+import View.Main;
 import algorithms.mazeGenerators.Maze;
 import algorithms.search.AState;
 import algorithms.search.Solution;
@@ -17,9 +18,6 @@ public class MyModel extends Observable implements IModel {
     private Solution solution;
 
     public MyModel() {
-        solution = null;
-        charCol = 0;
-        charRow = 0;
     }
 
     @Override
@@ -32,6 +30,8 @@ public class MyModel extends Observable implements IModel {
             e.printStackTrace();
         }
         maze = clientStrategyGenerateMaze.getMaze();
+        charRow = maze.getStartPosition().getRowIndex();
+        charCol = maze.getStartPosition().getColumnIndex();
         setChanged();
         notifyObservers(maze);
     }
@@ -40,6 +40,8 @@ public class MyModel extends Observable implements IModel {
     public void solveMaze() {
         if (maze == null)
             return;
+        maze.getStartPosition().setRow(charRow);
+        maze.getStartPosition().setColumn(charCol);
         ClientStrategySolveMaze clientStrategySolveMaze = new ClientStrategySolveMaze(maze);
         try {
             Client client = new Client(InetAddress.getLocalHost(), 5401, clientStrategySolveMaze);
@@ -62,24 +64,23 @@ public class MyModel extends Observable implements IModel {
 
         switch (direction) {
             case 1: //Up
-                if (charRow != 0)
+                if (charRow != 0 && maze.getMazeMatrix()[charRow-1][charCol]!= 1)
                     charRow--;
                 break;
 
             case 2: //Down
-                if (charRow != maze.getMazeMatrix().length - 1)
+                if (charRow != maze.getMazeMatrix().length - 1 && maze.getMazeMatrix()[charRow+1][charCol]!= 1)
                     charRow++;
                 break;
             case 3: //Left
-                if (charCol != 0)
+                if (charCol != 0 && maze.getMazeMatrix()[charRow][charCol-1]!= 1)
                     charCol--;
                 break;
             case 4: //Right
-                if (charCol != maze.getMazeMatrix()[0].length - 1)
+                if (charCol != maze.getMazeMatrix()[0].length - 1 && maze.getMazeMatrix()[charRow][charCol+1]!= 1)
                     charCol++;
                 break;
         }
-
         setChanged();
         notifyObservers();
 

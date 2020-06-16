@@ -9,6 +9,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
 import java.util.*;
@@ -30,6 +32,10 @@ public class MyViewController implements IView, Observer, Initializable {
     int[][] maze;
     int charCol, charRow;
 
+    public void keyPressed(KeyEvent keyEvent) {
+        viewModel.moveCharacter(keyEvent);
+        keyEvent.consume();
+    }
 
     @Override
     public void update(Observable o, Object arg) {
@@ -39,21 +45,20 @@ public class MyViewController implements IView, Observer, Initializable {
                 maze = viewModel.getMaze();
                 charCol = viewModel.getCharCol();
                 charRow = viewModel.getCharRow();
-                mazeDisplayer = new MazeDisplayer(maze,charRow,charCol,viewModel.getGoalRow(),viewModel.getGoalCol());
+                mazeDisplayer.setMaze(maze,charRow,charCol,viewModel.getGoalRow(),viewModel.getGoalCol());
                 mazeDisplayer.draw();
             }
             else if(arg instanceof List){
                 //Solution
+
 
             }
             else{
                 //move
                 mazeDisplayer.set_player_position(viewModel.getCharRow(),viewModel.getCharCol());
                 mazeDisplayer.draw();
-
                 if(viewModel.getCharRow()==viewModel.getGoalRow() && viewModel.getCharCol()==viewModel.getGoalCol()){
                     //ReachGoal
-
                 }
             }
         }
@@ -97,6 +102,10 @@ public class MyViewController implements IView, Observer, Initializable {
         int rows = Integer.valueOf(textField_mazeRows.getText());
         int cols = Integer.valueOf(textField_mazeColumns.getText());
         viewModel.generateMaze(rows,cols);
+
     }
 
+    public void mouseClicked(MouseEvent mouseEvent) {
+        mazeDisplayer.requestFocus();
+    }
 }

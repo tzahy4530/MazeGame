@@ -6,6 +6,7 @@ import algorithms.mazeGenerators.Maze;
 import algorithms.mazeGenerators.Position;
 import algorithms.search.AState;
 import algorithms.search.Solution;
+import javafx.scene.input.KeyEvent;
 import javafx.util.Pair;
 
 import java.util.ArrayList;
@@ -26,8 +27,6 @@ public class MyViewModel extends Observable implements Observer {
     public int getGoalCol() {
         return goalCol;
     }
-
-    private List<AState> solutionList;
 
     public int[][] getMaze() {
         return maze;
@@ -60,6 +59,24 @@ public class MyViewModel extends Observable implements Observer {
         model.generateMaze(row,col);
     }
 
+    public void moveCharacter(KeyEvent keyEvent){
+
+        switch(keyEvent.getCode()){
+            case UP:
+                model.moveCharacter(1);
+                break;
+            case DOWN:
+                model.moveCharacter(2);
+                break;
+            case LEFT:
+                model.moveCharacter(3);
+                break;
+            case RIGHT:
+                model.moveCharacter(4);
+                break;
+        }
+    }
+
     @Override
     public void update(Observable o, Object arg) {
         if (o instanceof MyModel) {
@@ -68,15 +85,14 @@ public class MyViewModel extends Observable implements Observer {
                 maze = model.getMazeMatrix();
                 charRow = model.getCharacterRow();
                 charCol = model.getCharacterCol();
-                goalRow = model.getCharacterRow();
-                goalCol = model.getCharacterCol();
+                goalRow = model.getGoalRow();
+                goalCol = model.getGoalCol();
                 setChanged();
                 notifyObservers(maze);
             }
             else if (arg instanceof Solution) {
-                solutionList=model.getSolution();
                 setChanged();
-                notifyObservers(solutionList);
+                notifyObservers(getSolutionList());
             }
             else{ //move // finish
                 charRow = model.getCharacterRow();
@@ -85,7 +101,7 @@ public class MyViewModel extends Observable implements Observer {
                 notifyObservers();
             }
         }
-
-
     }
+
+
 }
