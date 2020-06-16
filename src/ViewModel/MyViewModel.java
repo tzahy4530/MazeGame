@@ -19,6 +19,7 @@ public class MyViewModel extends Observable implements Observer {
     private int charRow, charCol;
     private int goalRow, goalCol;
     private IModel model;
+    private List<Pair<Integer,Integer>> solution;
 
     public int getGoalRow() {
         return goalRow;
@@ -40,14 +41,14 @@ public class MyViewModel extends Observable implements Observer {
         return charCol;
     }
 
-    public List<Pair<Integer, Integer>> getSolutionList() {
+    public void makeSolutionList(List<AState> solList) {
         List<Pair<Integer, Integer>> solutionAsRowCol=new ArrayList<>();
         for (AState state:
-             model.getSolution()) {
+             solList) {
             Position position= (Position) state.getStateValue();
             solutionAsRowCol.add(new Pair<Integer, Integer>(position.getRowIndex(),position.getColumnIndex()));
         }
-        return solutionAsRowCol;
+        solution=solutionAsRowCol;
     }
 
     public void solve(){
@@ -57,6 +58,12 @@ public class MyViewModel extends Observable implements Observer {
     public MyViewModel(IModel model) {
         this.model = model;
         this.model.assignObserver(this);
+        this.solution=null;
+        maze=null;
+        charRow=0;
+        charCol=0;
+        goalRow=0;
+        goalCol=0;
     }
 
     public void generateMaze(int row, int col){
@@ -95,8 +102,9 @@ public class MyViewModel extends Observable implements Observer {
                 notifyObservers(maze);
             }
             else if (arg instanceof Solution) {
+                makeSolutionList(model.getSolution());
                 setChanged();
-                notifyObservers(getSolutionList());
+                notifyObservers(solution);
             }
             else{ //move // finish
                 charRow = model.getCharacterRow();
