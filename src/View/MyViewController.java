@@ -22,6 +22,7 @@ public class MyViewController implements IView, Observer, Initializable {
     int[][] maze;
     int charCol, charRow;
 
+
     @Override
     public void update(Observable o, Object arg) {
 
@@ -59,4 +60,6 @@ public class MyViewController implements IView, Observer, Initializable {
         }
         System.exit(0);
     }
+    public void drawMaze(){}
+
 }

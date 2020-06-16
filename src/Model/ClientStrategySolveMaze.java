@@ -13,7 +13,8 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClientStrategySolveMaze implements IClientStrategy {
+public class
+ClientStrategySolveMaze implements IClientStrategy {
     private Maze maze;
     private Solution solution;
 

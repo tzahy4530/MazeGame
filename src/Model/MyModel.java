@@ -27,13 +27,13 @@ public class MyModel extends Observable implements IModel {
         ClientStrategyGenerateMaze clientStrategyGenerateMaze = new ClientStrategyGenerateMaze(row, col);
         try {
             Client mazeGenerate = new Client(InetAddress.getLocalHost(), 5400, clientStrategyGenerateMaze);
+            mazeGenerate.communicateWithServer();
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
         maze = clientStrategyGenerateMaze.getMaze();
         setChanged();
         notifyObservers(maze);
-
     }
 
     @Override
@@ -79,7 +79,6 @@ public class MyModel extends Observable implements IModel {
                     charCol++;
                 break;
         }
-
 
         setChanged();
         notifyObservers();

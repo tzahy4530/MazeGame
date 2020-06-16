@@ -1,0 +1,111 @@
+package View;
+
+import algorithms.mazeGenerators.Position;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
+import javafx.util.Pair;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
+public class MazeDisplayer extends Canvas {
+
+    StringProperty imageFileNameWall = new SimpleStringProperty("./wall.jpg");
+    StringProperty imageFileNamePlayer = new SimpleStringProperty("./mario.jpg");
+
+    private int[][] maze;
+    private int row_player;
+    private int col_player;
+    private Position goal;
+    public int getRow_player(){return row_player;}
+    public int getCol_player(){return col_player;}
+
+    public int getMazeMaxRow() {return maze.length;}
+    public int getMazeMaxCol() {return maze[0].length;}
+    public boolean isAWall(int row, int col){
+        if(maze[row][col]==1) return true;
+        return false;
+    }
+
+    public void set_player_position(int row, int col) {
+        this.row_player = row;
+        this.col_player = col;
+        draw();
+    }
+
+    public boolean reachGoal(){
+        if(getRow_player() == goal.getRowIndex() && getCol_player() == goal.getColumnIndex()){
+            return true;
+        }
+        return false;
+    }
+
+    public MazeDisplayer(int[][] maze, Position startPoint, Position endPoint) {
+        this.maze = maze;
+        this.row_player = startPoint.getRowIndex();
+        this.col_player = startPoint.getColumnIndex();
+        this.goal = endPoint;
+
+    }
+
+    public void draw(){
+        int row = maze.length;
+        int col = maze[0].length;
+        double canvasHeight = getHeight();
+        double canvasWidth = getWidth();
+
+        double cellHeight = canvasHeight/row;
+        double cellWidth = canvasWidth/col;
+        GraphicsContext graphicsContext = getGraphicsContext2D();
+        graphicsContext.clearRect(0,0,canvasWidth,canvasHeight);
+        graphicsContext.setFill(Color.WHITE);
+        double w,h;
+        Image wallImage = null;
+        try {
+            wallImage = new Image(new FileInputStream("./wall.jpg"));
+        }
+        catch(Exception e){
+            System.out.println("cannot find the wall Image");
+        }
+        for(int i=0;i<row;i++)
+        {
+            for(int j=0;j<col;j++)
+            {
+                if(maze[i][j] == 1) // Wall
+                {
+                    h = i * cellHeight;
+                    w = j * cellWidth;
+                    if (wallImage == null){
+                        graphicsContext.fillRect(w,h,cellWidth,cellHeight);
+                    }else{
+                        graphicsContext.drawImage(wallImage,w,h,cellWidth,cellHeight);
+                    }
+                }
+            }
+        }
+        double h_player = row_player * cellHeight;
+        double w_player = col_player * cellWidth;
+        Image goalImage = null;
+        try {
+            goalImage = new Image(new FileInputStream("./goal.jpg"));
+        } catch (Exception e) {
+            System.out.println("There is no Image player....");
+        }
+        graphicsContext.drawImage(goalImage,(double) 0*cellWidth,(double)3*cellHeight,cellWidth,cellHeight);
+        Image playerImage = null;
+        try {
+            playerImage = new Image(new FileInputStream("./mario.jpg"));
+        } catch (Exception e) {
+            System.out.println("There is no Image player....");
+        }
+        graphicsContext.drawImage(playerImage,w_player,h_player,cellWidth,cellHeight);
+
+    }
+}
+
+
+
