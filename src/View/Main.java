@@ -15,8 +15,10 @@ import javafx.stage.WindowEvent;
 
 public class Main extends Application {
     Server generateServer, solverServer ;
+    static Stage window;
     @Override
     public void start(Stage primaryStage) throws Exception{
+        window=primaryStage;
         FXMLLoader fxmlLoader=new FXMLLoader(getClass().getResource("MyView.fxml"));
         Parent root = fxmlLoader.load();
         primaryStage.setTitle("Hello World");
@@ -39,6 +41,7 @@ public class Main extends Application {
         generateServer.stop();
     }
 
+    public static void changeScene(Scene scene){window.setScene(scene);}
 
     public static void main(String[] args) {
         launch(args);
