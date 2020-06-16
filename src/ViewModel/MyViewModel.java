@@ -50,6 +50,10 @@ public class MyViewModel extends Observable implements Observer {
         return solutionAsRowCol;
     }
 
+    public void solve(){
+        model.solveMaze();
+    }
+
     public MyViewModel(IModel model) {
         this.model = model;
         this.model.assignObserver(this);

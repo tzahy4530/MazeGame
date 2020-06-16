@@ -1,5 +1,6 @@
 package View;
 
+import Model.ClientStrategySolveMaze;
 import Model.IModel;
 import Model.MyModel;
 import Server.*;
@@ -12,8 +13,6 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-    static public Server server;
-
     @Override
     public void start(Stage primaryStage) throws Exception{
         FXMLLoader fxmlLoader=new FXMLLoader(getClass().getResource("MyView.fxml"));
@@ -25,11 +24,11 @@ public class Main extends Application {
         IView view=fxmlLoader.getController();
         view.setViewModel(viewModel);
         viewModel.addObserver(view);
-        server = new Server(5400, 1000, new ServerStrategyGenerateMaze());
-        Main.server.start();
+        Server generateServer = new Server(5400, 1000, new ServerStrategyGenerateMaze());
+        generateServer.start();
+        Server solverServer = new Server(5401,10000, new ServerStrategySolveSearchProblem());
+        solverServer.start();
         primaryStage.show();
-
-
     }
 
 

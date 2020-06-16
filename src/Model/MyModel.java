@@ -22,6 +22,7 @@ public class MyModel extends Observable implements IModel {
 
     @Override
     public void generateMaze(int row, int col) {
+
         ClientStrategyGenerateMaze clientStrategyGenerateMaze = new ClientStrategyGenerateMaze(row, col);
         try {
             Client mazeGenerate = new Client(InetAddress.getLocalHost(), 5400, clientStrategyGenerateMaze);
@@ -45,6 +46,7 @@ public class MyModel extends Observable implements IModel {
         ClientStrategySolveMaze clientStrategySolveMaze = new ClientStrategySolveMaze(maze);
         try {
             Client client = new Client(InetAddress.getLocalHost(), 5401, clientStrategySolveMaze);
+            client.communicateWithServer();
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }

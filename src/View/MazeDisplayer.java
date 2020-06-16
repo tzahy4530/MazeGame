@@ -37,6 +37,7 @@ public class MazeDisplayer extends Canvas {
         this.col_player = colStartChar;
         this.row_goal = rowGoal;
         this.col_goal = colGoal;
+        solution = null;
 
     }
 
@@ -92,6 +93,14 @@ public class MazeDisplayer extends Canvas {
                 }
             }
         }
+        if(solution != null) {
+            graphicsContext.setFill(Color.RED);
+            for (Pair<Integer, Integer> pair : solution) {
+                double r = pair.getKey() * cellHeight;
+                double c = pair.getValue() * cellWidth;
+                graphicsContext.fillRect(c, r, cellWidth, cellHeight);
+            }
+        }
         double h_player = row_player * cellHeight;
         double w_player = col_player * cellWidth;
         Image goalImage = null;
@@ -108,15 +117,6 @@ public class MazeDisplayer extends Canvas {
             System.out.println("There is no Image player....");
         }
         graphicsContext.drawImage(playerImage,w_player,h_player,cellWidth,cellHeight);
-        if(solution != null){
-            graphicsContext.setFill(Color.RED);
-            for(Pair<Integer,Integer> pair: solution){
-                double r = pair.getKey() * cellHeight;
-                double c = pair.getValue() * cellWidth;
-                graphicsContext.fillRect(r,c,cellWidth,cellHeight);
-            }
-
-        }
 
     }
 }
