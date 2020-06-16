@@ -16,7 +16,17 @@ import java.util.Observer;
 public class MyViewModel extends Observable implements Observer {
     private int[][] maze;
     private int charRow, charCol;
+    private int goalRow, goalCol;
     private IModel model;
+
+    public int getGoalRow() {
+        return goalRow;
+    }
+
+    public int getGoalCol() {
+        return goalCol;
+    }
+
     private List<AState> solutionList;
 
     public int[][] getMaze() {
@@ -46,16 +56,36 @@ public class MyViewModel extends Observable implements Observer {
         this.model.assignObserver(this);
     }
 
+    public void generateMaze(int row, int col){
+        model.generateMaze(row,col);
+    }
+
     @Override
     public void update(Observable o, Object arg) {
         if (o instanceof MyModel) {
             if (arg instanceof Maze) {
+                //generateMaze
                 maze = model.getMazeMatrix();
+                charRow = model.getCharacterRow();
+                charCol = model.getCharacterCol();
+                goalRow = model.getCharacterRow();
+                goalCol = model.getCharacterCol();
+                setChanged();
+                notifyObservers(maze);
             }
-            if (arg instanceof Solution) {
+            else if (arg instanceof Solution) {
                 solutionList=model.getSolution();
+                setChanged();
+                notifyObservers(solutionList);
+            }
+            else{ //move // finish
+                charRow = model.getCharacterRow();
+                charCol = model.getCharacterCol();
+                setChanged();
+                notifyObservers();
             }
         }
+
 
     }
 }

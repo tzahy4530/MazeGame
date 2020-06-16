@@ -1,5 +1,6 @@
 package Model;
 
+import algorithms.mazeGenerators.Maze;
 import algorithms.search.AState;
 
 import java.util.List;
@@ -14,5 +15,7 @@ public interface IModel {
     public int getCharacterCol();
     public List<AState> getSolution();
     public void assignObserver(Observer o);
+    public int getGoalRow();
+    public int getGoalCol();
 
 }

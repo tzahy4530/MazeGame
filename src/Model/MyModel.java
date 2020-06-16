@@ -101,6 +101,16 @@ public class MyModel extends Observable implements IModel {
     }
 
     @Override
+    public int getGoalRow() {
+        return maze.getGoalPosition().getRowIndex();
+    }
+
+    @Override
+    public int getGoalCol() {
+        return maze.getGoalPosition().getColumnIndex();
+    }
+
+    @Override
     public List<AState> getSolution() {
         return solution.getSolutionPath();
     }

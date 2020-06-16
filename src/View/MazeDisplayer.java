@@ -20,7 +20,8 @@ public class MazeDisplayer extends Canvas {
     private int[][] maze;
     private int row_player;
     private int col_player;
-    private Position goal;
+    private int row_goal;
+    private int col_goal;
     public int getRow_player(){return row_player;}
     public int getCol_player(){return col_player;}
 
@@ -37,18 +38,12 @@ public class MazeDisplayer extends Canvas {
         draw();
     }
 
-    public boolean reachGoal(){
-        if(getRow_player() == goal.getRowIndex() && getCol_player() == goal.getColumnIndex()){
-            return true;
-        }
-        return false;
-    }
-
-    public MazeDisplayer(int[][] maze, Position startPoint, Position endPoint) {
+    public MazeDisplayer(int[][] maze, int rowStartChar, int colStartChar, int rowGoal, int colGoal) {
         this.maze = maze;
-        this.row_player = startPoint.getRowIndex();
-        this.col_player = startPoint.getColumnIndex();
-        this.goal = endPoint;
+        this.row_player = rowStartChar;
+        this.col_player = colStartChar;
+        this.row_goal = rowGoal;
+        this.col_player = colGoal;
 
     }
 
@@ -95,7 +90,7 @@ public class MazeDisplayer extends Canvas {
         } catch (Exception e) {
             System.out.println("There is no Image player....");
         }
-        graphicsContext.drawImage(goalImage,(double) 0*cellWidth,(double)3*cellHeight,cellWidth,cellHeight);
+        graphicsContext.drawImage(goalImage,(double) col_goal*cellWidth,(double)row_goal*cellHeight,cellWidth,cellHeight);
         Image playerImage = null;
         try {
             playerImage = new Image(new FileInputStream("./mario.jpg"));

@@ -1,19 +1,24 @@
 package View;
 
 import ViewModel.MyViewModel;
+import algorithms.search.AState;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.TextField;
 
 import java.net.URL;
-import java.util.Observable;
-import java.util.Observer;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class MyViewController implements IView, Observer, Initializable {
     private MyViewModel viewModel;
+    public TextField textField_mazeRows;
+    public TextField textField_mazeColumns;
+    public MazeDisplayer mazeDisplayer;
+
 
     public void setViewModel(MyViewModel viewModel) {
         this.viewModel = viewModel;
@@ -25,7 +30,28 @@ public class MyViewController implements IView, Observer, Initializable {
 
     @Override
     public void update(Observable o, Object arg) {
+        if(o instanceof MyViewModel){
+            if(arg instanceof int[][]){
+                //GenerateMaze
+                mazeDisplayer = new MazeDisplayer(viewModel.getMaze(),viewModel.getCharRow(),viewModel.getCharCol(),
+                        viewModel.getGoalRow(),viewModel.getGoalCol());
+                mazeDisplayer.draw();
+            }
+            else if(arg instanceof List){
+                //Solution
 
+            }
+            else{
+                //move
+                mazeDisplayer.set_player_position(viewModel.getCharRow(),viewModel.getCharCol());
+                mazeDisplayer.draw();
+
+                if(viewModel.getCharRow()==viewModel.getGoalRow() && viewModel.getCharCol()==viewModel.getGoalCol()){
+                    //ReachGoal
+
+                }
+            }
+        }
     }
 
     @Override
@@ -60,6 +86,14 @@ public class MyViewController implements IView, Observer, Initializable {
         }
         System.exit(0);
     }
+
+    public void generateMaze()
+    {
+        int rows = Integer.valueOf(textField_mazeRows.getText());
+        int cols = Integer.valueOf(textField_mazeColumns.getText());
+        viewModel.generateMaze(rows,cols);
+    }
+
     public void drawMaze(){}
 
 }
