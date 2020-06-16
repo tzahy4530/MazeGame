@@ -15,8 +15,11 @@ import java.util.*;
 
 public class MyViewController implements IView, Observer, Initializable {
     private MyViewModel viewModel;
+    @FXML
     public TextField textField_mazeRows;
+    @FXML
     public TextField textField_mazeColumns;
+    @FXML
     public MazeDisplayer mazeDisplayer;
 
 
@@ -33,8 +36,10 @@ public class MyViewController implements IView, Observer, Initializable {
         if(o instanceof MyViewModel){
             if(arg instanceof int[][]){
                 //GenerateMaze
-                mazeDisplayer = new MazeDisplayer(viewModel.getMaze(),viewModel.getCharRow(),viewModel.getCharCol(),
-                        viewModel.getGoalRow(),viewModel.getGoalCol());
+                maze = viewModel.getMaze();
+                charCol = viewModel.getCharCol();
+                charRow = viewModel.getCharRow();
+                mazeDisplayer = new MazeDisplayer(maze,charRow,charCol,viewModel.getGoalRow(),viewModel.getGoalCol());
                 mazeDisplayer.draw();
             }
             else if(arg instanceof List){
@@ -93,7 +98,5 @@ public class MyViewController implements IView, Observer, Initializable {
         int cols = Integer.valueOf(textField_mazeColumns.getText());
         viewModel.generateMaze(rows,cols);
     }
-
-    public void drawMaze(){}
 
 }

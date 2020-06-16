@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import View.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<?import View.MazeDisplayer?>
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MyViewController">
    <children>
       <Label layoutX="206.0" layoutY="19.0" prefHeight="35.0" prefWidth="146.0" text="אל תדאג נתי!" textAlignment="CENTER" textFill="#2d2386" textOverrun="WORD_ELLIPSIS">
@@ -31,9 +31,7 @@
          </children>
       </GridPane>
       <Pane layoutX="82.0" layoutY="149.0" prefHeight="237.0" prefWidth="388.0">
-         <children>
-            <MazeDisplayer fx:id="mazeDisplayer" height="400.0" width="400.0" />
-         </children>
+         <MazeDisplayer fx:id="mazeDisplayer" height="237.0" width="388.0" />
       </Pane>
    </children>
 </AnchorPane>

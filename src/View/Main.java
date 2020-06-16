@@ -17,12 +17,13 @@ public class Main extends Application {
         Parent root = fxmlLoader.load();
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root, 600, 275));
-        primaryStage.show();
         IModel model= new MyModel();
         MyViewModel viewModel=new MyViewModel(model);
         IView view=fxmlLoader.getController();
         view.setViewModel(viewModel);
         viewModel.addObserver(view);
+        primaryStage.show();
+
 
     }
 

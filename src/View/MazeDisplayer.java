@@ -7,10 +7,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
-import javafx.util.Pair;
-
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 
 public class MazeDisplayer extends Canvas {
 
@@ -22,6 +19,19 @@ public class MazeDisplayer extends Canvas {
     private int col_player;
     private int row_goal;
     private int col_goal;
+
+
+    public MazeDisplayer(int[][] maze, int rowStartChar, int colStartChar, int rowGoal, int colGoal) {
+        this.maze = maze;
+        this.row_player = rowStartChar;
+        this.col_player = colStartChar;
+        this.row_goal = rowGoal;
+        this.col_player = colGoal;
+
+    }
+
+    public MazeDisplayer(){};
+
     public int getRow_player(){return row_player;}
     public int getCol_player(){return col_player;}
 
@@ -38,14 +48,6 @@ public class MazeDisplayer extends Canvas {
         draw();
     }
 
-    public MazeDisplayer(int[][] maze, int rowStartChar, int colStartChar, int rowGoal, int colGoal) {
-        this.maze = maze;
-        this.row_player = rowStartChar;
-        this.col_player = colStartChar;
-        this.row_goal = rowGoal;
-        this.col_player = colGoal;
-
-    }
 
     public void draw(){
         int row = maze.length;
