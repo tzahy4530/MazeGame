@@ -3,9 +3,14 @@ package Model;
 import Client.*;
 import View.Main;
 import algorithms.mazeGenerators.Maze;
+import algorithms.mazeGenerators.Position;
 import algorithms.search.AState;
 import algorithms.search.Solution;
+import javafx.util.Pair;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.List;
@@ -16,6 +21,20 @@ public class MyModel extends Observable implements IModel {
     private Maze maze;
     private int charCol, charRow;
     private Solution solution;
+
+    public void setMaze(Maze maze) {
+        this.maze = maze;
+        setChanged();
+        notifyObservers(maze);
+    }
+
+    @Override
+    public void setCharacterPosition(Position charPosition) {
+        charRow = charPosition.getRowIndex();
+        charCol = charPosition.getColumnIndex();
+        setChanged();
+        notifyObservers(maze);
+    }
 
     public MyModel() {
     }
@@ -66,20 +85,20 @@ public class MyModel extends Observable implements IModel {
 
         switch (direction) {
             case 1: //Up
-                if (charRow != 0 && maze.getMazeMatrix()[charRow-1][charCol]!= 1)
+                if (charRow != 0 && maze.getMazeMatrix()[charRow - 1][charCol] != 1)
                     charRow--;
                 break;
 
             case 2: //Down
-                if (charRow != maze.getMazeMatrix().length - 1 && maze.getMazeMatrix()[charRow+1][charCol]!= 1)
+                if (charRow != maze.getMazeMatrix().length - 1 && maze.getMazeMatrix()[charRow + 1][charCol] != 1)
                     charRow++;
                 break;
             case 3: //Left
-                if (charCol != 0 && maze.getMazeMatrix()[charRow][charCol-1]!= 1)
+                if (charCol != 0 && maze.getMazeMatrix()[charRow][charCol - 1] != 1)
                     charCol--;
                 break;
             case 4: //Right
-                if (charCol != maze.getMazeMatrix()[0].length - 1 && maze.getMazeMatrix()[charRow][charCol+1]!= 1)
+                if (charCol != maze.getMazeMatrix()[0].length - 1 && maze.getMazeMatrix()[charRow][charCol + 1] != 1)
                     charCol++;
                 break;
         }
@@ -121,5 +140,21 @@ public class MyModel extends Observable implements IModel {
     @Override
     public void assignObserver(Observer o) {
         addObserver(o);
+    }
+
+    public void loadMazeFromFile(File mazeFile) throws Exception {
+        FileInputStream fileInputStream = new FileInputStream(mazeFile);
+        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+        Pair<Maze, Position> mazePlusCharacterPosition = (Pair<Maze, Position>) objectInputStream.readObject();
+        objectInputStream.close();
+        fileInputStream.close();
+        this.setMaze(mazePlusCharacterPosition.getKey());
+        this.setCharacterPosition(mazePlusCharacterPosition.getValue());
+    }
+
+    @Override
+    public Pair<Maze, Position> getObjectToSaveMaze() {
+        Pair<Maze, Position> obj = new Pair<Maze, Position>(maze, new Position(charRow, charCol));
+        return obj;
     }
 }

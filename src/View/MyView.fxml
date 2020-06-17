@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane onMouseClicked="#mouseClicked" prefHeight="404.0" prefWidth="186.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MyViewController">
+<AnchorPane prefHeight="404.0" prefWidth="186.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MyViewController">
    <children>
       <Label layoutX="16.0" layoutY="-3.0" prefHeight="35.0" prefWidth="146.0" text="אל תדאג נתי!" textAlignment="CENTER" textFill="#2d2386" textOverrun="WORD_ELLIPSIS">
          <font>

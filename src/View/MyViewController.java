@@ -107,9 +107,6 @@ public class MyViewController implements IView, Observer, Initializable {
         viewModel.solve();
     }
 
-    public void mouseClicked(MouseEvent mouseEvent) {
-        mazeDisplayer.requestFocus();
-    }
 
     public void MazeSceneChanger(ActionEvent actionEvent) throws IOException {
         FXMLLoader fxmllLoader=new FXMLLoader(getClass().getResource("MazeScene.fxml"));

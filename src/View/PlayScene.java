@@ -57,10 +57,20 @@ public class PlayScene implements IView, Initializable {
         Main.changeScene(new Scene(root));
     }
 
-    public void loadGame(ActionEvent actionEvent) {
+    public void loadGame(ActionEvent actionEvent) throws Exception {
         FileChooser fileChooser=new FileChooser();
         fileChooser.setTitle("Select saved game");
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Maze Files","*.maze"));
         File selectedMaze=fileChooser.showOpenDialog(Main.getWindow());
+        if(selectedMaze==null) return;
+        viewModel.loadMazeFromFile(selectedMaze);
+    }
+
+    public void saveGame(ActionEvent actionEvent) throws IOException {
+        FileChooser fileChooser=new FileChooser();
+        fileChooser.setTitle("Select saved game");
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Maze Files","*.maze"));
+        File selectedMaze=fileChooser.showSaveDialog(Main.getWindow());
+        viewModel.saveMaze(selectedMaze);
     }
 }
