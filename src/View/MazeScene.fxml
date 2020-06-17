@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import View.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<?import View.MazeDisplayer?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.Pane?>
-<VBox onMouseClicked="#mouseClicked" prefHeight="600.0" prefWidth="710.0" xmlns="http://javafx.com/javafx/11.0.1"
-      xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MazeScene">
+<VBox onMouseClicked="#mouseClicked" prefHeight="800" prefWidth="900" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MazeScene">
 <children>
-    <Pane fx:id="pane" VBox.vgrow="ALWAYS">
+    <Pane fx:id="pane" prefHeight="591.0" prefWidth="710.0" VBox.vgrow="ALWAYS">
         <children>
-            <MazeDisplayer fx:id="mazeDisplayer" height="${pane.height}" width="${pane.width}" onKeyPressed="#keyPressed"/>
+            <MazeDisplayer fx:id="mazeDisplayer" height="${pane.height}" onKeyPressed="#keyPressed" width="${pane.width}" />
         </children>
     </Pane>
+      <Pane prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <Button mnemonicParsing="false" text="Solve" onAction="#SolveMaze" />
+         </children></Pane>
 </children>
 </VBox>

@@ -110,7 +110,6 @@ public class MazeScene implements IView, Initializable {
     public void initialize(URL location, ResourceBundle resources) {
     }
 
-
     public void keyPressed(KeyEvent keyEvent) {
         viewModel.moveCharacter(keyEvent);
         keyEvent.consume();
