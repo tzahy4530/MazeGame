@@ -90,6 +90,14 @@ public class MyViewController implements IView, Observer, Initializable {
 
 
     public void generateMaze() {
+        if (textField_mazeRows.getText().length()==0 ||textField_mazeColumns.getText().length()==0){
+            Alert alet=new Alert(Alert.AlertType.ERROR);
+            alet.setTitle("Values");
+            alet.setContentText("You have to fell column and rows");
+            alet.setHeaderText("Feel values please");
+            alet.show();
+            return;
+        }
         int rows = Integer.valueOf(textField_mazeRows.getText());
         int cols = Integer.valueOf(textField_mazeColumns.getText());
         viewModel.generateMaze(rows, cols);
