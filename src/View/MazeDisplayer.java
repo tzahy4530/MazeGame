@@ -81,15 +81,18 @@ public class MazeDisplayer extends Canvas {
         {
             for(int j=0;j<col;j++)
             {
+                h = i * cellHeight;
+                w = j * cellWidth;
                 if(maze[i][j] == 1) // Wall
                 {
-                    h = i * cellHeight;
-                    w = j * cellWidth;
                     if (wallImage == null){
                         graphicsContext.fillRect(w,h,cellWidth,cellHeight);
                     }else{
                         graphicsContext.drawImage(wallImage,w,h,cellWidth,cellHeight);
                     }
+                }
+                else{
+                    graphicsContext.fillRect(w,h,cellWidth,cellHeight);
                 }
             }
         }
