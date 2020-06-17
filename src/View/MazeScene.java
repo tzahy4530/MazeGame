@@ -92,6 +92,9 @@ public class MazeScene implements IView, Initializable {
         }
 
     }
+    public void redraw(){
+        this.mazeDisplayer.draw();
+    }
 
     public void BackToMainScene(ActionEvent actionEvent) throws IOException {
         FXMLLoader fxmlLoader=new FXMLLoader(getClass().getResource("MyView.fxml"));
@@ -101,9 +104,6 @@ public class MazeScene implements IView, Initializable {
         viewModel.addObserver(mainView);
         mainView.setViewModel(viewModel);
         Main.changeScene(new Scene(root));
-    }
-    public void redraw(){
-        mazeDisplayer.draw();
     }
 
     @Override

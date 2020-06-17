@@ -29,6 +29,7 @@ public class PlayScene implements IView, Initializable {
     }
 
     public void newGame() throws IOException {
+
         //moving MazeInformation to ViewModel
         int[] mazeSize = Options.getOptions().getMazeSize();
         viewModel.generateMaze(mazeSize[0], mazeSize[1]);
@@ -41,6 +42,7 @@ public class PlayScene implements IView, Initializable {
         viewModel.deleteObserver(this);
         mazeView.setViewModel(viewModel);
         Main.changeScene(new Scene(mazeScene, 1280,600));
+        ((MazeScene)mazeView).redraw();
     }
 
     public void BackToMainScene(ActionEvent actionEvent) throws IOException {

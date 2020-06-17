@@ -41,7 +41,10 @@ public class Main extends Application {
         generateServer.stop();
     }
 
-    public static void changeScene(Scene scene){window.setScene(scene);}
+    public static void changeScene(Scene scene) {
+        window.setScene(scene);
+        window.show();
+    }
 
     public static void main(String[] args) {
         launch(args);
