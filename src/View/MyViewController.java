@@ -8,10 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Screen;
@@ -64,11 +61,28 @@ public class MyViewController implements IView, Observer, Initializable {
                 mazeDisplayer.draw();
                 if (viewModel.getCharRow() == viewModel.getGoalRow() && viewModel.getCharCol() == viewModel.getGoalCol()) {
                     //ReachGoal
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("Congratulations!");
+                    alert.setHeaderText("You have reached the goal.");
+                    alert.setContentText("Choose your option.");
+
+                    ButtonType buttonPlayAgain = new ButtonType("Play again");
+                    ButtonType buttonMenu = new ButtonType("Menu");
+                    alert.getButtonTypes().setAll(buttonPlayAgain, buttonMenu);
+
+                    Optional<ButtonType> result = alert.showAndWait();
+                    if (result.get() == buttonPlayAgain) {
+                        // ... user chose "PlayAgain"
+                        generateMaze();
+
+                    } else if (result.get() == buttonMenu) {
+                        // ... user chose "Menu"
+
+                    }
                 }
             }
         }
     }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 

@@ -6,6 +6,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
@@ -13,6 +15,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.Observable;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class MazeScene implements IView, Initializable {
@@ -51,6 +54,29 @@ public class MazeScene implements IView, Initializable {
                 mazeDisplayer.draw();
                 if (viewModel.getCharRow() == viewModel.getGoalRow() && viewModel.getCharCol() == viewModel.getGoalCol()) {
                     //ReachGoal
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("Congratulations!");
+                    alert.setHeaderText("You have reached the goal.");
+                    alert.setContentText("Choose your option.");
+
+                    ButtonType buttonPlayAgain = new ButtonType("Play again");
+                    ButtonType buttonMenu = new ButtonType("Menu");
+                    alert.getButtonTypes().setAll(buttonPlayAgain, buttonMenu);
+
+                    Optional<ButtonType> result = alert.showAndWait();
+                    if (result.get() == buttonPlayAgain) {
+                        // ... user chose "PlayAgain"
+                        viewModel.generateMaze(viewModel.getMaze().length,viewModel.getMaze()[0].length);
+
+                    } else if (result.get() == buttonMenu) {
+                        // ... user chose "Menu"
+                        try {
+                            BackToMainScene(new ActionEvent());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
                 }
             }
         }
