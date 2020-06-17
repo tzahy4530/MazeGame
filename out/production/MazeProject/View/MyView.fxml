@@ -1,39 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import View.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane onMouseClicked="#mouseClicked" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MyViewController">
+<AnchorPane onMouseClicked="#mouseClicked" prefHeight="600.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MyViewController">
    <children>
       <Label layoutX="206.0" layoutY="19.0" prefHeight="35.0" prefWidth="146.0" text="אל תדאג נתי!" textAlignment="CENTER" textFill="#2d2386" textOverrun="WORD_ELLIPSIS">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Button layoutX="252.0" layoutY="69.0" mnemonicParsing="false" onAction="#generateMaze" text="#התחלנו" />
-      <GridPane layoutX="14.0" layoutY="69.0">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Row" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Col" GridPane.rowIndex="1" />
-            <TextField fx:id="textField_mazeRows" GridPane.columnIndex="1" />
-            <TextField fx:id="textField_mazeColumns" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-         </children>
-      </GridPane>
-      <Pane layoutX="82.0" layoutY="149.0" prefHeight="237.0" prefWidth="388.0">
-         <MazeDisplayer fx:id="mazeDisplayer" height="237.0" onKeyPressed="#keyPressed" width="388.0" />
-      </Pane>
-      <Button layoutX="359.0" layoutY="69.0" mnemonicParsing="false" onAction="#solve" text="Solve" />
-      <Button layoutX="444.0" layoutY="69.0" mnemonicParsing="false" onAction="#MazeSceneChanger" text="Take me to other Scene" />
+      <Button layoutX="590.0" layoutY="350.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#generateMaze" prefHeight="50.0" prefWidth="150.0" text="Help">
+         <font>
+            <Font size="20.0" />
+         </font></Button>
+      <Button layoutX="590.0" layoutY="275.0" mnemonicParsing="false" onAction="#OptionsSceneChanger" prefHeight="50.0" prefWidth="150.0" text="Options">
+         <font>
+            <Font size="20.0" />
+         </font></Button>
+      <Button layoutX="590.0" layoutY="200.0" mnemonicParsing="false" onAction="#PlaySceneChanger" prefHeight="50.0" prefWidth="150.0" text="Play">
+         <font>
+            <Font size="20.0" />
+         </font></Button>
+      <Button layoutX="590.0" layoutY="500.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" text="Exit">
+         <font>
+            <Font size="20.0" />
+         </font></Button>
+      <Button layoutX="590.0" layoutY="425.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" text="About">
+         <font>
+            <Font size="20.0" />
+         </font></Button>
    </children>
 </AnchorPane>

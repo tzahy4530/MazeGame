@@ -21,6 +21,7 @@ import java.util.*;
 
 public class MyViewController implements IView, Observer, Initializable {
     private MyViewModel viewModel;
+    public ComboBox sounds;
     @FXML
     public TextField textField_mazeRows;
     @FXML
@@ -33,7 +34,6 @@ public class MyViewController implements IView, Observer, Initializable {
     public void setViewModel(MyViewModel viewModel) {
         this.viewModel = viewModel;
     }
-
 
 
     public void keyPressed(KeyEvent keyEvent) {
@@ -90,7 +90,7 @@ public class MyViewController implements IView, Observer, Initializable {
 
 
     public void generateMaze() {
-        if (textField_mazeRows.getText().length()==0 ||textField_mazeColumns.getText().length()==0){
+        if (textField_mazeRows.getText().length()<2 ||textField_mazeColumns.getText().length()<2){
             Alert alet=new Alert(Alert.AlertType.ERROR);
             alet.setTitle("Values");
             alet.setContentText("You have to fell column and rows");
@@ -118,6 +118,28 @@ public class MyViewController implements IView, Observer, Initializable {
         viewModel.addObserver(mazeView);
         viewModel.deleteObserver(this);
         mazeView.setViewModel(viewModel);
-        Main.changeScene(new Scene(mazeScene, 710,600));
+        Main.changeScene(new Scene(mazeScene, 1280,600));
     }
+
+    public void OptionsSceneChanger(ActionEvent actionEvent) throws IOException {
+        FXMLLoader fxmllLoader=new FXMLLoader(getClass().getResource("OptionView.fxml"));
+        Parent optionsScene = fxmllLoader.load();
+        IView optionsView=fxmllLoader.getController();
+        viewModel.addObserver(optionsView);
+        viewModel.deleteObserver(this);
+        optionsView.setViewModel(viewModel);
+        Main.changeScene(new Scene(optionsScene, 1280,600));
+    }
+
+    public void PlaySceneChanger(ActionEvent actionEvent) throws IOException {
+        FXMLLoader fxmllLoader=new FXMLLoader(getClass().getResource("PlayView.fxml"));
+        Parent playScene = fxmllLoader.load();
+        IView playView=fxmllLoader.getController();
+        viewModel.addObserver(playView);
+        viewModel.deleteObserver(this);
+        playView.setViewModel(viewModel);
+        Main.changeScene(new Scene(playScene, 1280,600));
+    }
+
+
 }

@@ -1,5 +1,6 @@
 package View;
 
+import Model.Options;
 import ViewModel.MyViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -57,12 +58,12 @@ public class MazeScene implements IView, Initializable {
                 mazeDisplayer.draw();
                 if (viewModel.getCharRow() == viewModel.getGoalRow() && viewModel.getCharCol() == viewModel.getGoalCol()) {
                     //ReachGoal
-
-                    String musicFile = "sound.mp3";     // For example
-                    Media sound = new Media(new File(musicFile).toURI().toString());
-                    MediaPlayer mediaPlayer = new MediaPlayer(sound);
-                    mediaPlayer.play();
-
+                    if(Options.getOptions().getSoundsMode()) {
+                        String musicFile = "sound.mp3";     // For example
+                        Media sound = new Media(new File(musicFile).toURI().toString());
+                        MediaPlayer mediaPlayer = new MediaPlayer(sound);
+                        mediaPlayer.play();
+                    }
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                     alert.setTitle("Congratulations!");
                     alert.setHeaderText("You have reached the goal.");
