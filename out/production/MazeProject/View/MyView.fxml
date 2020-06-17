@@ -34,5 +34,6 @@
          <MazeDisplayer fx:id="mazeDisplayer" height="237.0" onKeyPressed="#keyPressed" width="388.0" />
       </Pane>
       <Button layoutX="359.0" layoutY="69.0" mnemonicParsing="false" onAction="#solve" text="Solve" />
+      <Button layoutX="444.0" layoutY="69.0" mnemonicParsing="false" onAction="#MazeSceneChanger" text="Take me to other Scene" />
    </children>
 </AnchorPane>

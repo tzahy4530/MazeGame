@@ -1,47 +1,34 @@
 package View;
 
 import ViewModel.MyViewModel;
-import algorithms.search.AState;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Screen;
-import javafx.stage.Window;
-import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.*;
+import java.util.List;
+import java.util.Observable;
+import java.util.ResourceBundle;
 
-public class MyViewController implements IView, Observer, Initializable {
+public class MazeScene implements IView, Initializable {
     private MyViewModel viewModel;
-    @FXML
-    public TextField textField_mazeRows;
-    @FXML
-    public TextField textField_mazeColumns;
-    @FXML
-    public MazeDisplayer mazeDisplayer;
-    private int[][] maze;
+    private int [][] maze;
     private int charCol, charRow;
+    public MazeDisplayer mazeDisplayer;
 
+    @Override
     public void setViewModel(MyViewModel viewModel) {
-        this.viewModel = viewModel;
-    }
-
-
-
-    public void keyPressed(KeyEvent keyEvent) {
-        viewModel.moveCharacter(keyEvent);
-        keyEvent.consume();
+        this.viewModel =viewModel;
+        maze= this.viewModel.getMaze();
+        charCol= this.viewModel.getCharCol();
+        charRow= this.viewModel.getCharRow();
+        mazeDisplayer.setMaze(maze, charRow, charCol, this.viewModel.getGoalRow(), this.viewModel.getGoalCol());
+        mazeDisplayer.draw();
     }
 
     @Override
@@ -67,6 +54,17 @@ public class MyViewController implements IView, Observer, Initializable {
                 }
             }
         }
+
+    }
+
+    public void BackToMainScene(ActionEvent actionEvent) throws IOException {
+        FXMLLoader fxmlLoader=new FXMLLoader(getClass().getResource("MyView.fxml"));
+        Parent root = fxmlLoader.load();
+        IView mainView=fxmlLoader.getController();
+        viewModel.deleteObserver(this);
+        viewModel.addObserver(mainView);
+        mainView.setViewModel(viewModel);
+        Main.changeScene(new Scene(root));
     }
 
     @Override
@@ -75,27 +73,15 @@ public class MyViewController implements IView, Observer, Initializable {
     }
 
 
-    public void generateMaze() {
-        int rows = Integer.valueOf(textField_mazeRows.getText());
-        int cols = Integer.valueOf(textField_mazeColumns.getText());
-        viewModel.generateMaze(rows, cols);
+    public void keyPressed(KeyEvent keyEvent) {
+        viewModel.moveCharacter(keyEvent);
+        keyEvent.consume();
     }
-
-    public void solve() {
-        viewModel.solve();
-    }
-
     public void mouseClicked(MouseEvent mouseEvent) {
         mazeDisplayer.requestFocus();
     }
 
-    public void MazeSceneChanger(ActionEvent actionEvent) throws IOException {
-        FXMLLoader fxmllLoader=new FXMLLoader(getClass().getResource("MazeScene.fxml"));
-        Parent mazeScene = fxmllLoader.load();
-        IView mazeView=fxmllLoader.getController();
-        viewModel.addObserver(mazeView);
-        viewModel.deleteObserver(this);
-        mazeView.setViewModel(viewModel);
-        Main.changeScene(new Scene(mazeScene, 710,600));
+    public void SolveMaze(ActionEvent actionEvent) {
+        viewModel.solve();
     }
 }
