@@ -14,7 +14,7 @@ import java.util.List;
 
 public class MazeDisplayer extends Canvas {
 
-    StringProperty imageFileNameWall = new SimpleStringProperty("./wall.jpg");
+    StringProperty imageFileNameWall = new SimpleStringProperty("./wall2.png");
     StringProperty imageFileNamePlayer = new SimpleStringProperty("./mario.jpg");
 
     private int[][] maze;
@@ -72,7 +72,7 @@ public class MazeDisplayer extends Canvas {
         double w,h;
         Image wallImage = null;
         try {
-            wallImage = new Image(new FileInputStream("./wall.jpg"));
+            wallImage = new Image(new FileInputStream("./wall2.png"));
         }
         catch(Exception e){
             System.out.println("cannot find the wall Image");
