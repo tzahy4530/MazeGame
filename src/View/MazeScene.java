@@ -102,10 +102,12 @@ public class MazeScene implements IView, Initializable {
         mainView.setViewModel(viewModel);
         Main.changeScene(new Scene(root));
     }
+    public void redraw(){
+        mazeDisplayer.draw();
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
     }
 
 
