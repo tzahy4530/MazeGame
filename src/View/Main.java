@@ -36,6 +36,10 @@ public class Main extends Application {
         primaryStage.getScene().getWindow().addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, this::closeWindowEvent);
     }
 
+    public static Stage getWindow() {
+        return window;
+    }
+
     private <T extends Event> void closeWindowEvent(T t) {
         solverServer.stop();
         generateServer.stop();

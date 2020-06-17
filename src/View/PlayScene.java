@@ -8,7 +8,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.stage.FileChooser;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Observable;
@@ -53,5 +55,12 @@ public class PlayScene implements IView, Initializable {
         viewModel.addObserver(mainView);
         mainView.setViewModel(viewModel);
         Main.changeScene(new Scene(root));
+    }
+
+    public void loadGame(ActionEvent actionEvent) {
+        FileChooser fileChooser=new FileChooser();
+        fileChooser.setTitle("Select saved game");
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Maze Files","*.maze"));
+        File selectedMaze=fileChooser.showOpenDialog(Main.getWindow());
     }
 }
