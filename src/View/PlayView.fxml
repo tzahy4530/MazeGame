@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.PlayScene">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="392.0" prefWidth="188.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.PlayScene">
    <children>
-      <Button layoutX="590.0" layoutY="170.0" mnemonicParsing="false" onAction="#newGame" prefHeight="50.0" prefWidth="150.0" text="New Game">
+      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#newGame" prefHeight="50.0" prefWidth="150.0" text="New Game">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Button layoutX="590.0" layoutY="270.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" text="Save Game">
+      <Button layoutX="14.0" layoutY="119.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" text="Save Game">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Button layoutX="590.0" layoutY="370.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" text="Load Game">
+      <Button layoutX="14.0" layoutY="219.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" text="Load Game">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Button layoutX="590.0" layoutY="470.0" mnemonicParsing="false" onAction="#BackToMainScene" prefHeight="50.0" prefWidth="150.0" text="Back">
+      <Button layoutX="14.0" layoutY="328.0" mnemonicParsing="false" onAction="#BackToMainScene" prefHeight="50.0" prefWidth="150.0" text="Back">
          <font>
             <Font size="20.0" />
          </font>

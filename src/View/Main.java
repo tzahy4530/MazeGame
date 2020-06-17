@@ -22,7 +22,7 @@ public class Main extends Application {
         FXMLLoader fxmlLoader=new FXMLLoader(getClass().getResource("MyView.fxml"));
         Parent root = fxmlLoader.load();
         primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 1280, 600));
+        primaryStage.setScene(new Scene(root, 186, 404));
         IModel model= new MyModel();
         MyViewModel viewModel=new MyViewModel(model);
         IView view=fxmlLoader.getController();

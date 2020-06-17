@@ -138,8 +138,27 @@ public class MyViewController implements IView, Observer, Initializable {
         viewModel.addObserver(playView);
         viewModel.deleteObserver(this);
         playView.setViewModel(viewModel);
-        Main.changeScene(new Scene(playScene, 1280,600));
+        Main.changeScene(new Scene(playScene, 188,392));
     }
 
 
+    public void aboutClicked(ActionEvent actionEvent) {
+        Alert alert=new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText("the biggest developers in ISRAEL:\nTzah Ben Hamo\nNetanel Shaked");
+        alert.setContentText("You are mess with the most evaluated maze in entire world");
+        alert.setTitle("Coding by");
+        alert.show();
+    }
+
+    public void exitProgram(ActionEvent actionEvent) {
+        Alert alert=new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setContentText("Are you sure you want to exit?");
+        ButtonType exit= new ButtonType("I want to Exit"), stay=new ButtonType("I want stay");
+        alert.getButtonTypes().setAll(exit,stay);
+        Optional<ButtonType> res=alert.showAndWait();
+        if (res.get()==exit)
+            System.exit(0);
+        else
+            return;
+    }
 }
