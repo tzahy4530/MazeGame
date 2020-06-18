@@ -116,7 +116,10 @@ public class MyViewModel extends Observable implements Observer {
     }
 
 
-    public void saveMaze(File f) throws IOException {
+    public void saveMaze(String whereSave) throws IOException {
+        File f=new File(System.getProperty("java.io.tmpdir")+whereSave+".maze");
+        f.delete();
+        f.createNewFile();
         Pair<Maze,Position> toWrite = model.getObjectToSaveMaze();
         FileOutputStream fileOutputStream=new FileOutputStream(f);
         f.createNewFile();
@@ -125,9 +128,17 @@ public class MyViewModel extends Observable implements Observer {
         objectOutputStream.flush();
         objectOutputStream.close();
         fileOutputStream.close();
+        System.out.println(System.getProperty("java.io.tmpdir")+whereSave+".maze Created");
     }
 
     public void loadMazeFromFile(File mazeFile) throws Exception {
         model.loadMazeFromFile(mazeFile);
+
+    }
+
+    public void loadMaze(String whereLoad) throws Exception {
+        model.loadMazeFromFile(new File(System.getProperty("java.io.tmpdir")+whereLoad+".maze"));
+        setChanged();
+        notifyObservers(new Boolean(true));
     }
 }
