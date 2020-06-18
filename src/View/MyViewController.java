@@ -35,6 +35,11 @@ public class MyViewController implements IView, Observer, Initializable {
         this.viewModel = viewModel;
     }
 
+    @Override
+    public void onShowScreen() {
+
+    }
+
 
     public void keyPressed(KeyEvent keyEvent) {
         viewModel.moveCharacter(keyEvent);
@@ -135,6 +140,7 @@ public class MyViewController implements IView, Observer, Initializable {
         viewModel.addObserver(playView);
         viewModel.deleteObserver(this);
         playView.setViewModel(viewModel);
+        playView.onShowScreen();
         Main.changeScene(new Scene(playScene, 188,392));
     }
 

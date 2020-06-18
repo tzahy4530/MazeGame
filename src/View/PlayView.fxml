@@ -16,7 +16,7 @@
 <!--            <Font size="20.0" />-->
 <!--         </font>-->
 <!--      </Button>-->
-      <Button layoutX="14.0"  onAction="#loadGame" layoutY="219.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" text="Load Game">
+      <Button fx:id="loadButton" cancelButton="true" layoutX="14.0" layoutY="219.0" mnemonicParsing="false" onAction="#loadGame" prefHeight="50.0" prefWidth="150.0" text="Load Game">
          <font>
             <Font size="20.0" />
          </font>

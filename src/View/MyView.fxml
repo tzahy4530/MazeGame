@@ -12,7 +12,7 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Button layoutX="18.0" layoutY="182.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#generateMaze" prefHeight="50.0" prefWidth="150.0" text="Help">
+      <Button layoutX="18.0" layoutY="182.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"  prefHeight="50.0" prefWidth="150.0" text="Help">
          <font>
             <Font size="20.0" />
          </font></Button>

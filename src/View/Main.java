@@ -15,24 +15,28 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
+import java.io.IOException;
+
 public class Main extends Application {
-    Server generateServer, solverServer ;
-    static Stage window;
+    private Server generateServer, solverServer;
+    private static Stage window;
+    private MyViewModel viewModel;
+
     @Override
-    public void start(Stage primaryStage) throws Exception{
-        window=primaryStage;
-        FXMLLoader fxmlLoader=new FXMLLoader(getClass().getResource("MyView.fxml"));
+    public void start(Stage primaryStage) throws Exception {
+        window = primaryStage;
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MyView.fxml"));
         Parent root = fxmlLoader.load();
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root, 186, 404));
-        IModel model= new MyModel();
-        MyViewModel viewModel=new MyViewModel(model);
-        IView view=fxmlLoader.getController();
+        IModel model = new MyModel();
+        viewModel = new MyViewModel(model);
+        IView view = fxmlLoader.getController();
         view.setViewModel(viewModel);
         viewModel.addObserver(view);
         generateServer = new Server(5400, 1000, new ServerStrategyGenerateMaze());
         generateServer.start();
-        solverServer = new Server(5401,10000, new ServerStrategySolveSearchProblem());
+        solverServer = new Server(5401, 10000, new ServerStrategySolveSearchProblem());
         solverServer.start();
         primaryStage.show();
         primaryStage.getScene().getWindow().addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, this::closeWindowEvent);
@@ -45,6 +49,8 @@ public class Main extends Application {
     private <T extends Event> void closeWindowEvent(T t) {
         solverServer.stop();
         generateServer.stop();
+        viewModel.preClosing();
+
     }
 
     public static void changeScene(Scene scene) {

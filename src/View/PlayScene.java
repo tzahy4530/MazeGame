@@ -14,33 +14,44 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Dialog;
 import javafx.scene.layout.VBox;
-import javafx.stage.FileChooser;
 import javafx.stage.Window;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.DatagramPacket;
 import java.net.URL;
+import java.util.Date;
 import java.util.Observable;
 import java.util.ResourceBundle;
 
 public class PlayScene implements IView, Initializable {
     private MyViewModel viewModel;
     private boolean isLoad;
+    public Button loadButton;
 
     @Override
     public void setViewModel(MyViewModel viewModel) { this.viewModel = viewModel;}
+
+    @Override
+    public void onShowScreen() {
+        loadButton.setDisable(!viewModel.isDataFileExist());
+    }
 
     @Override
     public void update(Observable o, Object arg) {
         if (arg instanceof Boolean){
             System.out.println("update");
             isLoad=true;
+            loadButton.setDisable(true);
         }
+
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         isLoad=false;
+
+
     }
 
     public void newGame() throws IOException {
@@ -73,7 +84,7 @@ public class PlayScene implements IView, Initializable {
         Main.changeScene(new Scene(root));
     }
 
-    public void loadGame(ActionEvent actionEvent) throws Exception {
+    public void loadGame(ActionEvent actionEvent) {
 //        FileChooser fileChooser=new FileChooser();
 //        fileChooser.setTitle("Select saved game");
 //        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Maze Files","*.maze"));
@@ -89,10 +100,9 @@ public class PlayScene implements IView, Initializable {
         chooseLoad.setTitle("Choose Load option");
         chooseLoad.setHeaderText("Please choose where to Load to maze");
 
-        Button[] buttonTypes = new Button[10];
+        Button[] buttonTypes = viewModel.getButtons();
         StringProperty whereLoad = new SimpleStringProperty();
         for (int i = 0; i < buttonTypes.length; i++) {
-            buttonTypes[i] = new Button("save " + (i + 1));
             int finalI = i;
             buttonTypes[i].setOnAction(event -> {
                 whereLoad.setValue(String.valueOf(finalI));
@@ -106,7 +116,15 @@ public class PlayScene implements IView, Initializable {
         vBox.setSpacing(15);
         chooseLoad.getDialogPane().setContent(vBox);
         chooseLoad.showAndWait();
-        viewModel.loadMaze(whereLoad.get());
+        try {
+            viewModel.loadMaze(whereLoad.get());
+        }
+        catch (Exception e){
+            Alert alert=new Alert(Alert.AlertType.ERROR);
+            alert.setContentText(null);
+            alert.setHeaderText("File not found.\nplease select another maze");
+            alert.show();
+        }
     }
 
 //    public void saveGame(ActionEvent actionEvent) throws IOException {

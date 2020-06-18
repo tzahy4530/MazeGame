@@ -32,6 +32,11 @@ public class OptionsScene implements IView, Initializable {
     }
 
     @Override
+    public void onShowScreen() {
+
+    }
+
+    @Override
     public void update(Observable o, Object arg) {
     }
 

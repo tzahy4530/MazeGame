@@ -24,10 +24,7 @@ import javafx.util.Callback;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
-import java.util.Observable;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class MazeScene implements IView, Initializable {
     private MyViewModel viewModel;
@@ -43,6 +40,11 @@ public class MazeScene implements IView, Initializable {
         charRow = this.viewModel.getCharRow();
         mazeDisplayer.setMaze(maze, charRow, charCol, this.viewModel.getGoalRow(), this.viewModel.getGoalCol());
         mazeDisplayer.draw();
+    }
+
+    @Override
+    public void onShowScreen() {
+
     }
 
     @Override
@@ -141,15 +143,15 @@ public class MazeScene implements IView, Initializable {
         chooseSave.setTitle("Choose save option");
         chooseSave.setHeaderText("Please choose where to save to maze");
 
-        Button[] buttonTypes = new Button[10];
+        Button[] buttonTypes = viewModel.getButtons();
         StringProperty whereSave = new SimpleStringProperty();
         for (int i = 0; i < buttonTypes.length; i++) {
-            buttonTypes[i] = new Button("save " + (i + 1));
             int finalI = i;
             buttonTypes[i].setOnAction(event -> {
                 whereSave.setValue(String.valueOf(finalI));
                 window.hide();
                 System.out.println(finalI);
+                buttonTypes[finalI].setText("Saved "+new Date().toString());
             });
         }
         VBox vBox = new VBox();

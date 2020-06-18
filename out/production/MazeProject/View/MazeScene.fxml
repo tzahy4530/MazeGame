@@ -33,9 +33,9 @@
     </Pane>
       <Pane prefHeight="100.0" prefWidth="710.0" VBox.vgrow="ALWAYS">
          <children>
-            <Button layoutX="462.0" layoutY="38.0" mnemonicParsing="false" text="Button" onAction="#SolveMaze" />
-            <Button layoutX="88.0" layoutY="38.0" mnemonicParsing="false" text="Button" />
-            <Button layoutX="733.0" layoutY="38.0" mnemonicParsing="false" text="Button" onAction="#BackToMainScene" />
+            <Button layoutX="462.0" layoutY="38.0" mnemonicParsing="false" text="Solve" onAction="#SolveMaze" />
+            <Button layoutX="88.0" layoutY="38.0" mnemonicParsing="false" text="Save Maze" onAction="#saveMaze"/>
+            <Button layoutX="733.0" layoutY="38.0" mnemonicParsing="false" text="Menu" onAction="#BackToMainScene" />
          </children></Pane>
 </children>
 </VBox>
