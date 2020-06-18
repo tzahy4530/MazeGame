@@ -4,6 +4,26 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<!--<VBox onMouseClicked="#mouseClicked" prefHeight="800" prefWidth="900" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MazeScene">-->
+<!--    <children>-->
+<!--        <SplitPane dividerPositions="0.9323308270676691" orientation="VERTICAL" prefHeight="805.0" prefWidth="900.0">-->
+<!--            <items>-->
+<!--                <Pane fx:id="pane" prefHeight="591.0" prefWidth="710.0" VBox.vgrow="ALWAYS" onMouseClicked="#mouseClicked">-->
+<!--                    <children>-->
+<!--                        <MazeDisplayer fx:id="mazeDisplayer" height="${pane.height}" onKeyPressed="#keyPressed" width="${pane.width}" />-->
+<!--                    </children>-->
+<!--                </Pane>-->
+<!--                <Pane fx:id="pane2" prefHeight="100" prefWidth="710.0" VBox.vgrow="ALWAYS">-->
+<!--                    <children>-->
+<!--                        <Button layoutX="61.0" layoutY="13.0" mnemonicParsing="false" onAction="#SolveMaze" text="Solve" />-->
+<!--                        <Button layoutX="388.0" layoutY="13.0" mnemonicParsing="false" text="Save Game" />-->
+<!--                        <Button layoutX="763.0" layoutY="13.0" mnemonicParsing="false" onAction="#BackToMainScene" text="Back" />-->
+<!--                    </children></Pane>-->
+<!--            </items>-->
+<!--        </SplitPane>-->
+<!--    </children>-->
+<!--</VBox>-->
+
 <VBox onMouseClicked="#mouseClicked" prefHeight="800" prefWidth="900" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MazeScene">
 <children>
     <Pane fx:id="pane" prefHeight="591.0" prefWidth="710.0" VBox.vgrow="ALWAYS">
@@ -11,9 +31,11 @@
             <MazeDisplayer fx:id="mazeDisplayer" height="${pane.height}" onKeyPressed="#keyPressed" width="${pane.width}" />
         </children>
     </Pane>
-      <Pane prefHeight="200.0" prefWidth="200.0">
+      <Pane prefHeight="100.0" prefWidth="710.0" VBox.vgrow="ALWAYS">
          <children>
-            <Button mnemonicParsing="false" text="Solve" onAction="#SolveMaze" />
+            <Button layoutX="462.0" layoutY="38.0" mnemonicParsing="false" text="Button" onAction="#SolveMaze" />
+            <Button layoutX="88.0" layoutY="38.0" mnemonicParsing="false" text="Button" />
+            <Button layoutX="733.0" layoutY="38.0" mnemonicParsing="false" text="Button" onAction="#BackToMainScene" />
          </children></Pane>
 </children>
 </VBox>

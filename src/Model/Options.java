@@ -1,17 +1,5 @@
 package Model;
 
-import algorithms.mazeGenerators.EmptyMazeGenerator;
-import algorithms.mazeGenerators.IMazeGenerator;
-import algorithms.mazeGenerators.MyMazeGenerator;
-import algorithms.mazeGenerators.SimpleMazeGenerator;
-import algorithms.search.BestFirstSearch;
-import algorithms.search.BreadthFirstSearch;
-import algorithms.search.DepthFirstSearch;
-import algorithms.search.ISearchingAlgorithm;
-import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
-
 import java.io.*;
 import java.util.Properties;
 
