@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import View.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 
 <!--<VBox onMouseClicked="#mouseClicked" prefHeight="800" prefWidth="900" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MazeScene">-->
 <!--    <children>-->
@@ -24,18 +27,44 @@
 <!--    </children>-->
 <!--</VBox>-->
 
-<VBox onMouseClicked="#mouseClicked" prefHeight="800" prefWidth="900" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MazeScene">
+<?import View.MazeDisplayer?>
+<VBox onMouseClicked="#mouseClicked" prefHeight="800.0" prefWidth="900" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MazeScene">
 <children>
-    <Pane fx:id="pane" prefHeight="591.0" prefWidth="710.0" VBox.vgrow="ALWAYS">
+      <Pane fx:id="menuBar" prefHeight="26.0" prefWidth="900.0" VBox.vgrow="ALWAYS">
+         <children>
+            <MenuBar layoutY="2.0" prefHeight="0.0" prefWidth="${menuBar.width}">
+              <menus>
+                <Menu mnemonicParsing="false" text="File">
+                  <items>
+                        <MenuItem mnemonicParsing="false" text="Back to main" />
+                        <MenuItem mnemonicParsing="false" text="Save maze" />
+                    <MenuItem mnemonicParsing="false" text="Close" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Options">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Solve" onAction="#SolveMaze" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="About" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+         </children>
+      </Pane>
+    <Pane fx:id="pane" prefHeight="500.0" prefWidth="900.0" VBox.vgrow="ALWAYS">
         <children>
-            <MazeDisplayer fx:id="mazeDisplayer" height="${pane.height}" onKeyPressed="#keyPressed" width="${pane.width}" />
+            <MazeDisplayer fx:id="mazeDisplayer" height="500" onKeyPressed="#keyPressed" width="${pane.width}" />
         </children>
     </Pane>
-      <Pane prefHeight="100.0" prefWidth="710.0" VBox.vgrow="ALWAYS">
+      <Pane prefHeight="50.0" prefWidth="900.0" VBox.vgrow="ALWAYS">
          <children>
-            <Button layoutX="462.0" layoutY="38.0" mnemonicParsing="false" text="Solve" onAction="#SolveMaze" />
-            <Button layoutX="88.0" layoutY="38.0" mnemonicParsing="false" text="Save Maze" onAction="#saveMaze"/>
-            <Button layoutX="733.0" layoutY="38.0" mnemonicParsing="false" text="Menu" onAction="#BackToMainScene" />
+            <Button layoutX="458.0" layoutY="2.0" mnemonicParsing="false" onAction="#SolveMaze" text="Solve" />
+            <Button layoutX="85.0" layoutY="2.0" mnemonicParsing="false" onAction="#saveMaze" text="Save Maze" />
+            <Button layoutX="733.0" layoutY="2.0" mnemonicParsing="false" onAction="#BackToMainScene" text="Menu" />
          </children></Pane>
 </children>
 </VBox>

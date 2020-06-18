@@ -25,11 +25,12 @@ public class MyViewModel extends Observable implements Observer {
     private List<Pair<Integer, Integer>> solution;
     private Button[] buttons;
     private File dataFile;
+    private boolean hasSavedMaze;
 
     public Button[] getButtons() {
         return buttons;
     }
-    public boolean isDataFileExist(){return dataFile.exists();}
+    public boolean hasSavedMaze(){return hasSavedMaze;}
 
 
     public int getGoalRow() {
@@ -89,11 +90,13 @@ public class MyViewModel extends Observable implements Observer {
                     saveMazeList) {
                 buttons[index++] = new Button(fileName);
             }
+            hasSavedMaze=true;
         }
         else {
             for (int i = 0; i < buttons.length; i++) {
                 buttons[i] = new Button("save " + (i + 1));
             }
+            hasSavedMaze=false;
         }
     }
 
@@ -158,6 +161,7 @@ public class MyViewModel extends Observable implements Observer {
         objectOutputStream.close();
         fileOutputStream.close();
         System.out.println(System.getProperty("java.io.tmpdir") + whereSave + ".maze Created");
+        hasSavedMaze=true;
     }
 
 

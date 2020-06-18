@@ -16,11 +16,8 @@ import javafx.scene.control.Dialog;
 import javafx.scene.layout.VBox;
 import javafx.stage.Window;
 
-import java.io.File;
 import java.io.IOException;
-import java.net.DatagramPacket;
 import java.net.URL;
-import java.util.Date;
 import java.util.Observable;
 import java.util.ResourceBundle;
 
@@ -34,7 +31,7 @@ public class PlayScene implements IView, Initializable {
 
     @Override
     public void onShowScreen() {
-        loadButton.setDisable(!viewModel.isDataFileExist());
+        loadButton.setDisable(!viewModel.hasSavedMaze());
     }
 
     @Override
@@ -81,7 +78,7 @@ public class PlayScene implements IView, Initializable {
         viewModel.deleteObserver(this);
         viewModel.addObserver(mainView);
         mainView.setViewModel(viewModel);
-        Main.changeScene(new Scene(root));
+        Main.changeScene(new Scene(root,900,800));
     }
 
     public void loadGame(ActionEvent actionEvent) {
