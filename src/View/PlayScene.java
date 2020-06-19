@@ -27,7 +27,9 @@ public class PlayScene implements IView, Initializable {
     public Button loadButton;
 
     @Override
-    public void setViewModel(MyViewModel viewModel) { this.viewModel = viewModel;}
+    public void setViewModel(MyViewModel viewModel) {
+        this.viewModel = viewModel;
+    }
 
     @Override
     public void onShowScreen() {
@@ -36,9 +38,9 @@ public class PlayScene implements IView, Initializable {
 
     @Override
     public void update(Observable o, Object arg) {
-        if (arg instanceof Boolean){
+        if (arg instanceof Boolean) {
             System.out.println("update");
-            isLoad=true;
+            isLoad = true;
             loadButton.setDisable(true);
         }
 
@@ -46,7 +48,7 @@ public class PlayScene implements IView, Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        isLoad=false;
+        isLoad = false;
 
 
     }
@@ -55,39 +57,33 @@ public class PlayScene implements IView, Initializable {
 
         //moving MazeInformation to ViewModel
         int[] mazeSize = Options.getOptions().getMazeSize();
-        System.out.println("Load = "+isLoad);
+        System.out.println("Load = " + isLoad);
         if (!isLoad)
             viewModel.generateMaze(mazeSize[0], mazeSize[1]);
 
         //moving to MazeScene
-        FXMLLoader fxmllLoader=new FXMLLoader(getClass().getResource("MazeScene.fxml"));
+        FXMLLoader fxmllLoader = new FXMLLoader(getClass().getResource("MazeScene.fxml"));
         Parent mazeScene = fxmllLoader.load();
-        IView mazeView=fxmllLoader.getController();
+        IView mazeView = fxmllLoader.getController();
         viewModel.addObserver(mazeView);
         viewModel.deleteObserver(this);
         mazeView.setViewModel(viewModel);
-        Main.changeScene(new Scene(mazeScene, 1280,600));
-        ((MazeScene)mazeView).redraw();
-        isLoad=false;
+        Main.changeScene(new Scene(mazeScene, 1280, 600));
+        ((MazeScene) mazeView).redraw();
+        isLoad = false;
     }
 
     public void BackToMainScene(ActionEvent actionEvent) throws IOException {
-        FXMLLoader fxmlLoader=new FXMLLoader(getClass().getResource("MyView.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MyView.fxml"));
         Parent root = fxmlLoader.load();
-        IView mainView=fxmlLoader.getController();
+        IView mainView = fxmlLoader.getController();
         viewModel.deleteObserver(this);
         viewModel.addObserver(mainView);
         mainView.setViewModel(viewModel);
-        Main.changeScene(new Scene(root,900,800));
+        Main.changeScene(new Scene(root, 900, 800));
     }
 
     public void loadGame(ActionEvent actionEvent) {
-//        FileChooser fileChooser=new FileChooser();
-//        fileChooser.setTitle("Select saved game");
-//        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Maze Files","*.maze"));
-//        File selectedMaze=fileChooser.showOpenDialog(Main.getWindow());
-//        if(selectedMaze==null) return;
-//        viewModel.loadMazeFromFile(selectedMaze);
         Dialog<?> chooseLoad = new Dialog<>();
         chooseLoad.setResizable(true);
 
@@ -105,6 +101,14 @@ public class PlayScene implements IView, Initializable {
                 whereLoad.setValue(String.valueOf(finalI));
                 window.hide();
                 System.out.println(finalI);
+                try {
+                    viewModel.loadMaze(whereLoad.get());
+                } catch (Exception e) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setContentText(null);
+                    alert.setHeaderText("File not found.\nplease select another maze");
+                    alert.show();
+                }
             });
         }
         VBox vBox = new VBox();
@@ -113,22 +117,8 @@ public class PlayScene implements IView, Initializable {
         vBox.setSpacing(15);
         chooseLoad.getDialogPane().setContent(vBox);
         chooseLoad.showAndWait();
-        try {
-            viewModel.loadMaze(whereLoad.get());
-        }
-        catch (Exception e){
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setContentText(null);
-            alert.setHeaderText("File not found.\nplease select another maze");
-            alert.show();
-        }
+
     }
 
-//    public void saveGame(ActionEvent actionEvent) throws IOException {
-//        FileChooser fileChooser=new FileChooser();
-//        fileChooser.setTitle("Select saved game");
-//        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Maze Files","*.maze"));
-//        File selectedMaze=fileChooser.showSaveDialog(Main.getWindow());
-//        viewModel.saveMaze(selectedMaze);
-//    }
+
 }

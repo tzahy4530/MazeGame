@@ -7,6 +7,7 @@ import algorithms.mazeGenerators.Position;
 import algorithms.search.AState;
 import algorithms.search.Solution;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyEvent;
 import javafx.util.Pair;
@@ -26,6 +27,8 @@ public class MyViewModel extends Observable implements Observer {
     private Button[] buttons;
     private File dataFile;
     private boolean hasSavedMaze;
+    private Alert aboutInformtion;
+    String resursecPath;
 
     public Button[] getButtons() {
         return buttons;
@@ -63,22 +66,40 @@ public class MyViewModel extends Observable implements Observer {
         solution = solutionAsRowCol;
     }
 
+    public Alert getAboutInformtion() {
+        return aboutInformtion;
+    }
+
     public void solve() {
         model.solveMaze();
     }
 
+    private void  setaboutInforamtionAlert(){
+        aboutInformtion=new Alert(Alert.AlertType.INFORMATION);
+        aboutInformtion.setHeaderText("the biggest developers in ISRAEL:\nTzah Ben Hamo\nNetanel Shaked");
+        aboutInformtion.setContentText("You are mess with the most evaluated maze in entire world");
+        aboutInformtion.setTitle("Coding by");
+    }
+
     public MyViewModel(IModel model) throws IOException, ClassNotFoundException {
+        resursecPath="C:\\Users\\shako\\Documents\\GitHub\\MazeProject\\resources\\";
+
+        setaboutInforamtionAlert();
+
         this.model = model;
         this.model.assignObserver(this);
+
         this.solution = null;
+
         maze = null;
         charRow = 0;
         charCol = 0;
         goalRow = 0;
         goalCol = 0;
+
         buttons = new Button[10];
 
-        dataFile = new File(System.getProperty("java.io.tmpdir") + "MazeDataFile.mdf");
+        dataFile = new File(resursecPath+ "MazeDataFile.mdf");
         if (dataFile.exists()) {
             FileInputStream fileInputStream = new FileInputStream(dataFile);
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
@@ -149,7 +170,7 @@ public class MyViewModel extends Observable implements Observer {
 
 
     public void saveMaze(String whereSave) throws IOException {
-        File f = new File(System.getProperty("java.io.tmpdir") + whereSave + ".maze");
+        File f = new File(resursecPath + whereSave + ".maze");
         f.delete();
         f.createNewFile();
         Pair<Maze, Position> toWrite = model.getObjectToSaveMaze();
@@ -160,13 +181,13 @@ public class MyViewModel extends Observable implements Observer {
         objectOutputStream.flush();
         objectOutputStream.close();
         fileOutputStream.close();
-        System.out.println(System.getProperty("java.io.tmpdir") + whereSave + ".maze Created");
+        System.out.println(resursecPath + whereSave + ".maze Created");
         hasSavedMaze=true;
     }
 
 
     public void loadMaze(String whereLoad) throws Exception {
-        model.loadMazeFromFile(new File(System.getProperty("java.io.tmpdir") + whereLoad + ".maze"));
+        model.loadMazeFromFile(new File(resursecPath+ whereLoad + ".maze"));
         setChanged();
         notifyObservers(new Boolean(true));
     }

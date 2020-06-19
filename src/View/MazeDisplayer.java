@@ -1,5 +1,6 @@
 package View;
 
+import Model.Options;
 import algorithms.mazeGenerators.Position;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -14,8 +15,9 @@ import java.util.List;
 
 public class MazeDisplayer extends Canvas {
 
-    StringProperty imageFileNameWall = new SimpleStringProperty("./wall2.png");
-    StringProperty imageFileNamePlayer = new SimpleStringProperty("./mario.jpg");
+    public StringProperty imageFileNameWall = new SimpleStringProperty(Options.getOptions().getWallImagPath());
+    public StringProperty imageFileNamePlayer = new SimpleStringProperty(Options.getOptions().getCharacterImagPath());
+    public StringProperty imageFileNameGoal = new SimpleStringProperty(Options.getOptions().getGoalImagPath());
 
     private int[][] maze;
     private int row_player;
@@ -72,9 +74,10 @@ public class MazeDisplayer extends Canvas {
         double w,h;
         Image wallImage = null;
         try {
-            wallImage = new Image(new FileInputStream("./wall2.png"));
+            wallImage = new Image(new FileInputStream(imageFileNameWall.get()));
         }
         catch(Exception e){
+            System.out.println(imageFileNameWall.get());
             System.out.println("cannot find the wall Image");
         }
         for(int i=0;i<row;i++)
@@ -108,14 +111,14 @@ public class MazeDisplayer extends Canvas {
         double w_player = col_player * cellWidth;
         Image goalImage = null;
         try {
-            goalImage = new Image(new FileInputStream("./goal.jpg"));
+            goalImage = new Image(new FileInputStream(imageFileNameGoal.get()));
         } catch (Exception e) {
             System.out.println("There is no Image player....");
         }
         graphicsContext.drawImage(goalImage,(double) col_goal*cellWidth,(double)row_goal*cellHeight,cellWidth,cellHeight);
         Image playerImage = null;
         try {
-            playerImage = new Image(new FileInputStream("./mario.jpg"));
+            playerImage = new Image(new FileInputStream(imageFileNamePlayer.get()));
         } catch (Exception e) {
             System.out.println("There is no Image player....");
         }

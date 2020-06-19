@@ -146,11 +146,7 @@ public class MyViewController implements IView, Observer, Initializable {
 
 
     public void aboutClicked(ActionEvent actionEvent) {
-        Alert alert=new Alert(Alert.AlertType.INFORMATION);
-        alert.setHeaderText("the biggest developers in ISRAEL:\nTzah Ben Hamo\nNetanel Shaked");
-        alert.setContentText("You are mess with the most evaluated maze in entire world");
-        alert.setTitle("Coding by");
-        alert.show();
+        viewModel.getAboutInformtion().show();
     }
 
     public void exitProgram(ActionEvent actionEvent) {

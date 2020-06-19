@@ -3,15 +3,28 @@ package View;
 import Model.Options;
 import ViewModel.MyViewModel;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.stage.Window;
 
+import java.awt.*;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Observable;
@@ -67,6 +80,38 @@ public class OptionsScene implements IView, Initializable {
         options.setSoundsMode(soundsMode);
     }
 
+    public void choosePlayer (){
+        Image kenny=null,cartman=null, kyle=null, stan=null;
+        try{
+            kenny=new Image(new FileInputStream("C:\\Users\\shako\\Documents\\GitHub\\MazeProject\\resources\\Pictures\\kenny.png"));
+            cartman=new Image(new FileInputStream("C:\\Users\\shako\\Documents\\GitHub\\MazeProject\\resources\\Pictures\\cartman.png"));
+            kyle=new Image(new FileInputStream("C:\\Users\\shako\\Documents\\GitHub\\MazeProject\\resources\\Pictures\\kyle.png"));
+            stan=new Image(new FileInputStream("C:\\Users\\shako\\Documents\\GitHub\\MazeProject\\resources\\Pictures\\stan.png"));
+        }
+        catch (FileNotFoundException e){
+            e.printStackTrace();
+        }
+
+        Dialog <?> choosePlayer=new Dialog<>();
+        Window window=choosePlayer.getDialogPane().getScene().getWindow();
+        window.setOnCloseRequest(event -> choosePlayer.hide());
+
+
+        GridPane pane=new GridPane();
+        CharacterButton cartmanButton=new CharacterButton(cartman,"cartman"),kyleButton= new CharacterButton(kyle,"kyle"),stanButton=new CharacterButton(stan,"kyle"), kennyButton=new CharacterButton(kenny,"kenny") ;
+
+        pane.add(cartmanButton,0,0);
+        pane.add(stanButton,1,0);
+        pane.add(kennyButton,2,0);
+        pane.add(kyleButton,3,0);
+        pane.setOnMouseClicked(event -> window.hide());
+        pane.setAlignment(Pos.CENTER);
+        pane.setVgap(20);
+        choosePlayer.setTitle("Please choose character: ");
+        choosePlayer.getDialogPane().setContent(pane);
+        choosePlayer.show();
+
+    }
     public void BackToMainScene(ActionEvent actionEvent) throws IOException {
         FXMLLoader fxmlLoader=new FXMLLoader(getClass().getResource("MyView.fxml"));
         Parent root = fxmlLoader.load();

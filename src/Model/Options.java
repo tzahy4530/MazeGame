@@ -89,4 +89,39 @@ public final class Options {
         int[] mazeSize = new int[]{Integer.parseInt(mazeRowStr),Integer.parseInt(mazeColStr)};
         return mazeSize;
     }
+    public String getWallImagPath(){
+        String res=this.prop.getProperty("wallImage");
+        if (res==null)
+            return "./wall2.png";
+        return res;
+    }
+    public String getCharacterImagPath(){
+        String res=this.prop.getProperty("CharacterImage");
+        if (res==null)
+            return "./mario.jpg";
+        return res;
+    }
+    public String getGoalImagPath(){
+        String res=this.prop.getProperty("GoalImage");
+        if (res==null)
+            return "./goal.jpg";
+        return res;
+    }
+    public void setCharacter(String name){
+        FileOutputStream fileOutputStream=null;
+        try {
+            fileOutputStream=new FileOutputStream(filePath);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        getOptions();
+        prop.setProperty("CharacterImage","C:\\Users\\shako\\Documents\\GitHub\\MazeProject\\resources\\Pictures\\"+name+".png");
+        try {
+            prop.store(fileOutputStream,null);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
 }

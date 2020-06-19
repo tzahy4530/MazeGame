@@ -81,5 +81,6 @@
             <Font size="45.0" />
          </font>
       </Text>
+      <Button layoutX="201.0" layoutY="288.0" mnemonicParsing="false" onAction="#choosePlayer" text="check" />
    </children>
 </Pane>

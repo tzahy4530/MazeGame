@@ -164,4 +164,9 @@ public class MazeScene implements IView, Initializable {
 
 
     }
+
+    public void closeWindow(ActionEvent actionEvent) {
+        viewModel.preClosing();
+        System.exit(0);
+    }
 }
