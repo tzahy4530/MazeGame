@@ -120,7 +120,7 @@ public class MyViewController implements IView, Observer, Initializable {
         viewModel.addObserver(mazeView);
         viewModel.deleteObserver(this);
         mazeView.setViewModel(viewModel);
-        Main.changeScene(new Scene(mazeScene, 1280,600));
+        Main.changeScene(new Scene(mazeScene, viewModel.getSceneWidth(), viewModel.getSceneHigh()));
     }
 
     public void OptionsSceneChanger(ActionEvent actionEvent) throws IOException {
@@ -130,7 +130,7 @@ public class MyViewController implements IView, Observer, Initializable {
         viewModel.addObserver(optionsView);
         viewModel.deleteObserver(this);
         optionsView.setViewModel(viewModel);
-        Main.changeScene(new Scene(optionsScene, 1280,600));
+        Main.changeScene(new Scene(optionsScene, viewModel.getSceneWidth(), viewModel.getSceneHigh()));
     }
 
     public void PlaySceneChanger(ActionEvent actionEvent) throws IOException {
@@ -141,7 +141,7 @@ public class MyViewController implements IView, Observer, Initializable {
         viewModel.deleteObserver(this);
         playView.setViewModel(viewModel);
         playView.onShowScreen();
-        Main.changeScene(new Scene(playScene, 188,392));
+        Main.changeScene(new Scene(playScene, viewModel.getSceneWidth(), viewModel.getSceneHigh()));
     }
 
 

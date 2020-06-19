@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import View.MazeDisplayer?>
-<VBox onMouseClicked="#mouseClicked" prefHeight="800.0" prefWidth="900" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MazeScene">
+<VBox onMouseClicked="#mouseClicked" prefHeight="526.0" prefWidth="900" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MazeScene">
 <children>
       <Pane fx:id="menuBar" prefHeight="26.0" prefWidth="900.0" VBox.vgrow="ALWAYS">
          <children>
@@ -34,16 +34,10 @@
             </MenuBar>
          </children>
       </Pane>
-    <Pane fx:id="pane" prefHeight="500.0" prefWidth="900.0" VBox.vgrow="ALWAYS" >
+    <Pane fx:id="pane" prefHeight="500.0" prefWidth="900.0" VBox.vgrow="ALWAYS"  >
         <children>
             <MazeDisplayer fx:id="mazeDisplayer" height="500" onKeyPressed="#keyPressed" width="${pane.width}" />
         </children>
     </Pane>
-      <Pane prefHeight="50.0" prefWidth="900.0" VBox.vgrow="ALWAYS">
-         <children>
-            <Button layoutX="458.0" layoutY="2.0" mnemonicParsing="false" onAction="#SolveMaze" text="Solve" />
-            <Button layoutX="85.0" layoutY="2.0" mnemonicParsing="false" onAction="#saveMaze" text="Save Maze" />
-            <Button layoutX="733.0" layoutY="2.0" mnemonicParsing="false" onAction="#BackToMainScene" text="Menu" />
-         </children></Pane>
 </children>
 </VBox>

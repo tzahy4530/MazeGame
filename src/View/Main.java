@@ -27,10 +27,14 @@ public class Main extends Application {
         window = primaryStage;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MyView.fxml"));
         Parent root = fxmlLoader.load();
-        primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 186, 404));
+        primaryStage.setTitle("Maze Game");
         IModel model = new MyModel();
         viewModel = new MyViewModel(model);
+        viewModel.setSceneHigh(526);
+        viewModel.setSceneWidth(1200);
+        primaryStage.setScene(new Scene(root,  viewModel.getSceneWidth(), viewModel.getSceneHigh()));
+        window.setHeight(600);
+//        window.setWidth(1250);
         IView view = fxmlLoader.getController();
         view.setViewModel(viewModel);
         viewModel.addObserver(view);
@@ -59,6 +63,7 @@ public class Main extends Application {
 //        window.setX((screenBounds.getWidth()) / 2);
 //        window.setY((screenBounds.getHeight()) / 2);
         window.setScene(scene);
+
         window.show();
     }
 

@@ -119,6 +119,6 @@ public class OptionsScene implements IView, Initializable {
         viewModel.deleteObserver(this);
         viewModel.addObserver(mainView);
         mainView.setViewModel(viewModel);
-        Main.changeScene(new Scene(root));
+        Main.changeScene(new Scene(root,viewModel.getSceneWidth(), viewModel.getSceneHigh()));
     }
 }

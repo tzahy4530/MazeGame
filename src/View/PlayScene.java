@@ -68,7 +68,7 @@ public class PlayScene implements IView, Initializable {
         viewModel.addObserver(mazeView);
         viewModel.deleteObserver(this);
         mazeView.setViewModel(viewModel);
-        Main.changeScene(new Scene(mazeScene, 1280, 600));
+        Main.changeScene(new Scene(mazeScene, viewModel.getSceneWidth(), viewModel.getSceneHigh()));
         ((MazeScene) mazeView).redraw();
         isLoad = false;
     }
@@ -80,7 +80,7 @@ public class PlayScene implements IView, Initializable {
         viewModel.deleteObserver(this);
         viewModel.addObserver(mainView);
         mainView.setViewModel(viewModel);
-        Main.changeScene(new Scene(root, 900, 800));
+        Main.changeScene(new Scene(root,  viewModel.getSceneWidth(), viewModel.getSceneHigh()));
     }
 
     public void loadGame(ActionEvent actionEvent) {

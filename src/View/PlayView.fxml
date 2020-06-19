@@ -4,9 +4,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="392.0" prefWidth="188.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.PlayScene">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="526.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.PlayScene">
    <children>
-      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#newGame" prefHeight="50.0" prefWidth="150.0" text="New Game">
+      <Button layoutX="525.0" layoutY="106.0" mnemonicParsing="false" onAction="#newGame" prefHeight="50.0" prefWidth="150.0" text="New Game">
          <font>
             <Font size="20.0" />
          </font>
@@ -16,12 +16,12 @@
 <!--            <Font size="20.0" />-->
 <!--         </font>-->
 <!--      </Button>-->
-      <Button fx:id="loadButton" cancelButton="true" layoutX="14.0" layoutY="219.0" mnemonicParsing="false" onAction="#loadGame" prefHeight="50.0" prefWidth="150.0" text="Load Game">
+      <Button fx:id="loadButton" cancelButton="true" layoutX="525.0" layoutY="207.0" mnemonicParsing="false" onAction="#loadGame" prefHeight="50.0" prefWidth="150.0" text="Load Game">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Button layoutX="14.0" layoutY="328.0" mnemonicParsing="false" onAction="#BackToMainScene" prefHeight="50.0" prefWidth="150.0" text="Back">
+      <Button layoutX="525.0" layoutY="308.0" mnemonicParsing="false" onAction="#BackToMainScene" prefHeight="50.0" prefWidth="150.0" text="Back">
          <font>
             <Font size="20.0" />
          </font>
