@@ -115,7 +115,7 @@ public final class Options {
             e.printStackTrace();
         }
         getOptions();
-        prop.setProperty("CharacterImage","C:\\Users\\shako\\Documents\\GitHub\\MazeProject\\resources\\Pictures\\"+name+".png");
+        prop.setProperty("CharacterImage","./resources/Pictures/"+name+".png");
         try {
             prop.store(fileOutputStream,null);
         } catch (IOException e) {

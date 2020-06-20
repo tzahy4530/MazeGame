@@ -83,10 +83,10 @@ public class OptionsScene implements IView, Initializable {
     public void choosePlayer (){
         Image kenny=null,cartman=null, kyle=null, stan=null;
         try{
-            kenny=new Image(new FileInputStream("C:\\Users\\shako\\Documents\\GitHub\\MazeProject\\resources\\Pictures\\kenny.png"));
-            cartman=new Image(new FileInputStream("C:\\Users\\shako\\Documents\\GitHub\\MazeProject\\resources\\Pictures\\cartman.png"));
-            kyle=new Image(new FileInputStream("C:\\Users\\shako\\Documents\\GitHub\\MazeProject\\resources\\Pictures\\kyle.png"));
-            stan=new Image(new FileInputStream("C:\\Users\\shako\\Documents\\GitHub\\MazeProject\\resources\\Pictures\\stan.png"));
+            kenny=new Image(new FileInputStream("./resources/Pictures/kenny.png"));
+            cartman=new Image(new FileInputStream("./resources/Pictures/cartman.png"));
+            kyle=new Image(new FileInputStream("./resources/Pictures/kyle.png"));
+            stan=new Image(new FileInputStream("./resources/Pictures/stan.png"));
         }
         catch (FileNotFoundException e){
             e.printStackTrace();
