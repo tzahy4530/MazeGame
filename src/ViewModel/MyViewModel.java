@@ -29,21 +29,21 @@ public class MyViewModel extends Observable implements Observer {
     private boolean hasSavedMaze;
     private Alert aboutInformtion;
     String resursecPath;
-    private int sceneWidth, sceneHigh;
+    private double sceneWidth, sceneHigh;
 
-    public int getSceneWidth() {
+    public double getSceneWidth() {
         return sceneWidth;
     }
 
-    public int getSceneHigh() {
+    public double getSceneHigh() {
         return sceneHigh;
     }
 
-    public void setSceneWidth(int sceneWidth) {
+    public void setSceneWidth(double sceneWidth) {
         this.sceneWidth = sceneWidth;
     }
 
-    public void setSceneHigh(int sceneHigh) {
+    public void setSceneHigh(double sceneHigh) {
         this.sceneHigh = sceneHigh;
     }
 

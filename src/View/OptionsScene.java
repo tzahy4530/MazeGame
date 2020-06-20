@@ -2,8 +2,8 @@ package View;
 
 import Model.Options;
 import ViewModel.MyViewModel;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -16,13 +16,9 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.stage.Window;
 
-import java.awt.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -38,6 +34,11 @@ public class OptionsScene implements IView, Initializable {
     @FXML
     public TextField textField_mazeColumns;
     private MyViewModel viewModel;
+    public Pane mainPane;
+
+    public OptionsScene() {
+
+    }
 
     @Override
     public void setViewModel(MyViewModel viewModel) {
@@ -46,6 +47,32 @@ public class OptionsScene implements IView, Initializable {
 
     @Override
     public void onShowScreen() {
+        mainPane.widthProperty().addListener((observable, oldValue, newValue) -> {
+            ObservableList<Node> listnodes = mainPane.getChildren();
+            for (Node n : listnodes
+            ) {
+                viewModel.setSceneWidth((double)newValue);
+                n.setLayoutX(mainPane.getWidth() / (double) oldValue * n.getLayoutX());
+            }
+        });
+        mainPane.heightProperty().addListener((observable, oldValue, newValue) -> {
+            ObservableList<Node> listnodes = mainPane.getChildren();
+            for (Node n : listnodes
+            ) {
+                viewModel.setSceneHigh((double)newValue);
+                System.out.println(n.getLayoutY());
+                n.setLayoutY(mainPane.getHeight() / (double) oldValue * n.getLayoutY());
+
+            }
+        });
+//        if (viewModel.getSceneHigh() != 526 || viewModel.getSceneWidth() != 1200) {
+//            System.out.println(mainPane.getHeight()+ " "+ mainPane.getWidth());
+//            System.out.println(viewModel.getSceneHigh()+" " +viewModel.getSceneWidth());
+//            for (Node n : mainPane.getChildren()) {
+//                n.setLayoutY(viewModel.getSceneWidth() / 1200 * n.getLayoutY());
+//                n.setLayoutX(viewModel.getSceneHigh() / 526 * n.getLayoutX());
+//            }
+//        }
 
     }
 
@@ -58,7 +85,7 @@ public class OptionsScene implements IView, Initializable {
     }
 
     public void applyOptions(ActionEvent actionEvent) {
-        if (textField_mazeRows.getText().length()<2 ||textField_mazeColumns.getText().length()<2) {
+        if (textField_mazeRows.getText().length() < 2 || textField_mazeColumns.getText().length() < 2) {
             Alert alet = new Alert(Alert.AlertType.ERROR);
             alet.setTitle("Values");
             alet.setContentText("You have to fell column and rows");
@@ -67,9 +94,9 @@ public class OptionsScene implements IView, Initializable {
             return;
         }
         Options options = Options.getOptions();
-        options.setMazeSize(Integer.valueOf(textField_mazeRows.getText()),Integer.valueOf(textField_mazeColumns.getText()));
+        options.setMazeSize(Integer.valueOf(textField_mazeRows.getText()), Integer.valueOf(textField_mazeColumns.getText()));
         boolean soundsMode = true;
-        switch (sounds.getValue().toString()){
+        switch (sounds.getValue().toString()) {
             case "ON":
                 soundsMode = true;
                 break;
@@ -80,30 +107,29 @@ public class OptionsScene implements IView, Initializable {
         options.setSoundsMode(soundsMode);
     }
 
-    public void choosePlayer (){
-        Image kenny=null,cartman=null, kyle=null, stan=null;
-        try{
-            kenny=new Image(new FileInputStream("./resources/Pictures/kenny.png"));
-            cartman=new Image(new FileInputStream("./resources/Pictures/cartman.png"));
-            kyle=new Image(new FileInputStream("./resources/Pictures/kyle.png"));
-            stan=new Image(new FileInputStream("./resources/Pictures/stan.png"));
-        }
-        catch (FileNotFoundException e){
+    public void choosePlayer() {
+        Image kenny = null, cartman = null, kyle = null, stan = null;
+        try {
+            kenny = new Image(new FileInputStream("./resources/Pictures/kenny.png"));
+            cartman = new Image(new FileInputStream("./resources/Pictures/cartman.png"));
+            kyle = new Image(new FileInputStream("./resources/Pictures/kyle.png"));
+            stan = new Image(new FileInputStream("./resources/Pictures/stan.png"));
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
-        Dialog <?> choosePlayer=new Dialog<>();
-        Window window=choosePlayer.getDialogPane().getScene().getWindow();
+        Dialog<?> choosePlayer = new Dialog<>();
+        Window window = choosePlayer.getDialogPane().getScene().getWindow();
         window.setOnCloseRequest(event -> choosePlayer.hide());
 
 
-        GridPane pane=new GridPane();
-        CharacterButton cartmanButton=new CharacterButton(cartman,"cartman"),kyleButton= new CharacterButton(kyle,"kyle"),stanButton=new CharacterButton(stan,"stan"), kennyButton=new CharacterButton(kenny,"kenny") ;
+        GridPane pane = new GridPane();
+        CharacterButton cartmanButton = new CharacterButton(cartman, "cartman"), kyleButton = new CharacterButton(kyle, "kyle"), stanButton = new CharacterButton(stan, "stan"), kennyButton = new CharacterButton(kenny, "kenny");
 
-        pane.add(cartmanButton,0,0);
-        pane.add(stanButton,1,0);
-        pane.add(kennyButton,2,0);
-        pane.add(kyleButton,3,0);
+        pane.add(cartmanButton, 0, 0);
+        pane.add(stanButton, 1, 0);
+        pane.add(kennyButton, 2, 0);
+        pane.add(kyleButton, 3, 0);
         pane.setOnMouseClicked(event -> window.hide());
         pane.setAlignment(Pos.CENTER);
         pane.setVgap(20);
@@ -112,13 +138,14 @@ public class OptionsScene implements IView, Initializable {
         choosePlayer.show();
 
     }
+
     public void BackToMainScene(ActionEvent actionEvent) throws IOException {
-        FXMLLoader fxmlLoader=new FXMLLoader(getClass().getResource("MyView.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MyView.fxml"));
         Parent root = fxmlLoader.load();
-        IView mainView=fxmlLoader.getController();
+        IView mainView = fxmlLoader.getController();
         viewModel.deleteObserver(this);
         viewModel.addObserver(mainView);
         mainView.setViewModel(viewModel);
-        Main.changeScene(new Scene(root,viewModel.getSceneWidth(), viewModel.getSceneHigh()));
+        Main.changeScene(root, mainView);
     }
 }

@@ -1,6 +1,5 @@
 package View;
 
-import Model.ClientStrategySolveMaze;
 import Model.IModel;
 import Model.MazeSaverAndLoader;
 import Model.MyModel;
@@ -9,19 +8,15 @@ import ViewModel.MyViewModel;
 import javafx.application.Application;
 import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-
-import java.io.IOException;
 
 public class Main extends Application {
     private Server generateServer, solverServer;
     private static Stage window;
-    private MyViewModel viewModel;
+    private static MyViewModel viewModel;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -34,7 +29,7 @@ public class Main extends Application {
         viewModel.setSceneHigh(526);
         viewModel.setSceneWidth(1200);
         primaryStage.setScene(new Scene(root,  viewModel.getSceneWidth(), viewModel.getSceneHigh()));
-        window.setHeight(600);
+//        window.setHeight(600);
 //        window.setWidth(1250);
         IView view = fxmlLoader.getController();
         view.setViewModel(viewModel);
@@ -43,6 +38,7 @@ public class Main extends Application {
         generateServer.start();
         solverServer = new Server(5401, 10000, new ServerStrategySolveSearchProblem());
         solverServer.start();
+        view.onShowScreen();
         primaryStage.show();
         primaryStage.getScene().getWindow().addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, this::closeWindowEvent);
     }
@@ -58,13 +54,13 @@ public class Main extends Application {
 
     }
 
-    public static void changeScene(Scene scene) {
+    public static void changeScene(Parent newScene, IView view) {
         // try to center the Scene
 //        Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
 //        window.setX((screenBounds.getWidth()) / 2);
 //        window.setY((screenBounds.getHeight()) / 2);
-        window.setScene(scene);
-
+        window.setScene(new Scene(newScene,viewModel.getSceneWidth(),viewModel.getSceneHigh()));
+        view.onShowScreen();
         window.show();
     }
 

@@ -1,19 +1,16 @@
 package View;
 
 import ViewModel.MyViewModel;
-import algorithms.search.AState;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
-import javafx.stage.Screen;
-import javafx.stage.Window;
-import javafx.stage.WindowEvent;
+import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.net.URL;
@@ -30,21 +27,42 @@ public class MyViewController implements IView, Observer, Initializable {
     public MazeDisplayer mazeDisplayer;
     private int[][] maze;
     private int charCol, charRow;
+    public AnchorPane trydosome;
+
 
     public void setViewModel(MyViewModel viewModel) {
         this.viewModel = viewModel;
+
+
     }
 
     @Override
     public void onShowScreen() {
+        trydosome.widthProperty().addListener((observable, oldValue, newValue) -> {
+            ObservableList<Node> listnodes = trydosome.getChildren();
+            for (Node n : listnodes
+            ) {
+                viewModel.setSceneWidth((double)newValue);
+                n.setLayoutX(trydosome.getWidth() / (double) oldValue * n.getLayoutX());
+            }
+        });
+        trydosome.heightProperty().addListener((observable, oldValue, newValue) -> {
+            ObservableList<Node> listnodes = trydosome.getChildren();
+            for (Node n : listnodes
+            ) {
+                viewModel.setSceneHigh((double)newValue);
+                n.setLayoutY(trydosome.getHeight() / (double) oldValue * n.getLayoutY());
+
+            }
+        });
 
     }
 
 
-    public void keyPressed(KeyEvent keyEvent) {
-        viewModel.moveCharacter(keyEvent);
-        keyEvent.consume();
-    }
+//    public void keyPressed(KeyEvent keyEvent) {
+//        viewModel.moveCharacter(keyEvent);
+//        keyEvent.consume();
+//    }
 
     @Override
     public void update(Observable o, Object arg) {
@@ -88,6 +106,7 @@ public class MyViewController implements IView, Observer, Initializable {
             }
         }
     }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -95,8 +114,8 @@ public class MyViewController implements IView, Observer, Initializable {
 
 
     public void generateMaze() {
-        if (textField_mazeRows.getText().length()<2 ||textField_mazeColumns.getText().length()<2){
-            Alert alet=new Alert(Alert.AlertType.ERROR);
+        if (textField_mazeRows.getText().length() < 2 || textField_mazeColumns.getText().length() < 2) {
+            Alert alet = new Alert(Alert.AlertType.ERROR);
             alet.setTitle("Values");
             alet.setContentText("You have to fell column and rows");
             alet.setHeaderText("Feel values please");
@@ -108,40 +127,37 @@ public class MyViewController implements IView, Observer, Initializable {
         viewModel.generateMaze(rows, cols);
     }
 
-    public void solve() {
-        viewModel.solve();
-    }
 
-
-    public void MazeSceneChanger(ActionEvent actionEvent) throws IOException {
-        FXMLLoader fxmllLoader=new FXMLLoader(getClass().getResource("MazeScene.fxml"));
-        Parent mazeScene = fxmllLoader.load();
-        IView mazeView=fxmllLoader.getController();
-        viewModel.addObserver(mazeView);
-        viewModel.deleteObserver(this);
-        mazeView.setViewModel(viewModel);
-        Main.changeScene(new Scene(mazeScene, viewModel.getSceneWidth(), viewModel.getSceneHigh()));
-    }
+//    public void MazeSceneChanger(ActionEvent actionEvent) throws IOException {
+//        FXMLLoader fxmllLoader=new FXMLLoader(getClass().getResource("MazeScene.fxml"));
+//        Parent mazeScene = fxmllLoader.load();
+//        IView mazeView=fxmllLoader.getController();
+//        viewModel.addObserver(mazeView);
+//        viewModel.deleteObserver(this);
+//        mazeView.setViewModel(viewModel);
+//        Main.changeScene(new Scene(mazeScene, viewModel.getSceneWidth(), viewModel.getSceneHigh()));
+//    }
 
     public void OptionsSceneChanger(ActionEvent actionEvent) throws IOException {
-        FXMLLoader fxmllLoader=new FXMLLoader(getClass().getResource("OptionView.fxml"));
+        FXMLLoader fxmllLoader = new FXMLLoader(getClass().getResource("OptionView.fxml"));
         Parent optionsScene = fxmllLoader.load();
-        IView optionsView=fxmllLoader.getController();
+        IView optionsView = fxmllLoader.getController();
         viewModel.addObserver(optionsView);
         viewModel.deleteObserver(this);
         optionsView.setViewModel(viewModel);
-        Main.changeScene(new Scene(optionsScene, viewModel.getSceneWidth(), viewModel.getSceneHigh()));
+        Main.changeScene(optionsScene, optionsView);
+
     }
 
     public void PlaySceneChanger(ActionEvent actionEvent) throws IOException {
-        FXMLLoader fxmllLoader=new FXMLLoader(getClass().getResource("PlayView.fxml"));
+        FXMLLoader fxmllLoader = new FXMLLoader(getClass().getResource("PlayView.fxml"));
         Parent playScene = fxmllLoader.load();
-        IView playView=fxmllLoader.getController();
+        IView playView = fxmllLoader.getController();
         viewModel.addObserver(playView);
         viewModel.deleteObserver(this);
         playView.setViewModel(viewModel);
-        playView.onShowScreen();
-        Main.changeScene(new Scene(playScene, viewModel.getSceneWidth(), viewModel.getSceneHigh()));
+        Main.changeScene(playScene, playView);
+
     }
 
 
@@ -150,12 +166,12 @@ public class MyViewController implements IView, Observer, Initializable {
     }
 
     public void exitProgram(ActionEvent actionEvent) {
-        Alert alert=new Alert(Alert.AlertType.CONFIRMATION);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setContentText("Are you sure you want to exit?");
-        ButtonType exit= new ButtonType("I want to Exit"), stay=new ButtonType("I want stay");
-        alert.getButtonTypes().setAll(exit,stay);
-        Optional<ButtonType> res=alert.showAndWait();
-        if (res.get()==exit)
+        ButtonType exit = new ButtonType("I want to Exit"), stay = new ButtonType("I want stay");
+        alert.getButtonTypes().setAll(exit, stay);
+        Optional<ButtonType> res = alert.showAndWait();
+        if (res.get() == exit)
             System.exit(0);
         else
             return;
