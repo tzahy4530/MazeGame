@@ -107,6 +107,23 @@ public final class Options {
             return "./goal.jpg";
         return res;
     }
+
+    private void setGoalImagePath(String name){
+        FileOutputStream fileOutputStream=null;
+        try {
+            fileOutputStream=new FileOutputStream(filePath);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        getOptions();
+        prop.setProperty("GoalImage","./resources/Goals/"+name+".png");
+        try {
+            prop.store(fileOutputStream,null);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void setCharacter(String name){
         FileOutputStream fileOutputStream=null;
         try {
@@ -116,12 +133,13 @@ public final class Options {
         }
         getOptions();
         prop.setProperty("CharacterImage","./resources/Pictures/"+name+".png");
+        setGoalImagePath(name);
         try {
             prop.store(fileOutputStream,null);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
+
 
 }
