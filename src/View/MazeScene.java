@@ -32,6 +32,10 @@ public class MazeScene implements IView, Initializable {
     private int charCol, charRow;
     public MazeDisplayer mazeDisplayer;
 
+    public double s(){
+        return 30;
+    }
+
     @Override
     public void setViewModel(MyViewModel viewModel) {
         this.viewModel = viewModel;

@@ -98,7 +98,7 @@ public class OptionsScene implements IView, Initializable {
 
 
         GridPane pane=new GridPane();
-        CharacterButton cartmanButton=new CharacterButton(cartman,"cartman"),kyleButton= new CharacterButton(kyle,"kyle"),stanButton=new CharacterButton(stan,"kyle"), kennyButton=new CharacterButton(kenny,"kenny") ;
+        CharacterButton cartmanButton=new CharacterButton(cartman,"cartman"),kyleButton= new CharacterButton(kyle,"kyle"),stanButton=new CharacterButton(stan,"stan"), kennyButton=new CharacterButton(kenny,"kenny") ;
 
         pane.add(cartmanButton,0,0);
         pane.add(stanButton,1,0);
