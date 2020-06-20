@@ -15,6 +15,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -31,10 +32,7 @@ public class MazeScene implements IView, Initializable {
     private int[][] maze;
     private int charCol, charRow;
     public MazeDisplayer mazeDisplayer;
-
-    public double s(){
-        return 30;
-    }
+    public Pane pane;
 
     @Override
     public void setViewModel(MyViewModel viewModel) {
@@ -50,6 +48,7 @@ public class MazeScene implements IView, Initializable {
     public void onShowScreen() {
 
     }
+
 
     @Override
     public void update(Observable o, Object arg) {

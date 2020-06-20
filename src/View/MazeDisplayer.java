@@ -27,7 +27,24 @@ public class MazeDisplayer extends Canvas {
     private List<Pair<Integer, Integer>> solution=null;
 
 
-    public MazeDisplayer(){};
+    public MazeDisplayer(){
+        widthProperty().addListener(evt -> draw());
+        heightProperty().addListener(evt -> draw());
+    };
+
+    @Override
+    public boolean isResizable(){return true;}
+
+    @Override
+    public double prefWidth(double height) {
+        return getWidth();
+    }
+
+    @Override
+    public double prefHeight(double width) {
+        return getHeight();
+    }
+
 
     public void setSolution(List<Pair<Integer, Integer>> solution) {
         this.solution = solution;
