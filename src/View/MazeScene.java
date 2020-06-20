@@ -94,12 +94,10 @@ public class MazeScene implements IView, Initializable {
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-
                     }
                 }
             }
         }
-
     }
 
     public void redraw() {
@@ -161,8 +159,6 @@ public class MazeScene implements IView, Initializable {
         chooseSave.getDialogPane().setContent(vBox);
         chooseSave.showAndWait();
         viewModel.saveMaze(whereSave.get());
-
-
     }
 
     public void closeWindow(ActionEvent actionEvent) {

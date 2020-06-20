@@ -99,7 +99,7 @@ public class MyViewModel extends Observable implements Observer {
     }
 
     public MyViewModel(IModel model) throws IOException, ClassNotFoundException {
-        resursecPath="C:\\Users\\shako\\Documents\\GitHub\\MazeProject\\resources\\";
+        resursecPath="./resources";
 
         setaboutInforamtionAlert();
 

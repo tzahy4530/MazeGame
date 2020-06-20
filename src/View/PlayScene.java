@@ -117,6 +117,8 @@ public class PlayScene implements IView, Initializable {
         vBox.setSpacing(15);
         chooseLoad.getDialogPane().setContent(vBox);
         chooseLoad.showAndWait();
+        try{this.newGame();}
+        catch (Exception e){}
 
     }
 
