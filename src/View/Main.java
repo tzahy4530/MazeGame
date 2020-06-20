@@ -2,6 +2,7 @@ package View;
 
 import Model.ClientStrategySolveMaze;
 import Model.IModel;
+import Model.MazeSaverAndLoader;
 import Model.MyModel;
 import Server.*;
 import ViewModel.MyViewModel;
@@ -28,7 +29,7 @@ public class Main extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MyView.fxml"));
         Parent root = fxmlLoader.load();
         primaryStage.setTitle("Maze Game");
-        IModel model = new MyModel();
+        IModel model = new MyModel(new MazeSaverAndLoader());
         viewModel = new MyViewModel(model);
         viewModel.setSceneHigh(526);
         viewModel.setSceneWidth(1200);
