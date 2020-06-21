@@ -11,7 +11,6 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Dialog;
@@ -28,7 +27,7 @@ public class PlayScene implements IView, Initializable {
     private MyViewModel viewModel;
     private boolean isLoad;
     public Button loadButton;
-    public Pane mainPane;
+    public Pane mainPanePlayView;
 
     @Override
     public void setViewModel(MyViewModel viewModel) {
@@ -42,25 +41,25 @@ public class PlayScene implements IView, Initializable {
     @Override
     public void onShowScreen() {
         loadButton.setDisable(!viewModel.hasSavedMaze());
-        mainPane.widthProperty().addListener((observable, oldValue, newValue) -> {
-            ObservableList<Node> listnodes = mainPane.getChildren();
+        mainPanePlayView.widthProperty().addListener((observable, oldValue, newValue) -> {
+            ObservableList<Node> listnodes = mainPanePlayView.getChildren();
             for (Node n : listnodes
             ) {
                 viewModel.setSceneWidth((double) newValue);
-                n.setLayoutX(mainPane.getWidth() / (double) oldValue * n.getLayoutX());
+                n.setLayoutX(mainPanePlayView.getWidth() / (double) oldValue * n.getLayoutX());
             }
         });
-        mainPane.heightProperty().addListener((observable, oldValue, newValue) -> {
-            ObservableList<Node> listnodes = mainPane.getChildren();
+        mainPanePlayView.heightProperty().addListener((observable, oldValue, newValue) -> {
+            ObservableList<Node> listnodes = mainPanePlayView.getChildren();
             for (Node n : listnodes
             ) {
                 viewModel.setSceneHigh((double) newValue);
-                n.setLayoutY(mainPane.getHeight() / (double) oldValue * n.getLayoutY());
+                n.setLayoutY(mainPanePlayView.getHeight() / (double) oldValue * n.getLayoutY());
 
             }
         });
         if (viewModel.getSceneHigh() != 526 || viewModel.getSceneWidth() != 1200) {
-            for (Node n : mainPane.getChildren()) {
+            for (Node n : mainPanePlayView.getChildren()) {
                 n.setLayoutX(viewModel.getSceneWidth() / 1200 * n.getLayoutX());
                 n.setLayoutY(viewModel.getSceneHigh() / 526 * n.getLayoutY());
             }
