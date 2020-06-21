@@ -24,7 +24,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         window = primaryStage;
         loadingScreen();
-        PauseTransition delay = new PauseTransition(Duration.seconds(2.5));
+        PauseTransition delay = new PauseTransition(Duration.seconds(2));
         delay.setOnFinished( event -> startApp()
         );
         delay.play();

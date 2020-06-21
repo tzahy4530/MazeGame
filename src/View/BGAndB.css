@@ -1,13 +1,12 @@
-#pane{
-    -fx-background-image: url("../../../../resources/BackGround/background3.jpg");
+#mainPane{
+    -fx-background-image: url("../View/background3.jpg");
     -fx-background-repeat: stretch;
     -fx-background-size: 100% 100%  ;
     -fx-background-position: center center;
     -fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0);
 }
-#mainPanePlayView{
-
-    -fx-background-image: url("../../../../resources/BackGround/background.jpg");
+#loadingPane{
+    -fx-background-image: url("../View/ground.jpg");
     -fx-background-repeat: stretch;
     -fx-background-size: 100% 100%  ;
     -fx-background-position: center center;
