@@ -10,7 +10,6 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Dialog;
@@ -34,7 +33,7 @@ public class OptionsScene implements IView, Initializable {
     @FXML
     public TextField textField_mazeColumns;
     private MyViewModel viewModel;
-    public Pane mainPane;
+    public Pane pane;
 
     public OptionsScene() {
 
@@ -47,25 +46,25 @@ public class OptionsScene implements IView, Initializable {
 
     @Override
     public void onShowScreen() {
-        mainPane.widthProperty().addListener((observable, oldValue, newValue) -> {
-            ObservableList<Node> listnodes = mainPane.getChildren();
+        pane.widthProperty().addListener((observable, oldValue, newValue) -> {
+            ObservableList<Node> listnodes = pane.getChildren();
             for (Node n : listnodes
             ) {
                 viewModel.setSceneWidth((double)newValue);
-                n.setLayoutX(mainPane.getWidth() / (double) oldValue * n.getLayoutX());
+                n.setLayoutX(pane.getWidth() / (double) oldValue * n.getLayoutX());
             }
         });
-        mainPane.heightProperty().addListener((observable, oldValue, newValue) -> {
-            ObservableList<Node> listnodes = mainPane.getChildren();
+        pane.heightProperty().addListener((observable, oldValue, newValue) -> {
+            ObservableList<Node> listnodes = pane.getChildren();
             for (Node n : listnodes
             ) {
                 viewModel.setSceneHigh((double)newValue);
-                n.setLayoutY(mainPane.getHeight() / (double) oldValue * n.getLayoutY());
+                n.setLayoutY(pane.getHeight() / (double) oldValue * n.getLayoutY());
 
             }
         });
         if (viewModel.getSceneHigh() != 526 || viewModel.getSceneWidth() != 1200) {
-            for (Node n : mainPane.getChildren()) {
+            for (Node n : pane.getChildren()) {
                 n.setLayoutX(viewModel.getSceneWidth() / 1200 * n.getLayoutX());
                 n.setLayoutY(viewModel.getSceneHigh() / 526 * n.getLayoutY());
             }
