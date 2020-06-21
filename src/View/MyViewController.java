@@ -26,7 +26,7 @@ public class MyViewController implements IView, Observer, Initializable {
     public MazeDisplayer mazeDisplayer;
     private int[][] maze;
     private int charCol, charRow;
-    public AnchorPane pane;
+    public AnchorPane mainPane;
 
 
     public void setViewModel(MyViewModel viewModel) {
@@ -35,25 +35,25 @@ public class MyViewController implements IView, Observer, Initializable {
 
     @Override
     public void onShowScreen() {
-        pane.widthProperty().addListener((observable, oldValue, newValue) -> {
-            ObservableList<Node> listnodes = pane.getChildren();
+        mainPane.widthProperty().addListener((observable, oldValue, newValue) -> {
+            ObservableList<Node> listnodes = mainPane.getChildren();
             for (Node n : listnodes
             ) {
                 viewModel.setSceneWidth((double)newValue);
-                n.setLayoutX(pane.getWidth() / (double) oldValue * n.getLayoutX());
+                n.setLayoutX(mainPane.getWidth() / (double) oldValue * n.getLayoutX());
             }
         });
-        pane.heightProperty().addListener((observable, oldValue, newValue) -> {
-            ObservableList<Node> listnodes = pane.getChildren();
+        mainPane.heightProperty().addListener((observable, oldValue, newValue) -> {
+            ObservableList<Node> listnodes = mainPane.getChildren();
             for (Node n : listnodes
             ) {
                 viewModel.setSceneHigh((double)newValue);
-                n.setLayoutY(pane.getHeight() / (double) oldValue * n.getLayoutY());
+                n.setLayoutY(mainPane.getHeight() / (double) oldValue * n.getLayoutY());
 
             }
         });
         if (viewModel.getSceneHigh() != 526 || viewModel.getSceneWidth() != 1200) {
-            for (Node n : pane.getChildren()) {
+            for (Node n : mainPane.getChildren()) {
                 n.setLayoutX(viewModel.getSceneWidth() / 1200 * n.getLayoutX());
                 n.setLayoutY(viewModel.getSceneHigh() / 526 * n.getLayoutY());
             }
