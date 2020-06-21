@@ -42,6 +42,8 @@ public class MazeScene implements IView, Initializable {
 
     @Override
     public void onShowScreen() {
+        pane.widthProperty().addListener((observable, oldValue, newValue) -> viewModel.setSceneWidth((double)newValue));
+        pane.heightProperty().addListener((observable, oldValue, newValue) -> viewModel.setSceneHigh((double)newValue));
 
     }
 

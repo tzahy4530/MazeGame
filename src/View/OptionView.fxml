@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane stylesheets="@BGAndB.css" fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="526.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.OptionsScene">
+<Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="526.0" prefWidth="1200.0" stylesheets="@BGAndB.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.OptionsScene">
    <children>
-      <GridPane layoutX="358.0" layoutY="113.0" prefHeight="150.0" prefWidth="450.0">
+      <GridPane layoutX="319.0" layoutY="113.0" prefHeight="150.0" prefWidth="450.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -66,22 +66,22 @@
              </ChoiceBox>
          </children>
       </GridPane>
-      <Button layoutX="550.0" layoutY="378.0" mnemonicParsing="false" onAction="#applyOptions" prefHeight="45.0" prefWidth="135.0" text="Apply">
+      <Button layoutX="526.0" layoutY="378.0" mnemonicParsing="false" onAction="#applyOptions" prefHeight="45.0" prefWidth="135.0" text="Apply">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Button layoutX="550.0" layoutY="450.0" mnemonicParsing="false" onAction="#BackToMainScene" prefHeight="45.0" prefWidth="135.0" text="Back">
+      <Button layoutX="526.0" layoutY="450.0" mnemonicParsing="false" onAction="#BackToMainScene" prefHeight="45.0" prefWidth="135.0" text="Back">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Text layoutX="528.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Options">
+      <Text layoutX="515.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Options">
          <font>
             <Font size="45.0" />
          </font>
       </Text>
-      <Button layoutX="526.0" layoutY="288.0" mnemonicParsing="false" onAction="#choosePlayer" prefHeight="45.0" prefWidth="180.0" text="Set Character">
+      <Button layoutX="504.0" layoutY="306.0" mnemonicParsing="false" onAction="#choosePlayer" prefHeight="45.0" prefWidth="180.0" text="Set Character">
          <font>
             <Font size="20.0" />
          </font>

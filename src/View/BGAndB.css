@@ -1,19 +1,19 @@
-#loadingPane{
-    -fx-background-image: url("../ground.jpg");
+#pane{
+    -fx-background-image: url("../../../../resources/BackGround/background3.jpg");
     -fx-background-repeat: stretch;
-    -fx-background-size: 1200 506;
+    -fx-background-size: 100% 100%  ;
     -fx-background-position: center center;
     -fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0);
 }
+#mainPanePlayView{
 
-#mainPane{
-    -fx-background-image: url("../background2.jpg");
+    -fx-background-image: url("../../../../resources/BackGround/background.jpg");
     -fx-background-repeat: stretch;
-    -fx-background-size: 1200 506;
+    -fx-background-size: 100% 100%  ;
     -fx-background-position: center center;
     -fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0);
-}
 
+}
 Button {
     -fx-padding: 8 15 15 15;
     -fx-background-insets: 0,0 0 5 0,0 0 6 0,0 0 7 0;
