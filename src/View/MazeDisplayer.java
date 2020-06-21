@@ -132,7 +132,18 @@ public class MazeDisplayer extends Canvas {
             for (Pair<Integer, Integer> pair : solution) {
                 double r = pair.getKey() * cellHeight;
                 double c = pair.getValue() * cellWidth;
-                graphicsContext.fillRect(c, r, cellWidth, cellHeight);
+                Image solImage = null;
+                try {
+                    solImage = new Image(new FileInputStream("./resources/Goals/solWay.jpg"));
+                } catch (Exception e) {
+                    System.out.println(imageFileNameWall.get());
+                    System.out.println("cannot find the wall Image");
+                }
+                    if(solImage == null)
+                        graphicsContext.fillRect(c, r, cellWidth, cellHeight);
+                    else{
+                        graphicsContext.drawImage(solImage, c, r, cellWidth, cellHeight);
+                    }
             }
         }
         double h_player = row_player * cellHeight;

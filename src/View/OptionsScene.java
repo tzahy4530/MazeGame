@@ -16,8 +16,12 @@ import javafx.scene.control.Dialog;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Window;
+import javafx.util.Duration;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -34,6 +38,7 @@ public class OptionsScene implements IView, Initializable {
     public TextField textField_mazeColumns;
     private MyViewModel viewModel;
     public Pane mainPane;
+    private MediaPlayer mouseClick;
 
     public OptionsScene() {
 
@@ -46,6 +51,11 @@ public class OptionsScene implements IView, Initializable {
 
     @Override
     public void onShowScreen() {
+        if(mouseClick == null){
+            String musicFile = "./resources/Songs/mouseClick.mp3";     // For example
+            Media sound = new Media(new File(musicFile).toURI().toString());
+            mouseClick = new MediaPlayer(sound);
+        }
         mainPane.widthProperty().addListener((observable, oldValue, newValue) -> {
             ObservableList<Node> listnodes = mainPane.getChildren();
             for (Node n : listnodes
@@ -80,6 +90,10 @@ public class OptionsScene implements IView, Initializable {
     }
 
     public void applyOptions(ActionEvent actionEvent) {
+        if(Options.getOptions().getSoundsMode()){
+            mouseClick.play();
+            mouseClick.seek(Duration.ZERO);
+        }
         if (textField_mazeRows.getText().length() < 2 || textField_mazeColumns.getText().length() < 2) {
             Alert alet = new Alert(Alert.AlertType.ERROR);
             alet.setTitle("Values");
@@ -103,6 +117,10 @@ public class OptionsScene implements IView, Initializable {
     }
 
     public void choosePlayer() {
+        if(Options.getOptions().getSoundsMode()){
+            mouseClick.play();
+            mouseClick.seek(Duration.ZERO);
+        }
         Image kenny = null, cartman = null, kyle = null, stan = null;
         try {
             kenny = new Image(new FileInputStream("./resources/Pictures/kenny.png"));
@@ -131,10 +149,13 @@ public class OptionsScene implements IView, Initializable {
         choosePlayer.setTitle("Please choose character: ");
         choosePlayer.getDialogPane().setContent(pane);
         choosePlayer.show();
-
     }
 
     public void BackToMainScene(ActionEvent actionEvent) throws IOException {
+        if(Options.getOptions().getSoundsMode()){
+            mouseClick.play();
+            mouseClick.seek(Duration.ZERO);
+        }
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MyView.fxml"));
         Parent root = fxmlLoader.load();
         IView mainView = fxmlLoader.getController();

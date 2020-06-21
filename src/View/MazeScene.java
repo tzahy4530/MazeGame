@@ -14,9 +14,12 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.text.Text;
 import javafx.stage.Window;
+import javafx.util.Duration;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,6 +32,9 @@ public class MazeScene implements IView, Initializable {
     private int charCol, charRow;
     public MazeDisplayer mazeDisplayer;
     public Pane pane;
+    private MediaPlayer solMusic;
+    private MediaPlayer moveMusic;
+
 
     @Override
     public void setViewModel(MyViewModel viewModel) {
@@ -44,7 +50,6 @@ public class MazeScene implements IView, Initializable {
     public void onShowScreen() {
         pane.widthProperty().addListener((observable, oldValue, newValue) -> viewModel.setSceneWidth((double)newValue));
         pane.heightProperty().addListener((observable, oldValue, newValue) -> viewModel.setSceneHigh((double)newValue));
-
     }
 
 
@@ -64,15 +69,24 @@ public class MazeScene implements IView, Initializable {
                 mazeDisplayer.draw();
             } else {
                 //move
+                if(moveMusic == null){
+                    String musicFile = "./resources/Songs/move.mp3";     // For example
+                    Media sound = new Media(new File(musicFile).toURI().toString());
+                    moveMusic = new MediaPlayer(sound);
+                }
+                if(Options.getOptions().getSoundsMode()){
+                    moveMusic.play();
+                    moveMusic.seek(Duration.ZERO);
+                }
                 mazeDisplayer.set_player_position(viewModel.getCharRow(), viewModel.getCharCol());
                 mazeDisplayer.draw();
                 if (viewModel.getCharRow() == viewModel.getGoalRow() && viewModel.getCharCol() == viewModel.getGoalCol()) {
                     //ReachGoal
                     if (Options.getOptions().getSoundsMode()) {
-                        String musicFile = "sound.mp3";     // For example
+                        String musicFile = "./resources/Songs/reachGoal.mp3";     // For example
                         Media sound = new Media(new File(musicFile).toURI().toString());
-                        MediaPlayer mediaPlayer = new MediaPlayer(sound);
-                        mediaPlayer.play();
+                        solMusic = new MediaPlayer(sound);
+                        solMusic.play();
                     }
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                     alert.setTitle("Congratulations!");
@@ -139,8 +153,12 @@ public class MazeScene implements IView, Initializable {
         Window window = chooseSave.getDialogPane().getScene().getWindow();
         window.setOnCloseRequest(event -> window.hide());
 
-        chooseSave.setTitle("Choose save option");
-        chooseSave.setHeaderText("Please choose where to save to maze");
+        chooseSave.getDialogPane().setStyle("-fx-background-color: white; "
+                + "-fx-background-repeat: stretch;"
+                + "-fx-background-size: 100% 100% ;"
+                + "-fx-background-position: center center;"
+                + "-fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0);");
+        chooseSave.setTitle("Save Game");
 
         Button[] buttonTypes = viewModel.getButtons();
         StringProperty whereSave = new SimpleStringProperty();
@@ -154,6 +172,11 @@ public class MazeScene implements IView, Initializable {
             });
         }
         VBox vBox = new VBox();
+        Text text = new Text("Where to save?");
+        text.setStyle("-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.75),2,0,0,1);"+
+                "-fx-font-weight: bold;"+
+                "-fx-font-size: 1.6em;");
+        vBox.getChildren().add(text);
         vBox.getChildren().addAll(buttonTypes);
         vBox.setAlignment(Pos.CENTER);
         vBox.setSpacing(15);

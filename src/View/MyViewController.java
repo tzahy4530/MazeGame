@@ -1,5 +1,6 @@
 package View;
 
+import Model.Options;
 import ViewModel.MyViewModel;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -10,7 +11,11 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.util.Duration;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
@@ -26,6 +31,7 @@ public class MyViewController implements IView, Observer, Initializable {
     public MazeDisplayer mazeDisplayer;
     private int[][] maze;
     private int charCol, charRow;
+    private MediaPlayer mouseClick;
     public AnchorPane mainPane;
 
 
@@ -35,6 +41,11 @@ public class MyViewController implements IView, Observer, Initializable {
 
     @Override
     public void onShowScreen() {
+        if(mouseClick == null){
+            String musicFile = "./resources/Songs/mouseClick.mp3";     // For example
+            Media sound = new Media(new File(musicFile).toURI().toString());
+            mouseClick = new MediaPlayer(sound);
+        }
         mainPane.widthProperty().addListener((observable, oldValue, newValue) -> {
             ObservableList<Node> listnodes = mainPane.getChildren();
             for (Node n : listnodes
@@ -58,7 +69,6 @@ public class MyViewController implements IView, Observer, Initializable {
                 n.setLayoutY(viewModel.getSceneHigh() / 526 * n.getLayoutY());
             }
         }
-
     }
 
     @Override
@@ -111,6 +121,10 @@ public class MyViewController implements IView, Observer, Initializable {
 
 
     public void generateMaze() {
+        if(Options.getOptions().getSoundsMode()){
+            mouseClick.play();
+            mouseClick.seek(Duration.ZERO);
+        }
         if (textField_mazeRows.getText().length() < 2 || textField_mazeColumns.getText().length() < 2) {
             Alert alet = new Alert(Alert.AlertType.ERROR);
             alet.setTitle("Values");
@@ -125,17 +139,11 @@ public class MyViewController implements IView, Observer, Initializable {
     }
 
 
-//    public void MazeSceneChanger(ActionEvent actionEvent) throws IOException {
-//        FXMLLoader fxmllLoader=new FXMLLoader(getClass().getResource("MazeScene.fxml"));
-//        Parent mazeScene = fxmllLoader.load();
-//        IView mazeView=fxmllLoader.getController();
-//        viewModel.addObserver(mazeView);
-//        viewModel.deleteObserver(this);
-//        mazeView.setViewModel(viewModel);
-//        Main.changeScene(new Scene(mazeScene, viewModel.getSceneWidth(), viewModel.getSceneHigh()));
-//    }
-
     public void OptionsSceneChanger(ActionEvent actionEvent) throws IOException {
+        if(Options.getOptions().getSoundsMode()){
+            mouseClick.play();
+            mouseClick.seek(Duration.ZERO);
+        }
         FXMLLoader fxmllLoader = new FXMLLoader(getClass().getResource("OptionView.fxml"));
         Parent optionsScene = fxmllLoader.load();
         IView optionsView = fxmllLoader.getController();
@@ -147,6 +155,10 @@ public class MyViewController implements IView, Observer, Initializable {
     }
 
     public void PlaySceneChanger(ActionEvent actionEvent) throws IOException {
+        if(Options.getOptions().getSoundsMode()){
+            mouseClick.play();
+            mouseClick.seek(Duration.ZERO);
+        }
         FXMLLoader fxmllLoader = new FXMLLoader(getClass().getResource("PlayView.fxml"));
         Parent playScene = fxmllLoader.load();
         IView playView = fxmllLoader.getController();
@@ -159,15 +171,34 @@ public class MyViewController implements IView, Observer, Initializable {
 
 
     public void aboutClicked(ActionEvent actionEvent) {
+
+        if(Options.getOptions().getSoundsMode()){
+            mouseClick.play();
+            mouseClick.seek(Duration.ZERO);
+        }
         viewModel.getAboutInformtion().show();
     }
 
-    public void helpClicked(ActionEvent actionEvent) {
-        viewModel.getAboutInformtion().show();
+    public void helpSceneChanger(ActionEvent actionEvent) throws IOException {
+        if(Options.getOptions().getSoundsMode()){
+            mouseClick.play();
+            mouseClick.seek(Duration.ZERO);
+        }
+        FXMLLoader fxmllLoader = new FXMLLoader(getClass().getResource("HelpMessage.fxml"));
+        Parent playScene = fxmllLoader.load();
+        IView helpView = fxmllLoader.getController();
+        viewModel.addObserver(helpView);
+        viewModel.deleteObserver(this);
+        helpView.setViewModel(viewModel);
+        Main.changeScene(playScene, helpView);
     }
 
 
     public void exitProgram(ActionEvent actionEvent) {
+        if(Options.getOptions().getSoundsMode()){
+            mouseClick.play();
+            mouseClick.seek(Duration.ZERO);
+        }
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setContentText("Are you sure you want to exit?");
         ButtonType exit = new ButtonType("I want to Exit"), stay = new ButtonType("I want stay");

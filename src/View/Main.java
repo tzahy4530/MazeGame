@@ -3,6 +3,7 @@ package View;
 import Model.IModel;
 import Model.MazeSaverAndLoader;
 import Model.MyModel;
+import Model.Options;
 import Server.*;
 import ViewModel.MyViewModel;
 import javafx.animation.PauseTransition;
@@ -11,20 +12,31 @@ import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Duration;
+
+import java.io.File;
 
 public class Main extends Application {
     private Server generateServer, solverServer;
     private static Stage window;
     private static MyViewModel viewModel;
+    private MediaPlayer startSong;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        if (Options.getOptions().getSoundsMode()) {
+            String musicFile = "./resources/Songs/startGame.mp3";
+            Media sound = new Media(new File(musicFile).toURI().toString());
+            startSong = new MediaPlayer(sound);
+            startSong.play();
+        }
         window = primaryStage;
         loadingScreen();
-        PauseTransition delay = new PauseTransition(Duration.seconds(2));
+        PauseTransition delay = new PauseTransition(Duration.seconds(2.5));
         delay.setOnFinished( event -> startApp()
         );
         delay.play();
@@ -59,7 +71,7 @@ public class Main extends Application {
 
     private void loadingScreen(){
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("loadingScreen.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("LoadingScreen.fxml"));
             Parent root = fxmlLoader.load();
             window.setScene(new Scene(root,1200,526));
             window.show();

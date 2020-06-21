@@ -1,3 +1,19 @@
+
+#playViewPane,#optionPane,#helpMainPane{
+     -fx-background-image: url("../../../../resources/BackGround/background2.jpg");
+     -fx-background-repeat: stretch;
+     -fx-background-size: 100% 100%  ;
+     -fx-background-position: center center;
+     -fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0);
+}
+#secondHelpPane{
+-fx-background-image: url("../../../../resources/BackGround/woodbackground.jpg");
+     -fx-background-repeat: stretch;
+     -fx-background-size: 100% 100%  ;
+     -fx-background-position: center center;
+     -fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0);
+}
+
 #mainPane{
     -fx-background-image: url("../../../../resources/BackGround/background3.jpg");
     -fx-background-repeat: stretch;
@@ -13,6 +29,55 @@
     -fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0);
 
 }
+
+#optionPane1,#optionPane2,#optionPane3,#optionPane4,#optionPane5{
+-fx-padding: 8 15 15 15;
+        -fx-background-insets: 0,0 0 2 0,0 0 3 0,0 0 4 0;
+        -fx-background-radius: 2;
+        -fx-background-color:
+                #b74b15,
+                #cd5518;
+        -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.75),4,0,0,1);
+}
+
+#optionGrid{
+    -fx-padding: 8 15 15 15;
+    -fx-background-insets: 0,0 0 5 0,0 0 6 0,0 0 7 0;
+    -fx-background-radius: 4;
+    -fx-background-color:
+            linear-gradient(from 0% 93% to 0% 100%,#a34313 45%,#903b12 75%),
+             #9d4024,
+             #d86e3a,
+            radial-gradient(center 50% 50%, radius 100%,#d96e3a,#c54e2c);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.75),4,0,0,1);
+    -fx-font-weight: bold;
+    -fx-font-size: 1.1em;
+    -fx-text-fill: white;
+}
+
+#optionText1,#optionText2,#optionText3,#optionText4{
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.75),4,0,0,1);
+    -fx-font-weight: bold;
+    -fx-font-size: 1.1em;
+    -fx-text-fill: white;
+}
+
+#helpText1,#helpText2,#helpText3,#helpText4,#helpText5,#helpText6,#helpText7
+,#helpText8,#helpText9,#helpText10,#helpText11{
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25),2,0,0,1);
+    -fx-font-weight: bold;
+    -fx-font-size: 1.1em;
+    -fx-text-fill: white;
+}
+
+#mainTitle,#optionTitle,#playTitle,#helpTitle{
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.75),4,0,0,1);
+    -fx-font-weight: bold;
+    -fx-font-size: 45px;
+    -fx-text-fill: #ffcc00;
+}
+
+
 Button {
     -fx-padding: 8 15 15 15;
     -fx-background-insets: 0,0 0 5 0,0 0 6 0,0 0 7 0;
@@ -27,6 +92,8 @@ Button {
     -fx-font-size: 1.1em;
     -fx-text-fill: white;
 }
+
+
 Button:hover{
     -fx-background-color:
             linear-gradient(from 0% 93% to 0% 100%,#a34313 0%,#903b12 100),

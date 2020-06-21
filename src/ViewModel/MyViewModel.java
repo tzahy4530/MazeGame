@@ -96,9 +96,11 @@ public class MyViewModel extends Observable implements Observer {
 
     private void setaboutInforamtionAlert() {
         aboutInformtion = new Alert(Alert.AlertType.INFORMATION);
-        aboutInformtion.setHeaderText("the biggest developers in ISRAEL:\nTzah Ben Hamo\nNetanel Shaked");
-        aboutInformtion.setContentText("You are mess with the most evaluated maze in entire world");
-        aboutInformtion.setTitle("Coding by");
+        aboutInformtion.setHeaderText("Wellcome to SoutPark Maze.");
+        aboutInformtion.setContentText("This game adopt songs,characters, and images of the cartoon TV-Show \"SoutPark\".\n"
+        +"The purpose is to challenge the players with an infinity of hard/easy mazes.\n"
+        +"your goal? try to solve them.");
+        aboutInformtion.setTitle("About");
     }
 
     public MyViewModel(IModel model) throws IOException, ClassNotFoundException {
@@ -189,18 +191,6 @@ public class MyViewModel extends Observable implements Observer {
 
 
     public void saveMaze(String whereSave) throws IOException {
-//        File f = new File(resursecPath + whereSave + ".maze");
-//        f.delete();
-//        f.createNewFile();
-//        Pair<Maze, Position> toWrite = model.getObjectToSaveMaze();
-//        FileOutputStream fileOutputStream = new FileOutputStream(f);
-//        f.createNewFile();
-//        ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-//        objectOutputStream.writeObject(toWrite);
-//        objectOutputStream.flush();
-//        objectOutputStream.close();
-//        fileOutputStream.close();
-//        System.out.println(resursecPath + whereSave + ".maze Created");
         hasSavedMaze = model.saveMaze(whereSave, resursecPath);
 
     }
