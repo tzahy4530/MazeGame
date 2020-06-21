@@ -61,7 +61,7 @@ public class Main extends Application {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("loadingScreen.fxml"));
             Parent root = fxmlLoader.load();
-            window.setScene(new Scene(root,1200,506));
+            window.setScene(new Scene(root,1200,526));
             window.show();
         }
         catch (Exception e){}
