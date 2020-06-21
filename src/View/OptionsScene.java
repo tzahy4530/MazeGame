@@ -65,14 +65,11 @@ public class OptionsScene implements IView, Initializable {
             }
         });
         if (viewModel.getSceneHigh() != 526 || viewModel.getSceneWidth() != 1200) {
-            System.out.println(mainPane.getHeight()+ " "+ mainPane.getWidth());
-            System.out.println(viewModel.getSceneHigh()+" " +viewModel.getSceneWidth());
             for (Node n : mainPane.getChildren()) {
                 n.setLayoutX(viewModel.getSceneWidth() / 1200 * n.getLayoutX());
                 n.setLayoutY(viewModel.getSceneHigh() / 526 * n.getLayoutY());
             }
         }
-
     }
 
     @Override

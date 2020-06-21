@@ -33,8 +33,6 @@ public class MazeDisplayer extends Canvas {
         heightProperty().addListener(evt -> draw());
     }
 
-    ;
-
     @Override
     public boolean isResizable() {
         return true;

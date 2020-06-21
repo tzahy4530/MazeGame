@@ -32,8 +32,6 @@ public class MyViewController implements IView, Observer, Initializable {
 
     public void setViewModel(MyViewModel viewModel) {
         this.viewModel = viewModel;
-
-
     }
 
     @Override
@@ -56,8 +54,6 @@ public class MyViewController implements IView, Observer, Initializable {
             }
         });
         if (viewModel.getSceneHigh() != 526 || viewModel.getSceneWidth() != 1200) {
-            System.out.println(trydosome.getHeight()+ " "+ trydosome.getWidth());
-            System.out.println(viewModel.getSceneHigh()+" " +viewModel.getSceneWidth());
             for (Node n : trydosome.getChildren()) {
                 n.setLayoutX(viewModel.getSceneWidth() / 1200 * n.getLayoutX());
                 n.setLayoutY(viewModel.getSceneHigh() / 526 * n.getLayoutY());
@@ -65,12 +61,6 @@ public class MyViewController implements IView, Observer, Initializable {
         }
 
     }
-
-
-//    public void keyPressed(KeyEvent keyEvent) {
-//        viewModel.moveCharacter(keyEvent);
-//        keyEvent.consume();
-//    }
 
     @Override
     public void update(Observable o, Object arg) {
