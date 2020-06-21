@@ -122,7 +122,11 @@ public final class Options {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        fileOutputStream.close();
+        try {
+            fileOutputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void setCharacter(String name){
