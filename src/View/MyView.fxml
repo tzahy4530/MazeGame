@@ -6,7 +6,7 @@
 
 <AnchorPane fx:id="trydosome" prefHeight="526.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MyViewController">
    <children>
-      <Label layoutX="527.0" layoutY="8.0" prefHeight="35.0" prefWidth="146.0" text="אל תדאג נתי!" textAlignment="CENTER" textFill="#2d2386" textOverrun="WORD_ELLIPSIS">
+      <Label layoutX="526.0" layoutY="8.0" prefHeight="35.0" prefWidth="146.0" text="אל תדאג נתי!" textAlignment="CENTER" textFill="#2d2386" textOverrun="WORD_ELLIPSIS">
          <font>
             <Font size="24.0" />
          </font>
@@ -23,7 +23,7 @@
          <font>
             <Font size="20.0" />
          </font></Button>
-      <Button layoutX="525.0" layoutY="475.0" mnemonicParsing="false" onAction="#exitProgram" prefHeight="50.0" prefWidth="150.0" text="Exit">
+      <Button layoutX="526.0" layoutY="475.0" mnemonicParsing="false" onAction="#exitProgram" prefHeight="50.0" prefWidth="150.0" text="Exit">
          <font>
             <Font size="20.0" />
          </font></Button>

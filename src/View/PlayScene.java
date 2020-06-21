@@ -59,10 +59,10 @@ public class PlayScene implements IView, Initializable {
 
             }
         });
-        if (mainPane.getHeight() != 526 || mainPane.getWidth() != 1200) {
+        if (viewModel.getSceneHigh() != 526 || viewModel.getSceneWidth() != 1200) {
             for (Node n : mainPane.getChildren()) {
-                n.setLayoutY(mainPane.getWidth() / 1200 * n.getLayoutY());
-                n.setLayoutX(mainPane.getHeight() / 526 * n.getLayoutX());
+                n.setLayoutX(viewModel.getSceneWidth() / 1200 * n.getLayoutX());
+                n.setLayoutY(viewModel.getSceneHigh() / 526 * n.getLayoutY());
             }
         }
     }

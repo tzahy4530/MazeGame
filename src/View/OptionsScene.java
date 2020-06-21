@@ -60,19 +60,18 @@ public class OptionsScene implements IView, Initializable {
             for (Node n : listnodes
             ) {
                 viewModel.setSceneHigh((double)newValue);
-                System.out.println(n.getLayoutY());
                 n.setLayoutY(mainPane.getHeight() / (double) oldValue * n.getLayoutY());
 
             }
         });
-//        if (viewModel.getSceneHigh() != 526 || viewModel.getSceneWidth() != 1200) {
-//            System.out.println(mainPane.getHeight()+ " "+ mainPane.getWidth());
-//            System.out.println(viewModel.getSceneHigh()+" " +viewModel.getSceneWidth());
-//            for (Node n : mainPane.getChildren()) {
-//                n.setLayoutY(viewModel.getSceneWidth() / 1200 * n.getLayoutY());
-//                n.setLayoutX(viewModel.getSceneHigh() / 526 * n.getLayoutX());
-//            }
-//        }
+        if (viewModel.getSceneHigh() != 526 || viewModel.getSceneWidth() != 1200) {
+            System.out.println(mainPane.getHeight()+ " "+ mainPane.getWidth());
+            System.out.println(viewModel.getSceneHigh()+" " +viewModel.getSceneWidth());
+            for (Node n : mainPane.getChildren()) {
+                n.setLayoutX(viewModel.getSceneWidth() / 1200 * n.getLayoutX());
+                n.setLayoutY(viewModel.getSceneHigh() / 526 * n.getLayoutY());
+            }
+        }
 
     }
 
