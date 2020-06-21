@@ -14,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Dialog;
+import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
@@ -143,11 +144,12 @@ public class PlayScene implements IView, Initializable {
         Window window = chooseLoad.getDialogPane().getScene().getWindow();
         window.setOnCloseRequest(event -> window.hide());
 
-        chooseLoad.getDialogPane().setStyle("-fx-background-color: white; "
+        chooseLoad.getDialogPane().setStyle("-fx-background-image: url(\"/BackGround/woodbackground.jpg\"); "
         + "-fx-background-repeat: stretch;"
         + "-fx-background-size: 100% 100% ;"
         + "-fx-background-position: center center;"
         + "-fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0);");
+
          chooseLoad.setTitle("Loade Game");
         //chooseLoad.setHeaderText("Please choose where to Load to maze");
         Button[] buttonTypes = viewModel.getButtons();
@@ -174,9 +176,9 @@ public class PlayScene implements IView, Initializable {
             });
         }
         VBox vBox = new VBox();
-        Text text = new Text("Load which file?");
+        Label text = new Label("Load which file?");
         text.setStyle("-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.75),2,0,0,1);"+
-        "-fx-font-weight: bold;"+
+        "-fx-font-weight: bold;"+ "-fx-text-fill: white;"+
         "-fx-font-size: 1.6em;");
         vBox.getChildren().add(text);
         vBox.getChildren().addAll(buttonTypes);

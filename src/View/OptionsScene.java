@@ -15,6 +15,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -133,6 +134,12 @@ public class OptionsScene implements IView, Initializable {
 
         Dialog<?> choosePlayer = new Dialog<>();
         Window window = choosePlayer.getDialogPane().getScene().getWindow();
+        StackPane stackPane = new StackPane(new ImageView(
+                new Image(getClass().getResourceAsStream("/BackGround/woodbackground.jpg"))));
+        choosePlayer.getDialogPane().setStyle("-fx-background-image: url(\"/BackGround/woodbackground.jpg\");");
+        //stackPane.setPrefSize(24, 24);
+        //choosePlayer.setGraphic(stackPane);
+
         window.setOnCloseRequest(event -> choosePlayer.hide());
 
 

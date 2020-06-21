@@ -153,7 +153,7 @@ public class MazeScene implements IView, Initializable {
         Window window = chooseSave.getDialogPane().getScene().getWindow();
         window.setOnCloseRequest(event -> window.hide());
 
-        chooseSave.getDialogPane().setStyle("-fx-background-color: white; "
+        chooseSave.getDialogPane().setStyle("-fx-background-image: url(\"/BackGround/woodbackground.jpg\");"
                 + "-fx-background-repeat: stretch;"
                 + "-fx-background-size: 100% 100% ;"
                 + "-fx-background-position: center center;"
@@ -172,8 +172,9 @@ public class MazeScene implements IView, Initializable {
             });
         }
         VBox vBox = new VBox();
-        Text text = new Text("Where to save?");
+        Label text = new Label("Where to save?");
         text.setStyle("-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.75),2,0,0,1);"+
+                "-fx-text-fill: white;"+
                 "-fx-font-weight: bold;"+
                 "-fx-font-size: 1.6em;");
         vBox.getChildren().add(text);
