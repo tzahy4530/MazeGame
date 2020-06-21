@@ -111,7 +111,6 @@ public class MazeScene implements IView, Initializable {
         viewModel.addObserver(mainView);
         mainView.setViewModel(viewModel);
         Main.changeScene(root, mainView);
-        mainView.onShowScreen();
     }
 
     @Override
