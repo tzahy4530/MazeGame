@@ -5,22 +5,18 @@ import ViewModel.MyViewModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Window;
-import javafx.util.Callback;
 
 import java.io.File;
 import java.io.IOException;
@@ -114,7 +110,7 @@ public class MazeScene implements IView, Initializable {
         viewModel.deleteObserver(this);
         viewModel.addObserver(mainView);
         mainView.setViewModel(viewModel);
-        Main.changeScene(new Scene(root,viewModel.getSceneWidth(), viewModel.getSceneHigh()));
+        Main.changeScene(root, mainView);
     }
 
     @Override
@@ -152,7 +148,7 @@ public class MazeScene implements IView, Initializable {
                 whereSave.setValue(String.valueOf(finalI));
                 window.hide();
                 System.out.println(finalI);
-                buttonTypes[finalI].setText("Saved "+new Date().toString());
+                buttonTypes[finalI].setText("Saved " + new Date().toString());
             });
         }
         VBox vBox = new VBox();

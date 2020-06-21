@@ -23,6 +23,6 @@ public interface IModel {
     public void setMaze(Maze maze);
     public void setCharacterPosition(Position charPosition);
     public void loadMazeFromFile (File mazeFile) throws Exception;
-    public Pair<Maze, Position> getObjectToSaveMaze();
+    public boolean saveMaze(String whereToSave,String resurcePath);
 
 }

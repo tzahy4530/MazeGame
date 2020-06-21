@@ -21,6 +21,7 @@ public class MyModel extends Observable implements IModel {
     private Maze maze;
     private int charCol, charRow;
     private Solution solution;
+    private IMazeSaveAndLoader mazeSaveAndLoader;
 
     public void setMaze(Maze maze) {
         this.maze = maze;
@@ -36,7 +37,8 @@ public class MyModel extends Observable implements IModel {
         notifyObservers(maze);
     }
 
-    public MyModel() {
+    public MyModel(IMazeSaveAndLoader mazeSaveAndLoader) {
+        this.mazeSaveAndLoader=mazeSaveAndLoader;
     }
 
     @Override
@@ -143,18 +145,29 @@ public class MyModel extends Observable implements IModel {
     }
 
     public void loadMazeFromFile(File mazeFile) throws Exception {
-        FileInputStream fileInputStream = new FileInputStream(mazeFile);
-        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-        Pair<Maze, Position> mazePlusCharacterPosition = (Pair<Maze, Position>) objectInputStream.readObject();
-        objectInputStream.close();
-        fileInputStream.close();
-        this.setMaze(mazePlusCharacterPosition.getKey());
-        this.setCharacterPosition(mazePlusCharacterPosition.getValue());
+//        FileInputStream fileInputStream = new FileInputStream(mazeFile);
+//        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+//        Pair<Maze, Position> mazePlusCharacterPosition = (Pair<Maze, Position>) objectInputStream.readObject();
+//        objectInputStream.close();
+//        fileInputStream.close();
+//        this.setMaze(mazePlusCharacterPosition.getKey());
+//        this.setCharacterPosition(mazePlusCharacterPosition.getValue());
+        mazeSaveAndLoader.loadMaze(mazeFile);
+        setMaze(mazeSaveAndLoader.getMaze());
+        setCharacterPosition(mazeSaveAndLoader.getPosition());
+
     }
 
     @Override
-    public Pair<Maze, Position> getObjectToSaveMaze() {
-        Pair<Maze, Position> obj = new Pair<Maze, Position>(maze, new Position(charRow, charCol));
-        return obj;
+    public boolean saveMaze(String whereToSave,String resurcePath) {
+//        Pair<Maze, Position> obj = new Pair<Maze, Position>(maze, new Position(charRow, charCol));
+        try {
+            mazeSaveAndLoader.saveMaze(whereToSave, maze, new Position(charRow, charCol), resurcePath);
+            return true;
+        }
+        catch (Exception e){
+            return false;
+        }
+//        return obj;
     }
 }

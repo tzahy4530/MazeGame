@@ -29,28 +29,31 @@ public class MyViewModel extends Observable implements Observer {
     private boolean hasSavedMaze;
     private Alert aboutInformtion;
     String resursecPath;
-    private int sceneWidth,sceneHigh;
+    private double sceneWidth, sceneHigh;
 
-    public int getSceneWidth() {
+    public double getSceneWidth() {
         return sceneWidth;
     }
 
-    public int getSceneHigh() {
+    public double getSceneHigh() {
         return sceneHigh;
     }
 
-    public void setSceneWidth(int sceneWidth) {
+    public void setSceneWidth(double sceneWidth) {
         this.sceneWidth = sceneWidth;
     }
 
-    public void setSceneHigh(int sceneHigh) {
+    public void setSceneHigh(double sceneHigh) {
         this.sceneHigh = sceneHigh;
     }
 
     public Button[] getButtons() {
         return buttons;
     }
-    public boolean hasSavedMaze(){return hasSavedMaze;}
+
+    public boolean hasSavedMaze() {
+        return hasSavedMaze;
+    }
 
 
     public int getGoalRow() {
@@ -91,15 +94,15 @@ public class MyViewModel extends Observable implements Observer {
         model.solveMaze();
     }
 
-    private void  setaboutInforamtionAlert(){
-        aboutInformtion=new Alert(Alert.AlertType.INFORMATION);
+    private void setaboutInforamtionAlert() {
+        aboutInformtion = new Alert(Alert.AlertType.INFORMATION);
         aboutInformtion.setHeaderText("the biggest developers in ISRAEL:\nTzah Ben Hamo\nNetanel Shaked");
         aboutInformtion.setContentText("You are mess with the most evaluated maze in entire world");
         aboutInformtion.setTitle("Coding by");
     }
 
     public MyViewModel(IModel model) throws IOException, ClassNotFoundException {
-        resursecPath="./resources";
+        resursecPath = "./resources";
 
         setaboutInforamtionAlert();
 
@@ -116,7 +119,7 @@ public class MyViewModel extends Observable implements Observer {
 
         buttons = new Button[10];
 
-        dataFile = new File(resursecPath+ "MazeDataFile.mdf");
+        dataFile = new File(resursecPath + "MazeDataFile.mdf");
         if (dataFile.exists()) {
             FileInputStream fileInputStream = new FileInputStream(dataFile);
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
@@ -128,13 +131,12 @@ public class MyViewModel extends Observable implements Observer {
                     saveMazeList) {
                 buttons[index++] = new Button(fileName);
             }
-            hasSavedMaze=true;
-        }
-        else {
+            hasSavedMaze = true;
+        } else {
             for (int i = 0; i < buttons.length; i++) {
                 buttons[i] = new Button("save " + (i + 1));
             }
-            hasSavedMaze=false;
+            hasSavedMaze = false;
         }
     }
 
@@ -187,32 +189,33 @@ public class MyViewModel extends Observable implements Observer {
 
 
     public void saveMaze(String whereSave) throws IOException {
-        File f = new File(resursecPath + whereSave + ".maze");
-        f.delete();
-        f.createNewFile();
-        Pair<Maze, Position> toWrite = model.getObjectToSaveMaze();
-        FileOutputStream fileOutputStream = new FileOutputStream(f);
-        f.createNewFile();
-        ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-        objectOutputStream.writeObject(toWrite);
-        objectOutputStream.flush();
-        objectOutputStream.close();
-        fileOutputStream.close();
-        System.out.println(resursecPath + whereSave + ".maze Created");
-        hasSavedMaze=true;
+//        File f = new File(resursecPath + whereSave + ".maze");
+//        f.delete();
+//        f.createNewFile();
+//        Pair<Maze, Position> toWrite = model.getObjectToSaveMaze();
+//        FileOutputStream fileOutputStream = new FileOutputStream(f);
+//        f.createNewFile();
+//        ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+//        objectOutputStream.writeObject(toWrite);
+//        objectOutputStream.flush();
+//        objectOutputStream.close();
+//        fileOutputStream.close();
+//        System.out.println(resursecPath + whereSave + ".maze Created");
+        hasSavedMaze = model.saveMaze(whereSave, resursecPath);
+
     }
 
 
     public void loadMaze(String whereLoad) throws Exception {
-        model.loadMazeFromFile(new File(resursecPath+ whereLoad + ".maze"));
+        model.loadMazeFromFile(new File(resursecPath + whereLoad + ".maze"));
         setChanged();
         notifyObservers(new Boolean(true));
     }
 
-    public void preClosing()  {
-        List<String> toSave=new ArrayList<>();
-        for (Button b:
-             buttons) {
+    public void preClosing() {
+        List<String> toSave = new ArrayList<>();
+        for (Button b :
+                buttons) {
             toSave.add(b.getText());
         }
         dataFile.delete();
@@ -224,8 +227,7 @@ public class MyViewModel extends Observable implements Observer {
             objectOutputStream.flush();
             objectOutputStream.close();
             fileOutputStream.close();
-        }
-        catch (IOException e){
+        } catch (IOException e) {
             System.out.println("File Saving Fail");
         }
     }

@@ -4,15 +4,18 @@ import Model.Options;
 import ViewModel.MyViewModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Dialog;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Window;
 
@@ -25,15 +28,43 @@ public class PlayScene implements IView, Initializable {
     private MyViewModel viewModel;
     private boolean isLoad;
     public Button loadButton;
+    public Pane mainPane;
 
     @Override
     public void setViewModel(MyViewModel viewModel) {
         this.viewModel = viewModel;
     }
 
+    public PlayScene() {
+
+    }
+
     @Override
     public void onShowScreen() {
         loadButton.setDisable(!viewModel.hasSavedMaze());
+        mainPane.widthProperty().addListener((observable, oldValue, newValue) -> {
+            ObservableList<Node> listnodes = mainPane.getChildren();
+            for (Node n : listnodes
+            ) {
+                viewModel.setSceneWidth((double) newValue);
+                n.setLayoutX(mainPane.getWidth() / (double) oldValue * n.getLayoutX());
+            }
+        });
+        mainPane.heightProperty().addListener((observable, oldValue, newValue) -> {
+            ObservableList<Node> listnodes = mainPane.getChildren();
+            for (Node n : listnodes
+            ) {
+                viewModel.setSceneHigh((double) newValue);
+                n.setLayoutY(mainPane.getHeight() / (double) oldValue * n.getLayoutY());
+
+            }
+        });
+        if (viewModel.getSceneHigh() != 526 || viewModel.getSceneWidth() != 1200) {
+            for (Node n : mainPane.getChildren()) {
+                n.setLayoutX(viewModel.getSceneWidth() / 1200 * n.getLayoutX());
+                n.setLayoutY(viewModel.getSceneHigh() / 526 * n.getLayoutY());
+            }
+        }
     }
 
     @Override
@@ -68,7 +99,7 @@ public class PlayScene implements IView, Initializable {
         viewModel.addObserver(mazeView);
         viewModel.deleteObserver(this);
         mazeView.setViewModel(viewModel);
-        Main.changeScene(new Scene(mazeScene, viewModel.getSceneWidth(), viewModel.getSceneHigh()));
+        Main.changeScene(mazeScene, mazeView);
         ((MazeScene) mazeView).redraw();
         isLoad = false;
     }
@@ -80,7 +111,7 @@ public class PlayScene implements IView, Initializable {
         viewModel.deleteObserver(this);
         viewModel.addObserver(mainView);
         mainView.setViewModel(viewModel);
-        Main.changeScene(new Scene(root,  viewModel.getSceneWidth(), viewModel.getSceneHigh()));
+        Main.changeScene(root, mainView);
     }
 
     public void loadGame(ActionEvent actionEvent) {
@@ -117,8 +148,10 @@ public class PlayScene implements IView, Initializable {
         vBox.setSpacing(15);
         chooseLoad.getDialogPane().setContent(vBox);
         chooseLoad.showAndWait();
-        try{this.newGame();}
-        catch (Exception e){}
+        try {
+            this.newGame();
+        } catch (Exception e) {
+        }
 
     }
 
