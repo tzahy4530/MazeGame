@@ -122,6 +122,7 @@ public final class Options {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        fileOutputStream.close();
     }
 
     public void setCharacter(String name){
@@ -136,6 +137,11 @@ public final class Options {
         setGoalImagePath(name);
         try {
             prop.store(fileOutputStream,null);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            fileOutputStream.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
