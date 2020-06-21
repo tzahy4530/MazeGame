@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane stylesheets="@BGAndB.css" fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="526.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.PlayScene">
+   <children>
+      <Button layoutX="525.0" layoutY="150.0" mnemonicParsing="false" onAction="#newGame" prefHeight="45.0" prefWidth="150.0" text="New Game">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+<!--      <Button layoutX="14.0" onAction="#saveGame" layoutY="119.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" text="Save Game">-->
+<!--         <font>-->
+<!--            <Font size="20.0" />-->
+<!--         </font>-->
+<!--      </Button>-->
+      <Button fx:id="loadButton" cancelButton="true" layoutX="525.0" layoutY="250.0" mnemonicParsing="false" onAction="#loadGame" prefHeight="45.0" prefWidth="150.0" text="Load Game">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button layoutX="525.0" layoutY="350.0" mnemonicParsing="false" onAction="#BackToMainScene" prefHeight="45.0" prefWidth="150.0" text="Back">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Label layoutX="444.0" layoutY="59.0" text="MazeOf#DontWorryNaty" textFill="#dd0404">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>
