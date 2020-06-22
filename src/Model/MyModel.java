@@ -83,6 +83,10 @@ public class MyModel extends Observable implements IModel {
             direction = 2 -> Down
             direction = 3 -> Left
             direction = 4 -> Right
+            direction = 5 -> Up-Right
+            direction = 6 -> Up-Left
+            direction = 7 -> Down-Right
+            direction = 8 -. Down-Left
          */
 
         switch (direction) {
@@ -103,7 +107,56 @@ public class MyModel extends Observable implements IModel {
                 if (charCol != maze.getMazeMatrix()[0].length - 1 && maze.getMazeMatrix()[charRow][charCol + 1] != 1)
                     charCol++;
                 break;
+            case 5: //Up-Right
+                if (charCol != maze.getMazeMatrix()[0].length - 1 && charRow != 0 ) {
+                    if(maze.getMazeMatrix()[charRow][charCol+1]==0 && maze.getMazeMatrix()[charRow-1][charCol+1]==0){
+                        charRow--;
+                        charCol++;
+                    }
+                    else if(maze.getMazeMatrix()[charRow-1][charCol]==0 && maze.getMazeMatrix()[charRow-1][charCol+1]==0) {
+                        charRow--;
+                        charCol++;
+                    }
+                }
+                break;
+            case 6: //Up-Left
+                if (charCol != 0 && charRow != 0 ) {
+                    if(maze.getMazeMatrix()[charRow][charCol-1]==0 && maze.getMazeMatrix()[charRow-1][charCol-1]==0){
+                        charRow--;
+                        charCol--;
+                    }
+                    else if(maze.getMazeMatrix()[charRow-1][charCol]==0 && maze.getMazeMatrix()[charRow-1][charCol-1]==0) {
+                        charRow--;
+                        charCol--;
+                    }
+                }
+                break;
+            case 7: //Down-Right
+                if (charCol != maze.getMazeMatrix()[0].length-1 && charRow != maze.getMazeMatrix().length-1 ) {
+                    if(maze.getMazeMatrix()[charRow][charCol+1]==0 && maze.getMazeMatrix()[charRow+1][charCol+1]==0){
+                        charRow++;
+                        charCol++;
+                    }
+                    else if(maze.getMazeMatrix()[charRow+1][charCol]==0 && maze.getMazeMatrix()[charRow+1][charCol+1]==0) {
+                        charRow++;
+                        charCol++;
+                    }
+                }
+                break;
+            case 8: //Down-Left
+                if (charCol != 0 && charRow != maze.getMazeMatrix().length-1 ) {
+                    if(maze.getMazeMatrix()[charRow][charCol-1]==0 && maze.getMazeMatrix()[charRow+1][charCol-1]==0){
+                        charRow++;
+                        charCol--;
+                    }
+                    else if(maze.getMazeMatrix()[charRow+1][charCol]==0 && maze.getMazeMatrix()[charRow+1][charCol-1]==0) {
+                        charRow++;
+                        charCol--;
+                    }
+                }
+                break;
         }
+
         setChanged();
         notifyObservers();
 

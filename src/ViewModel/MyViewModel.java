@@ -149,17 +149,37 @@ public class MyViewModel extends Observable implements Observer {
     public void moveCharacter(KeyEvent keyEvent) {
 
         switch (keyEvent.getCode()) {
+            case NUMPAD8:
             case UP:
                 model.moveCharacter(1);
                 break;
+            case NUMPAD2:
             case DOWN:
                 model.moveCharacter(2);
                 break;
+            case NUMPAD4:
             case LEFT:
                 model.moveCharacter(3);
                 break;
+            case NUMPAD6:
             case RIGHT:
                 model.moveCharacter(4);
+                break;
+            case E:
+            case NUMPAD9:
+                model.moveCharacter(5);
+                break;
+            case Q:
+            case NUMPAD7:
+                model.moveCharacter(6);
+                break;
+            case C:
+            case NUMPAD3:
+                model.moveCharacter(7);
+                break;
+            case Z:
+            case NUMPAD1:
+                model.moveCharacter(8);
                 break;
         }
     }
