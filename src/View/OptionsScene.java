@@ -109,9 +109,11 @@ public class OptionsScene implements IView, Initializable {
         switch (sounds.getValue().toString()) {
             case "ON":
                 soundsMode = true;
+                Main.startMusic();
                 break;
             case "OFF":
                 soundsMode = false;
+                Main.stopMusic();
                 break;
         }
         options.setSoundsMode(soundsMode);

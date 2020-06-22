@@ -75,7 +75,7 @@
                </children></Pane>
             <Pane fx:id="optionPane4" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="55.0" prefWidth="165.0" GridPane.rowIndex="1">
                <children>
-                  <Text fx:id="optionText4" fill="WHITE" layoutX="52.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sounds">
+                  <Text fx:id="optionText4" fill="WHITE" layoutX="27.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sounds &amp;  Music">
                      <font>
                         <Font size="22.0" />
                      </font>

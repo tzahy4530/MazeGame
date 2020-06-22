@@ -25,14 +25,31 @@ public class Main extends Application {
     private static Stage window;
     private static MyViewModel viewModel;
     private MediaPlayer startSong;
+    private static MediaPlayer backgroundSong;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         if (Options.getOptions().getSoundsMode()) {
             String musicFile = "./resources/Songs/startGame.mp3";
+            String musicBGFile = "./resources/Songs/backgroundMusic.mp3";
             Media sound = new Media(new File(musicFile).toURI().toString());
+            Media soundBG = new Media(new File(musicBGFile).toURI().toString());
             startSong = new MediaPlayer(sound);
+            backgroundSong = new MediaPlayer(soundBG);
             startSong.play();
+            startSong.setOnEndOfMedia(new Runnable() {
+              @Override
+              public void run(){
+                  backgroundSong.play();
+              }
+            });
+            backgroundSong.setOnEndOfMedia(new Runnable() {
+                @Override
+                public void run() {
+                    backgroundSong.seek(Duration.ZERO);
+                    backgroundSong.play();
+                }
+            });
         }
         window = primaryStage;
         loadingScreen();
@@ -94,6 +111,15 @@ public class Main extends Application {
         window.setScene(new Scene(newScene,viewModel.getSceneWidth(),viewModel.getSceneHigh()));
         view.onShowScreen();
         window.show();
+    }
+
+    public static void stopMusic(){
+        backgroundSong.seek(Duration.seconds(10));
+        backgroundSong.pause();
+    }
+
+    public static void startMusic(){
+        backgroundSong.play();
     }
 
     public static void main(String[] args) {
