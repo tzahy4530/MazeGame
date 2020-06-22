@@ -22,11 +22,6 @@
                     <MenuItem mnemonicParsing="false" text="Solve" onAction="#SolveMaze" />
                 </items>
             </Menu>
-            <Menu mnemonicParsing="false" text="Help">
-                <items>
-                    <MenuItem mnemonicParsing="false" text="About" />
-                </items>
-            </Menu>
         </menus>
     </MenuBar>
     <Pane fx:id="pane" prefHeight="500.0" prefWidth="900.0" VBox.vgrow="ALWAYS"  >
