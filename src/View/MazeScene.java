@@ -2,25 +2,34 @@ package View;
 
 import Model.Options;
 import ViewModel.MyViewModel;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
+import javafx.scene.transform.Scale;
 import javafx.stage.Window;
 import javafx.util.Duration;
 
+import java.awt.event.InputEvent;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -34,7 +43,10 @@ public class MazeScene implements IView, Initializable {
     public Pane pane;
     private MediaPlayer solMusic;
     private MediaPlayer moveMusic;
-
+//    private final Set<KeyCode> pressedKeys = new HashSet<>();
+    private double x = 0;
+    private double y = 0;
+    ObjectProperty<Point2D> mouseLocation = new SimpleObjectProperty<>();
 
     @Override
     public void setViewModel(MyViewModel viewModel) {
@@ -48,10 +60,52 @@ public class MazeScene implements IView, Initializable {
 
     @Override
     public void onShowScreen() {
+//        pane.setOnKeyPressed(e -> pressedKeys.add(e.getCode()));
+//        pane.setOnKeyReleased(e -> pressedKeys.remove(e.getCode()));
         pane.widthProperty().addListener((observable, oldValue, newValue) -> viewModel.setSceneWidth((double)newValue));
         pane.heightProperty().addListener((observable, oldValue, newValue) -> viewModel.setSceneHigh((double)newValue));
-    }
+        pane.setOnScroll(new EventHandler<ScrollEvent>() {
+            @Override
+            public void handle(ScrollEvent event) {
+                if(event.isControlDown())
+                    scroll(event);
+            }
+        });
+        pane.setOnMousePressed(event ->
+                mouseLocation.set(new Point2D(event.getScreenX(), event.getScreenY())));
 
+        pane.setOnMouseReleased(new EventHandler<MouseEvent>() {
+            @Override public void handle(MouseEvent mouseEvent) {
+                pane.setCursor(Cursor.HAND);
+            }});
+        pane.setOnMouseDragged(new EventHandler<MouseEvent>() {
+            @Override public void handle(MouseEvent mouseEvent) {
+                if (mouseLocation.get() != null) {
+                    double x = mouseEvent.getScreenX();
+                    double deltaX = x - mouseLocation.get().getX();
+                    double y = mouseEvent.getScreenY();
+                    double deltaY = y - mouseLocation.get().getY();
+                    pane.setTranslateX(pane.getTranslateX() + deltaX);
+                    pane.setTranslateY(pane.getTranslateY() + deltaY);
+                    mouseLocation.set(new Point2D(x, y));
+                }
+            }
+            });
+    }
+    private void scroll(ScrollEvent event){
+        double factor = 1.05;
+        double wheelDirection = event.getDeltaY();
+        if(wheelDirection < 0){
+            factor = 0.95;
+        }
+        Scale newScale = new Scale();
+        newScale.setX(pane.getScaleX() * factor);
+        newScale.setY(pane.getScaleY() * factor);
+        newScale.setPivotX(event.getX());
+        newScale.setPivotY(event.getY());
+        pane.getTransforms().add(newScale);
+        event.consume();
+        }
 
     @Override
     public void update(Observable o, Object arg) {

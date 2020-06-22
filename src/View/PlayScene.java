@@ -107,6 +107,8 @@ public class PlayScene implements IView, Initializable {
         if (!isLoad)
             viewModel.generateMaze(mazeSize[0], mazeSize[1]);
 
+        //try
+
         //moving to MazeScene
         FXMLLoader fxmllLoader = new FXMLLoader(getClass().getResource("MazeScene.fxml"));
         Parent mazeScene = fxmllLoader.load();
@@ -117,6 +119,7 @@ public class PlayScene implements IView, Initializable {
         Main.changeScene(mazeScene, mazeView);
         ((MazeScene) mazeView).redraw();
         isLoad = false;
+
     }
 
     public void BackToMainScene(ActionEvent actionEvent) throws IOException {
