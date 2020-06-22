@@ -22,7 +22,6 @@ public class CharacterButton extends Pane {
             @Override
             public void handle(MouseEvent event) {
                 setStyle("-fx-background-color:#dae7f3;");
-                System.out.println("MouseOn");
             }
         });
 

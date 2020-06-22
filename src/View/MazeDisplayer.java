@@ -108,7 +108,6 @@ public class MazeDisplayer extends Canvas {
         try {
             wallImage = new Image(new FileInputStream(imageFileNameWall.get()));
         } catch (Exception e) {
-            System.out.println(imageFileNameWall.get());
             System.out.println("cannot find the wall Image");
         }
         for (int i = 0; i < row; i++) {
@@ -136,7 +135,6 @@ public class MazeDisplayer extends Canvas {
                 try {
                     solImage = new Image(new FileInputStream("./resources/Goals/solWay.jpg"));
                 } catch (Exception e) {
-                    System.out.println(imageFileNameWall.get());
                     System.out.println("cannot find the wall Image");
                 }
                     if(solImage == null)

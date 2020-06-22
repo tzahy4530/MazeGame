@@ -238,7 +238,6 @@ public class MyViewModel extends Observable implements Observer {
             objectOutputStream.close();
             fileOutputStream.close();
         } catch (IOException e) {
-            System.out.println("File Saving Fail");
         }
     }
 }
