@@ -161,7 +161,7 @@ public class MazeScene implements IView, Initializable {
         chooseSave.setTitle("Save Game");
 
         Button[] buttonTypes = viewModel.getButtons();
-        StringProperty whereSave = new SimpleStringProperty();
+        StringProperty whereSave = new SimpleStringProperty("");
         for (int i = 0; i < buttonTypes.length; i++) {
             int finalI = i;
             buttonTypes[i].setOnAction(event -> {
@@ -183,7 +183,9 @@ public class MazeScene implements IView, Initializable {
         vBox.setSpacing(15);
         chooseSave.getDialogPane().setContent(vBox);
         chooseSave.showAndWait();
-        viewModel.saveMaze(whereSave.get());
+        if (!whereSave.get().equals(""))
+            viewModel.saveMaze(whereSave.get());
+        whereSave.setValue("");
     }
 
     public void closeWindow(ActionEvent actionEvent) {

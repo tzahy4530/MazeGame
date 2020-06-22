@@ -38,7 +38,7 @@ public class OptionsScene implements IView, Initializable {
     @FXML
     public TextField textField_mazeColumns;
     private MyViewModel viewModel;
-    public Pane mainPane;
+    public Pane optionPane;
     private MediaPlayer mouseClick;
 
     public OptionsScene() {
@@ -57,25 +57,25 @@ public class OptionsScene implements IView, Initializable {
             Media sound = new Media(new File(musicFile).toURI().toString());
             mouseClick = new MediaPlayer(sound);
         }
-        mainPane.widthProperty().addListener((observable, oldValue, newValue) -> {
-            ObservableList<Node> listnodes = mainPane.getChildren();
+        optionPane.widthProperty().addListener((observable, oldValue, newValue) -> {
+            ObservableList<Node> listnodes = optionPane.getChildren();
             for (Node n : listnodes
             ) {
                 viewModel.setSceneWidth((double)newValue);
-                n.setLayoutX(mainPane.getWidth() / (double) oldValue * n.getLayoutX());
+                n.setLayoutX(optionPane.getWidth() / (double) oldValue * n.getLayoutX());
             }
         });
-        mainPane.heightProperty().addListener((observable, oldValue, newValue) -> {
-            ObservableList<Node> listnodes = mainPane.getChildren();
+        optionPane.heightProperty().addListener((observable, oldValue, newValue) -> {
+            ObservableList<Node> listnodes = optionPane.getChildren();
             for (Node n : listnodes
             ) {
                 viewModel.setSceneHigh((double)newValue);
-                n.setLayoutY(mainPane.getHeight() / (double) oldValue * n.getLayoutY());
+                n.setLayoutY(optionPane.getHeight() / (double) oldValue * n.getLayoutY());
 
             }
         });
         if (viewModel.getSceneHigh() != 526 || viewModel.getSceneWidth() != 1200) {
-            for (Node n : mainPane.getChildren()) {
+            for (Node n : optionPane.getChildren()) {
                 n.setLayoutX(viewModel.getSceneWidth() / 1200 * n.getLayoutX());
                 n.setLayoutY(viewModel.getSceneHigh() / 526 * n.getLayoutY());
             }
