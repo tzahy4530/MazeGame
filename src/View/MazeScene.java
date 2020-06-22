@@ -43,9 +43,6 @@ public class MazeScene implements IView, Initializable {
     public Pane pane;
     private MediaPlayer solMusic;
     private MediaPlayer moveMusic;
-//    private final Set<KeyCode> pressedKeys = new HashSet<>();
-    private double x = 0;
-    private double y = 0;
     ObjectProperty<Point2D> mouseLocation = new SimpleObjectProperty<>();
 
     @Override
@@ -60,8 +57,6 @@ public class MazeScene implements IView, Initializable {
 
     @Override
     public void onShowScreen() {
-//        pane.setOnKeyPressed(e -> pressedKeys.add(e.getCode()));
-//        pane.setOnKeyReleased(e -> pressedKeys.remove(e.getCode()));
         pane.widthProperty().addListener((observable, oldValue, newValue) -> viewModel.setSceneWidth((double)newValue));
         pane.heightProperty().addListener((observable, oldValue, newValue) -> viewModel.setSceneHigh((double)newValue));
         pane.setOnScroll(new EventHandler<ScrollEvent>() {
