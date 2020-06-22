@@ -14,6 +14,7 @@ import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -26,6 +27,8 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
 import javafx.scene.transform.Scale;
+import javafx.stage.Popup;
+import javafx.stage.Stage;
 import javafx.stage.Window;
 import javafx.util.Duration;
 
@@ -43,6 +46,7 @@ public class MazeScene implements IView, Initializable {
     public Pane pane;
     private MediaPlayer solMusic;
     private MediaPlayer moveMusic;
+    private int steps;
     ObjectProperty<Point2D> mouseLocation = new SimpleObjectProperty<>();
 
     @Override
@@ -57,6 +61,7 @@ public class MazeScene implements IView, Initializable {
 
     @Override
     public void onShowScreen() {
+        steps = 0;
         pane.widthProperty().addListener((observable, oldValue, newValue) -> viewModel.setSceneWidth((double)newValue));
         pane.heightProperty().addListener((observable, oldValue, newValue) -> viewModel.setSceneHigh((double)newValue));
         pane.setOnScroll(new EventHandler<ScrollEvent>() {
@@ -118,6 +123,7 @@ public class MazeScene implements IView, Initializable {
                 mazeDisplayer.draw();
             } else {
                 //move
+                steps++;
                 if(moveMusic == null){
                     String musicFile = "./resources/Songs/move.mp3";     // For example
                     Media sound = new Media(new File(musicFile).toURI().toString());
@@ -144,28 +150,19 @@ public class MazeScene implements IView, Initializable {
                             }
                         });
                     }
-                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                    alert.setTitle("Congratulations!");
-                    alert.setHeaderText("You have reached the goal.");
-                    alert.setContentText("Choose your option.");
-
-                    ButtonType buttonPlayAgain = new ButtonType("Play again");
-                    ButtonType buttonMenu = new ButtonType("Menu");
-                    alert.getButtonTypes().setAll(buttonPlayAgain, buttonMenu);
-
-                    Optional<ButtonType> result = alert.showAndWait();
-                    if (result.get() == buttonPlayAgain) {
-                        // ... user chose "PlayAgain"
-                        viewModel.generateMaze(viewModel.getMaze().length, viewModel.getMaze()[0].length);
-
-                    } else if (result.get() == buttonMenu) {
-                        // ... user chose "Menu"
-                        try {
-                            BackToMainScene(new ActionEvent());
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
+                    try {
+                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FinishMessage.fxml"));
+                        Parent root = fxmlLoader.load();
+                        finishMessage mainView = (finishMessage) fxmlLoader.getController();
+                        Scene finishMessageScene = new Scene(root, 400, 400);
+                        mainView.setSteps(steps);
+                        mainView.setMazeSize(maze.length, maze[0].length);
+                        Stage popsStage = new Stage();
+                        mainView.setMazeScene(this);
+                        popsStage.setResizable(false);
+                        popsStage.setScene(finishMessageScene);
+                        popsStage.show();
+                    }catch (Exception e) {}
                 }
             }
         }
@@ -247,5 +244,10 @@ public class MazeScene implements IView, Initializable {
     public void closeWindow(ActionEvent actionEvent) {
         viewModel.preClosing();
         System.exit(0);
+    }
+
+    public void startAgain(){
+        viewModel.generateMaze(viewModel.getMaze().length, viewModel.getMaze()[0].length);
+        steps = 0;
     }
 }
