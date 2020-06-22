@@ -47,7 +47,7 @@ public class MazeSaverAndLoader implements IMazeSaveAndLoader {
             objectOutputStream.flush();
             objectOutputStream.close();
             fileOutputStream.close();
-            System.out.println(resurcePath + path + ".maze Created");
+            System.out.println(resurcePath+"/" + path + ".maze Created");
 
     }
 }

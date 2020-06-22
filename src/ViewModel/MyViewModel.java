@@ -104,7 +104,7 @@ public class MyViewModel extends Observable implements Observer {
     }
 
     public MyViewModel(IModel model) throws IOException, ClassNotFoundException {
-        resursecPath = "./resources";
+        resursecPath = "./resources/";
 
         setaboutInforamtionAlert();
 
