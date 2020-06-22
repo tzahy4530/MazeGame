@@ -1,3 +1,10 @@
+#congPane{
+-fx-background-image: url("../../../../resources/BackGround/background2.jpg");
+    -fx-background-size: cover, auto;
+    -fx-background-repeat: no-repeat;
+    -fx-background-padding: 10
+}
+
 
 #playViewPane,#optionPane,#helpMainPane{
      -fx-background-image: url("../../../../resources/BackGround/background2.jpg");
@@ -62,6 +69,13 @@
     -fx-text-fill: white;
 }
 
+#finishText1,#finishText2,#finishText3,#finishText4,steps,mazeSize{
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.75),4,0,0,1);
+    -fx-font-weight: bold;
+    -fx-font-size: 1.1em;
+    -fx-text-fill: #ffcc00;
+}
+
 #helpText1,#helpText2,#helpText3,#helpText4,#helpText5,#helpText6,#helpText7
 ,#helpText8,#helpText9,#helpText10,#helpText11{
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25),2,0,0,1);
@@ -70,7 +84,7 @@
     -fx-text-fill: white;
 }
 
-#mainTitle,#optionTitle,#playTitle,#helpTitle{
+#mainTitle,#optionTitle,#playTitle,#helpTitle,#finishTitle{
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.75),4,0,0,1);
     -fx-font-weight: bold;
     -fx-font-size: 45px;
