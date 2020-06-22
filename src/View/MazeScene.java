@@ -223,7 +223,6 @@ public class MazeScene implements IView, Initializable {
             buttonTypes[i].setOnAction(event -> {
                 whereSave.setValue(String.valueOf(finalI));
                 window.hide();
-                System.out.println(finalI);
                 buttonTypes[finalI].setText("Saved " + new Date().toString());
             });
         }

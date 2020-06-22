@@ -81,7 +81,6 @@ public class PlayScene implements IView, Initializable {
     @Override
     public void update(Observable o, Object arg) {
         if (arg instanceof Boolean) {
-            System.out.println("update");
             isLoad = true;
             loadButton.setDisable(true);
         }
@@ -103,7 +102,6 @@ public class PlayScene implements IView, Initializable {
 
         //moving MazeInformation to ViewModel
         int[] mazeSize = Options.getOptions().getMazeSize();
-        System.out.println("Load = " + isLoad);
         if (!isLoad)
             viewModel.generateMaze(mazeSize[0], mazeSize[1]);
 
@@ -167,7 +165,6 @@ public class PlayScene implements IView, Initializable {
             buttonTypes[i].setOnAction(event -> {
                 whereLoad.setValue(String.valueOf(finalI));
                 window.hide();
-                System.out.println(finalI);
                 try {
                     viewModel.loadMaze(whereLoad.get());
                 } catch (Exception e) {
