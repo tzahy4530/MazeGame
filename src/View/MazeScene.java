@@ -83,10 +83,17 @@ public class MazeScene implements IView, Initializable {
                 if (viewModel.getCharRow() == viewModel.getGoalRow() && viewModel.getCharCol() == viewModel.getGoalCol()) {
                     //ReachGoal
                     if (Options.getOptions().getSoundsMode()) {
+                        Main.stopMusic();
                         String musicFile = "./resources/Songs/reachGoal.mp3";     // For example
                         Media sound = new Media(new File(musicFile).toURI().toString());
                         solMusic = new MediaPlayer(sound);
                         solMusic.play();
+                        solMusic.setOnEndOfMedia(new Runnable() {
+                            @Override
+                            public void run() {
+                                Main.startMusic();
+                            }
+                        });
                     }
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                     alert.setTitle("Congratulations!");
