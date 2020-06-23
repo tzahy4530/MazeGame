@@ -12,7 +12,7 @@ import java.net.URL;
 import java.util.Observable;
 import java.util.ResourceBundle;
 
-public class finishMessage {
+public class FinishMessage {
     public Label steps;
     public Label mazeSize;
     public Pane congPane;

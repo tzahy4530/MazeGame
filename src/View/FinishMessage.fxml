@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane fx:id="congPane" prefHeight="400.0" prefWidth="400" stylesheets="@BGAndB.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.finishMessage">
+<Pane fx:id="congPane" prefHeight="400.0" prefWidth="400" stylesheets="@BGAndB.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.FinishMessage">
    <children>
       <Label fx:id="finishTitle" layoutX="30.0" layoutY="34.0" text="Congratulations" />
       <Button layoutX="159.0" layoutY="257.0" mnemonicParsing="false" onAction="#playAgain" onMouseClicked="#exit" text="Play Again" />

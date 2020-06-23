@@ -16,23 +16,18 @@ import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.text.Text;
 import javafx.scene.transform.Scale;
-import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import javafx.util.Duration;
 
-import java.awt.event.InputEvent;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -153,7 +148,7 @@ public class MazeScene implements IView, Initializable {
                     try {
                         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FinishMessage.fxml"));
                         Parent root = fxmlLoader.load();
-                        finishMessage mainView = (finishMessage) fxmlLoader.getController();
+                        FinishMessage mainView = (FinishMessage) fxmlLoader.getController();
                         Scene finishMessageScene = new Scene(root, 400, 400);
                         mainView.setSteps(steps);
                         mainView.setMazeSize(maze.length, maze[0].length);
