@@ -57,10 +57,8 @@ public final class Options {
     public boolean getSoundsMode(){
         boolean soundMode = true;
         String soundsModeStr;
-        try {
-            soundsModeStr = this.prop.getProperty("Sounds");
-        }
-        catch (Exception e){
+        soundsModeStr = this.prop.getProperty("Sounds");
+        if (soundsModeStr==null){
             this.prop.setProperty("Sounds", "true");
             soundsModeStr = "true";
         }
@@ -77,15 +75,14 @@ public final class Options {
         // index 1 --> col
         String mazeRowStr;
         String mazeColStr;
-        try {
-            mazeRowStr = this.prop.getProperty("MazeRow");
-            mazeColStr = this.prop.getProperty("MazeCol");
-        } catch (Exception e){
-            mazeRowStr = "10";
-            mazeColStr = "10";
-            this.prop.setProperty("MazeRow", "10");
-            this.prop.setProperty("MazeCol", "10");
-        }
+        mazeRowStr = this.prop.getProperty("MazeRow");
+        mazeColStr = this.prop.getProperty("MazeCol");
+        if(mazeRowStr==null || mazeColStr == null){
+        mazeRowStr = "10";
+        mazeColStr = "10";
+        this.prop.setProperty("MazeRow", "10");
+        this.prop.setProperty("MazeCol", "10");
+    }
         int[] mazeSize = new int[]{Integer.parseInt(mazeRowStr),Integer.parseInt(mazeColStr)};
         return mazeSize;
     }
