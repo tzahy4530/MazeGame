@@ -14,11 +14,15 @@
       <Label fx:id="helpText5" layoutX="40.0" layoutY="115.0" text="-On the gameplay, if you can't solve the maze -no problem!, you can use the MenuBar up to the maze, to get solution, " />
       <Label fx:id="helpText6" layoutX="44.0" layoutY="132.0" text="click on &quot;Options&quot; -&gt; &quot;solve&quot;." />
       <Label fx:id="helpText7" layoutX="385.0" layoutY="200.0" text="Controls:" />
-      <Label fx:id="helpText8" layoutX="235.0" layoutY="235.0" text="UpArrow - Go up." />
-      <Label fx:id="helpText10" layoutX="235.0" layoutY="260.0" text="DownArrow -&gt; Go down." />
-      <Label fx:id="helpText9" layoutX="485.0" layoutY="235.0" text="LeftArrow - Go left." />
-      <Label fx:id="helpText11" layoutX="485.0" layoutY="260.0" text="RightArrow - Go right." />
+      <Label fx:id="helpText8" layoutX="267.0" layoutY="235.0" text="Numpad8 -&gt; Go up." />
+      <Label fx:id="helpText10" layoutX="267.0" layoutY="260.0" text="Numpad2 -&gt; Go down." />
+      <Label fx:id="helpText9" layoutX="455.0" layoutY="235.0" text="Numpad4 -&gt; Go left." />
+      <Label fx:id="helpText11" layoutX="455.0" layoutY="260.0" text="Numpad6 -&gt; Go right." />
       <Label fx:id="helpText3" layoutX="40.0" layoutY="55.0" text=" row &amp; columns, when you finish, dont forget to apply." />
+         <Label fx:id="helpText12" layoutX="70.0" layoutY="235.0" text="Numpad9 -&gt; Go up-right." />
+         <Label fx:id="helpText13" layoutX="70.0" layoutY="260.0" text="Numpad7 -&gt; Go up-left." />
+         <Label fx:id="helpText14" layoutX="640.0" layoutY="235.0" text="Numpad3 -&gt; Go down-right." />
+         <Label fx:id="helpText15" layoutX="640.0" layoutY="260.0" text="Numpad1 -&gt; Go down-left." />
    </children>
    <padding>
       <Insets right="100.0" />

@@ -91,20 +91,27 @@ public final class Options {
     }
     public String getWallImagPath(){
         String res=this.prop.getProperty("wallImage");
-        if (res==null)
-            return "./wall2.png";
+        if (res==null) {
+            setWall("wall");
+            return "./resources/Walls/wall.png";
+        }
         return res;
     }
     public String getCharacterImagPath(){
         String res=this.prop.getProperty("CharacterImage");
-        if (res==null)
-            return "./mario.jpg";
+        if (res==null) {
+            setCharacter("cartman");
+            setGoalImagePath("cartman");
+            return "./resources/Pictures/cartman.png";
+        }
         return res;
     }
     public String getGoalImagPath(){
         String res=this.prop.getProperty("GoalImage");
-        if (res==null)
-            return "./goal.jpg";
+        if (res==null) {
+            setGoalImagePath("cartman");
+            return "./resources/Goals/cartman.png";
+        }
         return res;
     }
 
@@ -139,6 +146,27 @@ public final class Options {
         getOptions();
         prop.setProperty("CharacterImage","./resources/Pictures/"+name+".png");
         setGoalImagePath(name);
+        try {
+            prop.store(fileOutputStream,null);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            fileOutputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setWall(String name){
+        FileOutputStream fileOutputStream=null;
+        try {
+            fileOutputStream=new FileOutputStream(filePath);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        getOptions();
+        prop.setProperty("wallImage","./resources/Walls/"+name+".png");
         try {
             prop.store(fileOutputStream,null);
         } catch (IOException e) {
