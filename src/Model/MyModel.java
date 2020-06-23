@@ -1,16 +1,11 @@
 package Model;
 
 import Client.*;
-import View.Main;
 import algorithms.mazeGenerators.Maze;
 import algorithms.mazeGenerators.Position;
 import algorithms.search.AState;
 import algorithms.search.Solution;
-import javafx.util.Pair;
-
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.ObjectInputStream;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.List;
@@ -198,13 +193,6 @@ public class MyModel extends Observable implements IModel {
     }
 
     public void loadMazeFromFile(File mazeFile) throws Exception {
-//        FileInputStream fileInputStream = new FileInputStream(mazeFile);
-//        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-//        Pair<Maze, Position> mazePlusCharacterPosition = (Pair<Maze, Position>) objectInputStream.readObject();
-//        objectInputStream.close();
-//        fileInputStream.close();
-//        this.setMaze(mazePlusCharacterPosition.getKey());
-//        this.setCharacterPosition(mazePlusCharacterPosition.getValue());
         mazeSaveAndLoader.loadMaze(mazeFile);
         setMaze(mazeSaveAndLoader.getMaze());
         setCharacterPosition(mazeSaveAndLoader.getPosition());
@@ -213,7 +201,6 @@ public class MyModel extends Observable implements IModel {
 
     @Override
     public boolean saveMaze(String whereToSave,String resurcePath) {
-//        Pair<Maze, Position> obj = new Pair<Maze, Position>(maze, new Position(charRow, charCol));
         try {
             mazeSaveAndLoader.saveMaze(whereToSave, maze, new Position(charRow, charCol), resurcePath);
             return true;
@@ -221,6 +208,5 @@ public class MyModel extends Observable implements IModel {
         catch (Exception e){
             return false;
         }
-//        return obj;
     }
 }

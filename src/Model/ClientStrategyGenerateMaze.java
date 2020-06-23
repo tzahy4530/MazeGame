@@ -1,12 +1,10 @@
 package Model;
 
-import Client.Client;
 import Client.IClientStrategy;
 import IO.MyDecompressorInputStream;
 import algorithms.mazeGenerators.Maze;
 
 import java.io.*;
-import java.net.InetAddress;
 
 public class ClientStrategyGenerateMaze implements IClientStrategy {
     private Maze maze;
@@ -20,15 +18,6 @@ public class ClientStrategyGenerateMaze implements IClientStrategy {
     }
 
     private int rowDimension, colDimension;
-
-
-    public int getRowDimension() {
-        return rowDimension;
-    }
-
-    public int getColDimension() {
-        return colDimension;
-    }
 
     public ClientStrategyGenerateMaze(int rowDimension, int colDimension) {
         this.rowDimension = rowDimension;

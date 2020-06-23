@@ -2,16 +2,12 @@ package Model;
 
 import Client.IClientStrategy;
 import algorithms.mazeGenerators.Maze;
-import algorithms.mazeGenerators.MyMazeGenerator;
-import algorithms.search.AState;
 import algorithms.search.Solution;
 
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.List;
 
 public class
 ClientStrategySolveMaze implements IClientStrategy {
