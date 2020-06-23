@@ -105,9 +105,6 @@ public class Main extends Application {
 
     public static void changeScene(Parent newScene, IView view) {
         // try to center the Scene
-//        Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
-//        window.setX((screenBounds.getWidth()) / 2);
-//        window.setY((screenBounds.getHeight()) / 2);
         window.setScene(new Scene(newScene,viewModel.getSceneWidth(),viewModel.getSceneHigh()));
         view.onShowScreen();
         window.show();

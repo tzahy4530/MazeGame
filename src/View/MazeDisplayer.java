@@ -1,7 +1,6 @@
 package View;
 
 import Model.Options;
-import algorithms.mazeGenerators.Position;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.canvas.Canvas;
@@ -61,27 +60,6 @@ public class MazeDisplayer extends Canvas {
         this.col_goal = colGoal;
         solution = null;
 
-    }
-
-    public int getRow_player() {
-        return row_player;
-    }
-
-    public int getCol_player() {
-        return col_player;
-    }
-
-    public int getMazeMaxRow() {
-        return maze.length;
-    }
-
-    public int getMazeMaxCol() {
-        return maze[0].length;
-    }
-
-    public boolean isAWall(int row, int col) {
-        if (maze[row][col] == 1) return true;
-        return false;
     }
 
     public void set_player_position(int row, int col) {

@@ -22,7 +22,6 @@ import java.util.*;
 
 public class MyViewController implements IView, Observer, Initializable {
     private MyViewModel viewModel;
-    public ComboBox sounds;
     @FXML
     public TextField textField_mazeRows;
     @FXML
@@ -73,69 +72,10 @@ public class MyViewController implements IView, Observer, Initializable {
 
     @Override
     public void update(Observable o, Object arg) {
-        if (o instanceof MyViewModel) {
-            if (arg instanceof int[][]) {
-                //GenerateMaze
-                maze = viewModel.getMaze();
-                charCol = viewModel.getCharCol();
-                charRow = viewModel.getCharRow();
-                mazeDisplayer.setMaze(maze, charRow, charCol, viewModel.getGoalRow(), viewModel.getGoalCol());
-                mazeDisplayer.draw();
-            } else if (arg instanceof List) {
-                //Solution
-                mazeDisplayer.setSolution((List) arg);
-                mazeDisplayer.draw();
-            } else {
-                //move
-                mazeDisplayer.set_player_position(viewModel.getCharRow(), viewModel.getCharCol());
-                mazeDisplayer.draw();
-                if (viewModel.getCharRow() == viewModel.getGoalRow() && viewModel.getCharCol() == viewModel.getGoalCol()) {
-                    //ReachGoal
-                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                    alert.setTitle("Congratulations!");
-                    alert.setHeaderText("You have reached the goal.");
-                    alert.setContentText("Choose your option.");
-
-                    ButtonType buttonPlayAgain = new ButtonType("Play again");
-                    ButtonType buttonMenu = new ButtonType("Menu");
-                    alert.getButtonTypes().setAll(buttonPlayAgain, buttonMenu);
-
-                    Optional<ButtonType> result = alert.showAndWait();
-                    if (result.get() == buttonPlayAgain) {
-                        // ... user chose "PlayAgain"
-                        generateMaze();
-
-                    } else if (result.get() == buttonMenu) {
-                        // ... user chose "Menu"
-
-                    }
-                }
-            }
-        }
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-    }
-
-
-    public void generateMaze() {
-        if(Options.getOptions().getSoundsMode()){
-            mouseClick.play();
-            mouseClick.seek(Duration.ZERO);
-        }
-        if (textField_mazeRows.getText().length() < 2 || textField_mazeColumns.getText().length() < 2) {
-            Alert alet = new Alert(Alert.AlertType.ERROR);
-            alet.setTitle("Values");
-            alet.setContentText("You have to fell column and rows");
-            alet.setHeaderText("Feel values please");
-            alet.show();
-            return;
-        }
-        int rows = Integer.valueOf(textField_mazeRows.getText());
-        int cols = Integer.valueOf(textField_mazeColumns.getText());
-        viewModel.generateMaze(rows, cols);
     }
 
 
@@ -192,7 +132,6 @@ public class MyViewController implements IView, Observer, Initializable {
         helpView.setViewModel(viewModel);
         Main.changeScene(playScene, helpView);
     }
-
 
     public void exitProgram(ActionEvent actionEvent) {
         if(Options.getOptions().getSoundsMode()){
