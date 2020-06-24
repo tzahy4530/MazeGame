@@ -97,7 +97,7 @@ public class MyViewModel extends Observable implements Observer {
     private void setaboutInforamtionAlert() {
         aboutInformtion = new Alert(Alert.AlertType.INFORMATION);
         aboutInformtion.setHeaderText("Wellcome to SoutPark Maze.");
-        aboutInformtion.setContentText("This game was developed by Tzah Ben Hamo & Nethanel Shaked " +
+        aboutInformtion.setContentText("This game was developed by Tzah Ben Hamo & Netanel Shaked " +
                 "as a part of project during the undergraduate in Ben Gurion University.\n" +
                 "The maze generation is by prim algorithm.\n" +
                 "The solution is by Best Searcch alogorithm.\n"+
